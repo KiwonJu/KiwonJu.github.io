@@ -1,0 +1,2050 @@
+---
+title: "Quantum Field Theory 강의 필기"
+collection: teaching
+type: "Lecture notes"
+permalink: /teaching/qft-lecture-notes
+venue: "Quantum Field Theory"
+date: 2026-11-05
+excerpt: "스캔한 Quantum Field Theory 강의 필기를 변환한 노트입니다."
+---
+
+<style>
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+  .page__content table { display: block; overflow-x: auto; }
+</style>
+
+<blockquote>
+<p><strong>표기 안내</strong></p>
+<ul>
+<li><code>[?]</code> : 필기가 흐리거나 지워져서 <strong>유추해 채운 부분</strong> (검토 필요)</li>
+<li><code>[그림: …]</code> : 손그림을 글로 대신한 부분</li>
+<li>필기에 있던 명백한 오타는 가능한 한 원문을 살리되, 바로잡은 곳에는 <code>[?]</code>를 붙였습니다.</li>
+<li>축약 <span class="math inline">\(\overline{\phi_i\phi_j}\)</span> 는 Wick contraction을 뜻합니다.</li>
+</ul>
+</blockquote>
+<hr />
+<h2>0. Introduction (날짜 없음, p.1–4)</h2>
+<h3>References</h3>
+<ul>
+<li><em>Gauge Theory of Elementary Particle Physics</em> — Cheng &amp; Li</li>
+<li><em>An Introduction to Quantum Field Theory</em> — Peskin &amp; Schroeder</li>
+<li><em>The Quantum Theory of Fields, Vol. I</em> — Steven Weinberg</li>
+<li><em>Introduction to Quantum Field Theory</em> — M. Schwartz</li>
+<li>Sidney Coleman (forgot the name)</li>
+</ul>
+<p>QFT is an application of QM to dynamical systems of <strong>fields</strong>, very much like QM concerns the quantization of dynamical systems of <strong>particles</strong>.</p>
+<div class="math block">
+<div>\[\underset{\text{non-rel}}{\text{QM}} \oplus \underset{v\to c}{\text{SR}} \;\Rightarrow\; \text{rel. QM} \checkmark \;\to\; \text{QFT (so far)}\]</div>
+
+</div>
+<p>&quot;QM&quot;: particle–wave duality (<span class="math inline">\(e,\ \gamma\)</span>) <span class="math inline">\(\Rightarrow\)</span> <strong>Particles vs. Field</strong>.</p>
+<p><strong>Classical viewpoint</strong></p>
+<ul>
+<li>Particles are fundamental objects. <span class="math inline">\(e \Rightarrow\)</span> elementary object of Nature.</li>
+<li>Fields are derived, e.g. light <span class="math inline">\(\leftarrow\)</span> EM field.</li>
+</ul>
+<p><strong>Difficulty</strong>: Action at a distance (Coulomb's, Newton's law). Interactions are instantaneous — &quot;No locality&quot;.
+<span class="math inline">\(\Rightarrow\)</span> Introduce SR (<span class="math inline">\(v\le c\)</span>), fields.</p>
+<h3>Quantum viewpoint</h3>
+<p>Due to duality, particle &amp; wave <span class="math inline">\(\Rightarrow\)</span> similar. View <strong>fields as fundamental</strong>.</p>
+<p>E.g. (photon fields, electron fields, proton fields) — &quot;ripples&quot; <span class="math inline">\(\Rightarrow\)</span> particles: electron, photon, proton.</p>
+<ul>
+<li>locality</li>
+<li>can treat states with unspecified # of particles.</li>
+</ul>
+<p>[그림: 폭 <span class="math inline">\(L\)</span>인 무한 우물 안의 입자; 오른쪽에 <span class="math inline">\(m\)</span> 쌍생성 그림]</p>
+<div class="math block">
+<div>\[\Delta p\,\Delta x \gtrsim \hbar,\qquad \Delta p \ge \frac{\hbar}{L}\;\Rightarrow\; \Delta E \ge \frac{\hbar c}{L} \simeq 2mc^2\]</div>
+
+</div>
+<div class="math block">
+<div>\[E \simeq mc^2,\qquad L \simeq \frac{\hbar}{mc}\quad\therefore\ \text{Compton wavelength}\]</div>
+
+</div>
+<p>de Broglie wavelength <span class="math inline">\(\lambda \sim \dfrac{h}{|\vec p|}\)</span> : a length scale where particle–wave duality becomes apparent.</p>
+<ul>
+<li><strong>1905</strong> A. Einstein, photoelectric effect: <span class="math inline">\(E\sim h\nu,\quad p=\dfrac{E}{c}\sim\dfrac{h}{\lambda}\)</span></li>
+<li><strong>1924</strong> de Broglie extends this concept to all matter: <span class="math inline">\(\lambda=\dfrac{h}{p}\)</span></li>
+</ul>
+<div class="math block">
+<div>\[\psi(\vec x,t)\sim e^{2\pi i(\vec k\cdot\vec x-\nu t)},\qquad \vec x,t \text{ follow the Lorentz tr.}\]</div>
+
+</div>
+<div class="math block">
+<div>\[x\to\gamma(x-vt),\quad t\to\gamma(t-vx),\quad E\to\gamma(E-px),\quad p\to\gamma(p-Ex)\]</div>
+
+</div>
+<p><span class="math inline">\(\vec k\propto\vec p,\ \nu\propto E\)</span>:
+<div class="math inline"><div>\[\vec k=\frac{\vec p}{h},\qquad \nu=\frac{E}{h}\]</div>
+</div></p>
+<p>Group velocity:
+<div class="math inline"><div>\[v_g=\frac{\partial\nu}{\partial k}=\frac{\partial E}{\partial p}=\frac{\partial}{\partial p}\left(\frac{p^2}{2m}\right)=\frac{p}{m}=v
+\qquad
+=\frac{\partial}{\partial p}\left(\sqrt{p^2c^2+m^2c^4}\right)=\cdots=v\]</div>
+</div></p>
+<ul>
+<li>All particles of the same type are the same.
+[그림: Supernovae에서 온 <span class="math inline">\(p\)</span> ↔ LHC의 <span class="math inline">\(p\)</span>]</li>
+</ul>
+<h3>Schrödinger's relativistic wave equation</h3>
+<div class="math block">
+<div>\[E^2=(pc)^2+(mc^2)^2\]</div>
+
+</div>
+<div class="math block">
+<div>\[0=(H+e\phi)^2-c^2\left(\vec p+\frac{e\vec A}{c}\right)^2-m^2c^4\]</div>
+
+</div>
+<div class="math block">
+<div>\[E=h\nu\to i\hbar\frac{\partial}{\partial t},\qquad \vec p=\hbar\vec k\to -i\hbar\nabla\]</div>
+
+</div>
+<div class="math block">
+<div>\[0=\left[\left(i\hbar\frac{\partial}{\partial t}+e\phi\right)^2-c^2\left(-i\hbar\nabla+\frac{e\vec A}{c}\right)^2-m^2c^4\right]\psi(\vec x,t),
+\qquad \vec A\to 0,\ \ e\phi=\frac{e^2}{4\pi r},\ \ \psi=e^{-iEt/\hbar}\psi(\vec x)\]</div>
+
+</div>
+<div class="math block">
+<div>\[\Rightarrow E=mc^2\left[1-\frac{\alpha^2}{2n^2}-\frac{\alpha^4}{2n^4}\left(\frac{n}{l+\frac12}-\frac34\right)+\cdots\right]\]</div>
+
+</div>
+<div class="math block">
+<div>\[\alpha=\frac{e^2}{4\pi}=\frac1{137},\qquad n=2,\ l=0,1:\quad \Delta E=\frac{\alpha^4mc^2}{12}\ \Leftrightarrow\ \Delta E_{\exp}=\frac{\alpha^4mc^2}{32}\]</div>
+
+</div>
+<p>Non-rel: <span class="math inline">\(i\hbar\dfrac{\partial\psi}{\partial t}=H\psi\)</span>. Ansatz:
+<div class="math inline"><div>\[H\psi=\left(-i\hbar c\,\vec\alpha\cdot\nabla+\alpha_4mc^2\right)\psi\qquad(\alpha_1,\alpha_2,\alpha_3,\alpha_4\ \text{unknown})\]</div>
+</div>
+<div class="math inline"><div>\[0=\frac{\partial}{\partial t}\big(|\psi|^2\big)-\frac{i\hbar}{2m}\nabla\cdot\big(\psi^*\nabla\psi-\psi\nabla\psi^*\big),
+\qquad \underbrace{|\psi|^2}_{\rho\,\ge 0\ \text{prob. density}},\ \ \vec j\]</div>
+</div>
+<div class="math inline"><div>\[\frac{\partial\rho}{\partial t}+\nabla\cdot\vec j=0\]</div>
+</div></p>
+<p>Relativistic: <span class="math inline">\(\dfrac{\partial\rho}{\partial t}+\nabla\cdot\vec j=0\)</span> with
+<div class="math inline"><div>\[\rho=\operatorname{Im}\psi^*\left(\frac{\partial}{\partial t}-\frac{ie\phi}{\hbar}\right)\psi,\qquad
+\vec j=c^2\operatorname{Im}\psi^*\left(\nabla+\frac{ie\vec A}{\hbar c}\right)\psi\]</div>
+</div>
+<span class="math inline">\(\to\)</span> probability density? <strong>H.W. (Next Wed.)</strong></p>
+<div class="math block">
+<div>\[i\hbar\frac{\partial\psi}{\partial t}=H\psi=\left(-i\hbar c\,\vec\alpha\cdot\nabla+\alpha_4mc^2\right)\psi\]</div>
+
+</div>
+<div class="math block">
+<div>\[(i\hbar)\left(i\hbar\frac{\partial^2\psi}{\partial t^2}\right)=H\,i\hbar\frac{\partial\psi}{\partial t}
+\;\Rightarrow\; -\hbar^2\frac{\partial^2\psi}{\partial t^2}=HH\psi\]</div>
+
+</div>
+<div class="math block">
+<div>\[=\left(-i\hbar c\,\vec\alpha\cdot\nabla+\alpha_4mc^2\right)\left(-i\hbar c\,\vec\alpha\cdot\nabla+\alpha_4mc^2\right)\psi\]</div>
+
+</div>
+<div class="math block">
+<div>\[=-\hbar^2c^2\alpha_i\alpha_j\frac{\partial^2\psi}{\partial x_i\partial x_j}-i\hbar mc^3(\alpha_i\alpha_4+\alpha_4\alpha_i)\frac{\partial\psi}{\partial x_i}+m^2c^4\alpha_4^2\psi\]</div>
+
+</div>
+<div class="math block">
+<div>\[\alpha_i\alpha_j+\alpha_j\alpha_i=2\delta_{ij}\mathbb 1,\qquad \alpha_i\alpha_4+\alpha_4\alpha_i=0,\qquad \alpha_4^2=\mathbb 1\]</div>
+
+</div>
+<hr />
+<h2>9/4 QFT</h2>
+<p><em>Only graduate students.</em></p>
+<p>Non-rel:
+<div class="math inline"><div>\[\frac{\partial\rho}{\partial t}+\nabla\cdot\vec J=0,\qquad \rho=|\psi|^2\ \ (\text{prob. amplitude})\]</div>
+</div>
+Rel:
+<div class="math inline"><div>\[\frac{\partial\rho}{\partial t}+\nabla\cdot\vec J=0,\qquad \rho=\operatorname{Im}\psi^*\left(\frac{\partial}{\partial t}-\frac{ie\phi}{\hbar}\right)\psi\ \ \not\ge 0\ [?]\]</div>
+</div>
+<div class="math inline"><div>\[i\hbar\frac{\partial\psi}{\partial t}=H\psi,\qquad H=-i\hbar c\,\vec\alpha\cdot\nabla+\alpha_4mc^2\quad(\alpha_1,\alpha_2,\alpha_3,\alpha_4)\]</div>
+</div>
+<div class="math inline"><div>\[E^2=p^2c^2+m^2c^4\]</div>
+</div>
+<div class="math inline"><div>\[(i\hbar)^2\frac{\partial^2\psi}{\partial t^2}=H\underbrace{i\hbar\frac{\partial\psi}{\partial t}}_{H\psi}
+=\left(-i\hbar c\,\vec\alpha\cdot\nabla+\alpha_4mc^2\right)\left(-i\hbar c\,\vec\alpha\cdot\nabla+\alpha_4mc^2\right)\psi\]</div>
+</div>
+<div class="math inline"><div>\[=-\hbar^2c^2\alpha_i\alpha_j\frac{\partial^2\psi}{\partial x_i\partial x_j}-i\hbar mc^3(\alpha_i\alpha_4+\alpha_4\alpha_i)\frac{\partial\psi}{\partial x_i}\,[?]+m^2c^4\alpha_4^2\psi\]</div>
+</div>
+<div class="math inline"><div>\[\alpha_i\alpha_j+\alpha_j\alpha_i=2\delta_{ij}\mathbb 1,\qquad \alpha_i\alpha_4+\alpha_4\alpha_i=0,\qquad \alpha_4^2=\mathbb 1\]</div>
+</div>
+<div class="math inline"><div>\[\alpha_i=\begin{pmatrix}0&amp;\sigma_i\\ \sigma_i&amp;0\end{pmatrix}\ (i=1,2,3),\qquad
+\alpha_4=\begin{pmatrix}\mathbb 1_{2\times2}&amp;0\\0&amp;-\mathbb 1_{2\times2}\end{pmatrix}\,[?]\]</div>
+</div>
+<div class="math inline"><div>\[\left[i\hbar\frac{\partial}{\partial t}+i\hbar c\,\vec\alpha\cdot\nabla-\alpha_4mc^2\right]\psi=0\qquad\Big]\times(-\alpha_4)\]</div>
+</div>
+<div class="math inline"><div>\[\left[-i\hbar\alpha_4\frac{\partial}{\partial t}-i\hbar c\,\alpha_4\vec\alpha\cdot\nabla+\underbrace{\alpha_4^2}_{1}mc^2\right]\psi=0\]</div>
+</div>
+<div class="math inline"><div>\[\Big[\hbar c\underbrace{(-i\alpha_4)}_{\gamma^0}\frac{\partial}{\partial(ct)}+\hbar c\underbrace{(-i\alpha_4\alpha_i)}_{\gamma^i}\frac{\partial}{\partial x_i}+mc^2\Big]\psi=0\]</div>
+</div></p>
+<div class="math block">
+<div>\[\gamma^\mu\equiv\{\gamma^0,\gamma^1,\gamma^2,\gamma^3\},\qquad x^\mu\equiv\{ct,x^1,x^2,x^3\}\]</div>
+
+</div>
+<div class="math block">
+<div>\[\left(\hbar c\,\gamma^\mu\partial_\mu+mc^2\right)\psi(x^\mu)=0\qquad\leftarrow\ \text{ansatz? } e^{\frac i\hbar(\vec p\cdot\vec x-Et)}\]</div>
+
+</div>
+<p><span class="math inline">\(\psi\)</span>: 4-component <span class="math inline">\(\to\begin{pmatrix}\psi_1\\ \psi_2\end{pmatrix}\)</span>, 2-component spinors.
+<div class="math inline"><div>\[\{\gamma^\mu,\gamma^\nu\}=2\eta^{\mu\nu},\qquad \eta=\operatorname{diag}(-1,+1,+1,+1)\]</div>
+</div>
+If <span class="math inline">\(m=0\)</span>: <span class="math inline">\(\hbar c\,\sigma^\mu\dfrac{\partial}{\partial x^\mu}\psi(x^\mu)=0\)</span> → <span class="math inline">\(4\times4\)</span> matrix → <span class="math inline">\(2\times2\)</span> matrix, 2-component만 필요해짐.</p>
+<p>In presence of <span class="math inline">\(\vec A,\phi\)</span>:
+<div class="math inline"><div>\[i\hbar\frac{\partial}{\partial t}\to i\hbar\frac{\partial}{\partial t}+e\phi,\qquad -i\hbar\nabla\to-i\hbar\nabla+\frac{e}{c}\vec A\]</div>
+</div>
+<div class="math inline"><div>\[\left(i\hbar\frac{\partial}{\partial t}+e\phi\right)\psi=\left(-i\hbar c\nabla+e\vec A\right)\cdot\vec\alpha\,\psi+mc^2\alpha_4\psi\]</div>
+</div>
+Iterate twice:
+<div class="math inline"><div>\[E=mc^2\left[1+\frac{\alpha^2}{\left\{n-j-\frac12+\left((j+\frac12)^2-\alpha^2\right)^{1/2}\right\}^2}\right]^{-1/2}\]</div>
+</div>
+<div class="math inline"><div>\[i\hbar\frac{\partial\psi}{\partial t}=H\psi=\left(-i\hbar c\,\vec\alpha\cdot\nabla+\alpha_4mc^2\right)\psi,\qquad
+\frac{\partial\rho}{\partial t}+\nabla\cdot\vec J=0,\qquad \rho=|\psi|^2,\ \ \vec J=c\,\psi^\dagger\vec\alpha\,\psi\]</div>
+</div>
+<div class="math inline"><div>\[E=\sqrt{p^2c^2+m^2c^4}\quad @\ S=\pm\frac\hbar2,\qquad E=-\sqrt{p^2c^2+m^2c^4}\ \ \text{(hole)}\]</div>
+</div></p>
+<h3>Unit system</h3>
+<p>Natural unit: <span class="math inline">\(\hbar=c=1\)</span>.</p>
+<p>&quot;Non-relativistic case (Classical World)&quot;: MKS, CGS (length, mass, time) ⇒ gives all mechanical units.
+<div class="math inline"><div>\[\text{Energy}=[\mathrm g]\frac{[\mathrm{cm}]^2}{[\mathrm s]^2}\ \ (E=mc^2),\qquad
+\text{Momentum}=[\mathrm g][\mathrm{cm}]/[\mathrm s]\ \ (p=mv)\]</div>
+</div>
+Length <span class="math inline">\([L]\)</span>, Time <span class="math inline">\([T]\)</span>, Mass <span class="math inline">\([M]\)</span>.</p>
+<p><strong>QFT (Relativistic Quantum World)</strong>: QM ⊕ SR ⇒ QFT</p>
+<p>Characteristic features:
+<div class="math inline"><div>\[\left(\begin{array}{l}\text{uncertainty principle: } \Delta x\Delta p\gtrsim\hbar,\ \Delta t\Delta E\gtrsim\hbar\\ \text{particle–wave duality: } \lambda\sim h/p\end{array}\right)
+\oplus
+\left(\begin{array}{l}\text{limit on a speed } c\\ \text{Lorentz inv.: "Time"}\sim\text{"Space"}\\ c=\text{velocity}=L/T\end{array}\right)\]</div>
+</div></p>
+<p>Natural unit <span class="math inline">\(\hbar=c=1\)</span>:
+<div class="math inline"><div>\[c[T]=[L]\Rightarrow[T]=[L],\qquad [L]=\frac{\hbar}{[p]=[M]}\xrightarrow{\hbar=1}[L]=[M]^{-1}\]</div>
+</div></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mass: <span class="math inline">\(E\)</span></td>
+<td>Energy: <span class="math inline">\(E\)</span></td>
+<td>Force: <span class="math inline">\(E^2\)</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Length: <span class="math inline">\(1/E\)</span></td>
+<td>Momentum: <span class="math inline">\(E\)</span></td>
+<td>velocity: <span class="math inline">\(1\)</span></td>
+<td><span class="math inline">\(c\)</span> dimensionless</td>
+</tr>
+<tr>
+<td>Time: <span class="math inline">\(1/E\)</span></td>
+<td>cross section: <span class="math inline">\(1/E^2\)</span></td>
+<td>angular momentum: <span class="math inline">\(1\)</span></td>
+<td><span class="math inline">\(\hbar\)</span> dimensionless</td>
+</tr>
+</tbody>
+</table>
+<div class="math block">
+<div>\[1\,\mathrm{eV}=1.6\times10^{-12}\,\mathrm{erg}\ \big(\mathrm g\,(\mathrm{cm/s})^2\big)=1.6\times10^{-19}\,\mathrm J,\qquad \mathrm{GeV}=10^9\,\mathrm{eV}\]</div>
+
+</div>
+<p>In terms of CGS units:
+<div class="math inline"><div>\[1=\hbar c\simeq197.33\,\mathrm{MeV\cdot fm},\qquad 1=c\simeq2.9979\times10^{23}\,\mathrm{fm\,s^{-1}}\]</div>
+</div>
+<div class="math inline"><div>\[1\,\mathrm{GeV}^{-1}\,[?]=1.97\times10^{-14}\,\mathrm{cm}=6.58\times10^{-25}\,\mathrm{s}\,[?],\qquad 1\,\mathrm{GeV}=1.78\times10^{-24}\,\mathrm g\]</div>
+</div></p>
+<p>LHC (Large Hadron Collider): [그림: 반지름 4.3 (km) 원] c.o.m. <span class="math inline">\(E\sim13\,\mathrm{TeV}\)</span>.</p>
+<h3>Electromagnetic units</h3>
+<div class="math block">
+<div>\[\underbrace{\vec F}_{[E^2]}=\frac1{4\pi\epsilon_0}\frac{Q_1Q_2}{\underbrace{r^2}_{[E^{-2}]}}\hat r
+\;\Rightarrow\;\left[\frac{Q^2}{\epsilon_0}\right]=\text{dimensionless}\]</div>
+
+</div>
+<p>Convention: <span class="math inline">\(\epsilon_0=1\)</span>, <span class="math inline">\(c=\dfrac1{\sqrt{\mu_0\epsilon_0}}=1\)</span>, <span class="math inline">\(\epsilon_0=1\Rightarrow\mu_0=1\)</span>.</p>
+<p><span class="math inline">\(Q=\#e\)</span>. Strength of interaction:
+<div class="math inline"><div>\[\left[\frac{e^2}{4\pi\epsilon_0}\right]=[E\times L],\qquad \alpha\equiv\frac{e^2}{4\pi\epsilon_0\hbar c}\Rightarrow\frac{e^2}{4\pi}=\frac1{137}\]</div>
+</div>
+Temperature: <span class="math inline">\(k_B=1\)</span>, <span class="math inline">\([T]=[E]\)</span>.</p>
+<hr />
+<h2>9/6 QFT — Special Relativity</h2>
+<p><strong>Two principles of special relativity</strong></p>
+<ol>
+<li><strong>Relativity</strong>: In all coordinate systems related to each other by &quot;uniform velocity&quot;, the laws of physics should be the same (frame independence).</li>
+<li>The speed of light <span class="math inline">\(c\)</span> is the same in all frames.</li>
+</ol>
+<p>→ Einstein rederived the Lorentz transf. solely based on the above two principles.</p>
+<p>[그림: 정지계 <span class="math inline">\((x,t)\)</span>에서 A, B, C의 세계선과 빛 <span class="math inline">\(x=ct\)</span> (<span class="math inline">\(c=1\)</span>, <span class="math inline">\(x=t\)</span>) — simultaneity of two events]</p>
+<p>[그림: 움직이는 계 <span class="math inline">\(x=vt\)</span>, <span class="math inline">\(x'\propto x-vt=0\)</span>; 세계선 <span class="math inline">\(x=vt,\ x=vt+1,\ x=vt+2\)</span>, 빛 <span class="math inline">\(x=t\)</span>, 축 <span class="math inline">\(t=vx\)</span> — simultaneity of two events in a moving frame]</p>
+<div class="math block">
+<div>\[x=t,\ \ x=vt+1\;\Rightarrow\; t_a=\frac1{1-v},\quad x_a=\frac1{1-v}\qquad(\text{점 } a)\]</div>
+
+</div>
+<p><span class="math inline">\(x=-t+\text{const}\)</span>, 점 <span class="math inline">\(a\)</span>를 지나므로
+<div class="math inline"><div>\[x+t=\text{const}=\frac2{1-v}\]</div>
+</div>
+<div class="math inline"><div>\[x=vt+2\;\Rightarrow\; t_b=\frac{2v}{1-v^2},\quad x_b=\frac2{1-v^2}\]</div>
+</div></p>
+<p><span class="math inline">\((x,t)\Leftrightarrow(x',t')\)</span>. Boundary condition (B.C.): <span class="math inline">\(x'=t'=0\Rightarrow x=vt,\ t=vx\)</span>.</p>
+<p>Ansatz:
+<div class="math inline"><div>\[x'=(x-vt)f(v),\qquad t'=(t-vx)g(v)\]</div>
+</div>
+The speed of light = constant: <span class="math inline">\(c=\dfrac xt=\dfrac{x'}{t'}=1\;\Rightarrow\; g(v)=f(v)\)</span>
+<div class="math inline"><div>\[\left.\begin{aligned}x'&amp;=(x-vt)f(v)\\ t'&amp;=(t-vx)f(v)\end{aligned}\right\}\ \cdots①\qquad
+\left.\begin{aligned}x&amp;=(x'+vt')f(v)\\ t&amp;=(t'+vx')f(v)\end{aligned}\right\}\ \cdots②\]</div>
+</div>
+<div class="math inline"><div>\[①+②:\quad f(v)^2=\frac1{1-v^2}\quad\therefore f(v)=\pm\frac1{\sqrt{1-v^2}}\]</div>
+</div>
+(<span class="math inline">\(-\)</span> sign일 경우 <span class="math inline">\(v=0\Rightarrow x=-x'\)</span>: boundary condition ✗)</p>
+<p><strong>Lorentz transformation</strong>:
+<div class="math inline"><div>\[x'=\frac{x-vt}{\sqrt{1-v^2}},\quad t'=\frac{t-vx}{\sqrt{1-v^2}};\qquad
+x=\frac{x'+vt'}{\sqrt{1-v^2}},\quad t=\frac{t'+vx'}{\sqrt{1-v^2}}\]</div>
+</div>
+Put <span class="math inline">\(c\)</span> again:
+<div class="math inline"><div>\[x'=\frac{x-vt}{\sqrt{1-(v/c)^2}},\qquad t'=\frac{t-\frac{v}{c^2}x}{\sqrt{1-(v/c)^2}}
+\;\xrightarrow{\ v/c\ll1\ }\; x'=x-vt,\ \ t'=t\quad\text{(Galileo transf.)}\]</div>
+</div></p>
+<h3>Time dilation</h3>
+<p>[그림: <span class="math inline">\(t'\)</span>축 (<span class="math inline">\(x=vt\)</span>), <span class="math inline">\(x'\)</span>축 (<span class="math inline">\(t=vx\)</span>)]
+<div class="math inline"><div>\[x=\frac{x'+vt'}{\sqrt{1-v^2}},\qquad t=\frac{t'+vx'}{\sqrt{1-v^2}}
+\quad\to\quad \frac{v}{\sqrt{1-v^2}}+\frac1{\sqrt{1-v^2}}&gt;1\ [?]\]</div>
+</div>
+Ex) Put an engine [그림: 우주선/관찰자 그림]</p>
+<p><strong>Euclidean space-time</strong>: <span class="math inline">\(\text{Length}^2=x'^2+t'^2=x^2+t^2\)</span></p>
+<p><strong>Minkowski spacetime</strong>: [그림: <span class="math inline">\(t',x'\)</span>축과 event A]
+<div class="math inline"><div>\[x^2+t^2\ne x'^2+t'^2,\qquad t'^2-\vec x'^2=t^2-\vec x^2=\text{const}=g^{ij}x_ix_j,\quad x_i=\{t,\vec x\}\]</div>
+</div>
+<div class="math inline"><div>\[g^{ij}=\operatorname{diag}(1,-1)=\operatorname{diag}(1,-1,-1,-1)\]</div>
+</div></p>
+<hr />
+<h2>9/11 QFT — Road to QFT</h2>
+<h3>Propagator (Green's function)</h3>
+<p>[그림: GUN <span class="math inline">\((\vec x,t=0)\)</span>에서 detector (<span class="math inline">\(t&gt;0\)</span>)로 가는 입자] Where is the particle later?</p>
+<p>First consider a point-like source: <span class="math inline">\(\psi(\vec x,t=0)=\delta^3(\vec x)\)</span>.</p>
+<p>The wave function at later time (<span class="math inline">\(t&gt;0\)</span>):
+<div class="math inline"><div>\[\psi(\vec x,t&gt;0)=e^{-iHt}\,\underbrace{\psi(\vec x,t=0)}_{\delta^3(\vec x)=\int d^3p\,e^{i\vec p\cdot\vec x}}\,\theta(t)
+=\int d^3p\,e^{-iHt}e^{i\vec p\cdot\vec x}\,[?]\]</div>
+</div>
+<div class="math inline"><div>\[\theta(t)=\lim_{\epsilon\to0^+}\frac{i}{2\pi}\int_{-\infty}^{\infty}d\omega\,\frac{e^{-i\omega t}}{\omega+i\epsilon}=\begin{cases}1&amp;t&gt;0\\0&amp;t&lt;0\end{cases}\]</div>
+</div>
+[그림: 복소 <span class="math inline">\(\omega\)</span> 평면 contour. 극점 <span class="math inline">\(-i\epsilon\)</span>. <span class="math inline">\(t&lt;0\)</span>이면 위쪽 반원, <span class="math inline">\(t&gt;0\)</span>이면 아래쪽 반원으로 닫음; <span class="math inline">\(\omega=-iR\)</span>에서 <span class="math inline">\(e^{-Rt}\)</span>]</p>
+<div class="math block">
+<div>\[\psi(\vec x,t)=\frac{i}{2\pi}\int d^3p\,d\omega\,e^{-i\frac{\vec p^2}{2m}t+i\vec p\cdot\vec x-i\omega t}\frac1{\omega+i\epsilon}\]</div>
+
+</div>
+<p>(define <span class="math inline">\(\omega\equiv p_0-\dfrac{\vec p^2}{2m}\)</span>; <span class="math inline">\(\ p_\mu=\{p_0,-\vec p\},\ x_\mu=\{t,-\vec x\}\)</span>)
+<div class="math inline"><div>\[=\frac{i}{2\pi}\int d^3p\,dp_0\,e^{-ip_0t+i\vec p\cdot\vec x}\frac1{p_0-\frac{\vec p^2}{2m}+i\epsilon}
+=\frac{i}{2\pi}\int d^4p\,e^{-ip\cdot x}\frac1{p_0-\frac{\vec p^2}{2m}+i\epsilon}\]</div>
+</div>
+(&quot;I don't care <span class="math inline">\(2\pi\)</span>…&quot; — professor)
+<div class="math inline"><div>\[=\int d^4p\,G(p)\,e^{-ip\cdot x}\qquad\boxed{2\pi,\ i,\ \text{"}-\text{"}}\]</div>
+</div>
+<div class="math inline"><div>\[G(p)\equiv\frac{1}{p_0-\frac{\vec p^2}{2m}+i\epsilon}\quad:\ \text{Non-relativistic propagator}\]</div>
+</div></p>
+<p><strong>Extended source</strong>:
+<div class="math inline"><div>\[\psi(\vec x,t=0)=\phi(\vec x)=\int d^3x'\,\phi(\vec x')\delta(\vec x'-\vec x)\]</div>
+</div>
+<div class="math inline"><div>\[\psi(\vec x,t)=\int d^3x'\,G(\vec x-\vec x',t)\,\phi(\vec x')\ \ \big(\equiv G(x,t)\ \text{if}\ \phi=\delta^3(\vec x)\big)\]</div>
+</div>
+<div class="math inline"><div>\[\psi(\vec x,t)=\int d^4x'\,G(\vec x-\vec x',t)\,J(x')\]</div>
+</div>
+[그림: 시공간 도표에서 <span class="math inline">\(J_{\rm GUN}\)</span> → <span class="math inline">\(J_{\rm detector}\)</span>]
+<div class="math inline"><div>\[\mathrm{Amp}\big|_{\text{Gun}\to\text{detector}}=\int d^4x\,d^4y\,J_{\rm detector}(x)\,G(x-y)\,J_{\rm GUN}(y)\]</div>
+</div>
+<span class="math inline">\(\psi(\vec x,t)\)</span> satisfies the inhomogeneous Schrödinger eq.:
+<div class="math inline"><div>\[\psi(\vec x,t)=\int d^4x'\,G(x-x')\big(-iJ_{\rm GUN}(x')\big)
+\;\Rightarrow\;(i\partial_t-H)\psi(\vec x,t)=J_{\rm GUN}(x)\]</div>
+</div>
+<div class="math inline"><div>\[(i\partial_t-H)G(x^\mu)=i\delta(x^\mu)\]</div>
+</div>
+<div class="math inline"><div>\[\int d^4p\,\frac{1}{p_0-\frac{\vec p^2}{2m}+i\epsilon}e^{-ip\cdot x}=G(x)\]</div>
+</div>
+<div class="math inline"><div>\[(i\partial_t-H)G(x)=(i\partial_t-H)\int d^4p\,\frac{1}{p_0-\frac{\vec p^2}{2m}+i\epsilon}e^{-ip\cdot x}
+=i\int d^4p\,\frac{p_0-\frac{\vec p^2}{2m}}{p_0-\frac{\vec p^2}{2m}+i\epsilon}e^{-ip\cdot x}=\int d^4p\,e^{-ip\cdot x}\]</div>
+</div></p>
+<div class="math block">
+<div>\[G(x_\mu)=\int d^4p\,\frac{i}{p_0-\frac{\vec p^2}{2m}+i\epsilon}e^{-ip\cdot x}\qquad(\text{non-rel case})\]</div>
+
+</div>
+<p><em>Wild phase</em>: <span class="math inline">\(x_D-x_G\gg1\)</span> → high oscillation.</p>
+<p>In general, <span class="math inline">\(p_0=?\)</span>:</p>
+<ul>
+<li><span class="math inline">\(p_0\ne\dfrac{\vec p^2}{2m}\)</span>: <strong>off-shell</strong></li>
+<li><span class="math inline">\(p_0=\dfrac{\vec p^2}{2m}\)</span>: <strong>on-shell</strong> (mass-shell)</li>
+</ul>
+<p>[그림: <span class="math inline">\(x_G\)</span>에서 <span class="math inline">\(x_D\)</span>로 가는 질량 <span class="math inline">\(m\)</span>, 운동량 <span class="math inline">\(\vec p\)</span>의 입자] <span class="math inline">\(G(x)\)</span>, <span class="math inline">\(x=x_D-x_G\)</span>.</p>
+<p><strong>Mixed position–momentum space</strong>:
+<div class="math inline"><div>\[G(t,\vec p)=\int dE\,G(p)e^{-iEt}=i\,e^{-i\frac{\vec p^2}{2m}t}\int dE\,\frac{e^{-i\left(E-\frac{\vec p^2}{2m}\right)t}}{E-\frac{\vec p^2}{2m}+i\epsilon}\]</div>
+</div>
+<span class="math inline">\(\left(E-\dfrac{\vec p^2}{2m}\right)t\gg1\)</span> (<span class="math inline">\(\Delta E\,\Delta t\)</span>) → wild phase (wildly oscillating phase).
+<span class="math inline">\(E-\dfrac{\vec p^2}{2m}\to0\)</span>, <span class="math inline">\(\ \Delta E\Delta t\gg1\)</span>.</p>
+<p>[그림: <span class="math inline">\(E=\Delta E\)</span>인 파속, 10 m 거리]</p>
+<p><span class="math inline">\(A=\int e^{iS/\hbar}\)</span>, <span class="math inline">\(S\gg1\)</span>: wild phase.</p>
+<h3>Relativistic propagator</h3>
+<p><span class="math inline">\(t,\vec x\)</span> &amp; <span class="math inline">\(\{E,\vec p\}\)</span> combined → <span class="math inline">\(p_\mu\)</span>.
+<div class="math inline"><div>\[p_\mu p^\mu=m^2,\qquad E^2-\vec p^2=m^2,\qquad E^2=\vec p^2+m^2\ \ \text{(dispersion relation)}\]</div>
+</div>
+<div class="math inline"><div>\[E=+\sqrt{\vec p^2+m^2}&gt;0\quad(E&lt;0\ \text{인 경우?}\ [?])\qquad \simeq\frac{\vec p^2}{2m}+m+O(\cdots)\quad(|\vec p|\ll m)\]</div>
+</div></p>
+<div class="math block">
+<div>\[G(p)=\frac{i}{p_0-\frac{\vec p^2}{2m}+i\epsilon}\ \xrightarrow{\text{guess}}\ \frac{i}{p_0-\sqrt{\vec p^2+m^2}+i\epsilon}\quad(\text{not Lorentz invariant; not perfect})\]</div>
+
+</div>
+<p>[그림: Gun → Detector] (LI: Lorentz Invariance)
+<div class="math inline"><div>\[A=\int d^4x\,d^4y\,J_G(x)G(x-y)J_D(y)=\int d^4p\,\underbrace{J_G(p)}_{\rm LI}G(p)\underbrace{J_D(-p)}_{\rm LI}\]</div>
+</div>
+<span class="math inline">\(G(p)\)</span> → can only depend on <span class="math inline">\(p^2=p_\mu p^\mu\ (\ne m^2)\)</span>, or equivalently <span class="math inline">\(p^2-m^2\)</span>.
+<div class="math inline"><div>\[p^2-m^2=\left(p_0-\sqrt{\vec p^2+m^2}\right)\left(p_0+\sqrt{\vec p^2+m^2}\right)\]</div>
+</div>
+<div class="math inline"><div>\[G_{LI}(p)=\frac{i}{p^2-m^2+i\epsilon}=\frac{i}{(p_0-\sqrt{\ })(p_0+\sqrt{\ })}\ ?
+=\frac1{2\sqrt{\vec p^2+m^2}}\left(\frac{i}{p_0-\sqrt{\vec p^2+m^2}+i\epsilon}-\frac{i}{p_0+\sqrt{\vec p^2+m^2}}\right)\]</div>
+</div></p>
+<ul>
+<li>prefactor <span class="math inline">\(\dfrac1{2\sqrt{\vec p^2+m^2}}\)</span>: can be absorbed into redefinition of <span class="math inline">\(J\)</span></li>
+<li>first term: gives correct long-distance behavior</li>
+</ul>
+<div class="math block">
+<div>\[J^{\rm rel}_{\rm GUN}(\vec p,p_0)=\left(2\sqrt{\vec p^2+m^2}\right)^{1/2}J^{\rm nr}_{\rm GUN}(\vec p,p_0)\ [?]\]</div>
+
+</div>
+<p>1st term:
+<div class="math inline"><div>\[\int dp_0\,J_G^{\rm rel}(p_0)\frac{i}{p_0-\sqrt{\vec p^2+m^2}+i\epsilon}J_D^{\rm rel}(-p_0)\qquad(\text{rel}\to\text{non-rel})\]</div>
+</div>
+2nd term:
+<div class="math inline"><div>\[\int dp_0\,J_G^{\rm rel}(p_0)\frac{-i}{p_0+\sqrt{\vec p^2+m^2}}J_D^{\rm rel}(-p_0)\]</div>
+</div>
+change <span class="math inline">\(p_0\to-p_0\)</span>:
+<div class="math inline"><div>\[\int dp_0\,J_G^{\rm rel}(-p_0)\frac{i}{p_0-\sqrt{\vec p^2+m^2}}J_D^{\rm rel}(p_0)
+=\int dp_0\,J_D^{\rm rel}(p_0)\frac{i}{p_0-\sqrt{\vec p^2+m^2}}J_G^{\rm rel}(-p_0)\]</div>
+</div>
+→ Detector와 Gun을 구분할 수 없다. Detector도 particle을 쏠 수 있다 [?]. Only source <span class="math inline">\(J\)</span>.</p>
+<p>[그림: <span class="math inline">\(t,x\)</span> 축과 boost된 <span class="math inline">\(t',x'\)</span> 축(빨강). time-like 간격(파랑)과 space-like 간격]</p>
+<ul>
+<li>time-like 간격에서만 LI에 의해 future와 past가 바뀌지 않는다 [?] (space-like이면 바뀔 수 있다).</li>
+<li>All the sources emit and receive particles.</li>
+<li>There is no distinction (Gun &amp; detector).</li>
+</ul>
+<hr />
+<h2>9/13 QFT</h2>
+<div class="math block">
+<div>\[G_{\rm nr}(\vec x,t)=\int d^4p\,\frac{i}{p_0-\frac{\vec p^2}{2m}+i\epsilon}e^{-ipx}\quad(\text{wild phase}),\qquad
+G_{\rm rel}(\vec x,t)=\int d^4p\,\frac{i}{p^2-m^2+i\epsilon}e^{-ipx}\]</div>
+
+</div>
+<p>[그림: <span class="math inline">\(J\)</span> — <span class="math inline">\(G\)</span> — (질량 <span class="math inline">\(m\)</span>) — on-shell]
+<div class="math inline"><div>\[p_0\simeq\frac{\vec p^2}{2m}+\Delta E\ (\text{off-shell});\qquad p^2-m^2=0\to E=\pm\sqrt{\vec p^2+m^2},\quad p_0\simeq\sqrt{\vec p^2+m^2}+\Delta E\]</div>
+</div>
+<div class="math inline"><div>\[\frac{i}{p^2-m^2+i\epsilon}=\frac1{2\sqrt{\vec p^2+m^2}}\left(\frac{i}{p_0-\sqrt{\ }+i\epsilon}-\frac{i}{p_0+\sqrt{\ }-i\epsilon}\right)\,[?]\]</div>
+</div></p>
+<h3>Relativistic Feynman propagator</h3>
+<div class="math block">
+<div>\[G^{\rm rel}(\vec x,t)=\int d^4p\,\frac{i}{p^2-m^2+i\epsilon}e^{-ipx},\qquad p\cdot x=p_0t-\vec p\cdot\vec x\]</div>
+
+</div>
+<div class="math block">
+<div>\[=\int d^3p\,dp_0\,\frac1{2\sqrt{\vec p^2+m^2}}e^{-ipx}\left(\frac{i}{p_0-\sqrt{\ }+i\epsilon}-\frac{i}{p_0+\sqrt{\ }-i\epsilon}\right)\]</div>
+
+</div>
+<div class="math block">
+<div>\[=\int d^3p\,\frac{e^{i\vec p\cdot\vec x}}{2\sqrt{\vec p^2+m^2}}\left[\int dp_0\,e^{-ip_0t}\frac{i}{\underbrace{p_0-\sqrt{\ }}_{\omega}+i\epsilon}-\int dp_0\,e^{-ip_0t}\frac{i}{\underbrace{p_0+\sqrt{\ }}_{\omega}-i\epsilon}\right]
+\qquad(p_0=\omega+\sqrt{\ }\ ;\ p_0=\omega-\sqrt{\ })\]</div>
+
+</div>
+<div class="math block">
+<div>\[=\int d^3p\,\frac{e^{i\vec p\cdot\vec x}}{2\sqrt{\vec p^2+m^2}}\left[e^{-i\sqrt{\vec p^2+m^2}\,t}\int d\omega\,\frac{e^{-i\omega t}}{\omega+i\epsilon}-e^{i\sqrt{\vec p^2+m^2}\,t}\int d\omega\,\frac{e^{-i\omega t}}{\omega-i\epsilon}\right]\]</div>
+
+</div>
+<div class="math block">
+<div>\[\int d\omega\,\frac{e^{-i\omega t}}{\omega+i\epsilon}\equiv\theta(t)=\begin{cases}1&amp;t&gt;0\\0&amp;t&lt;0\end{cases},\qquad
+\int d\omega\,\frac{e^{-i\omega t}}{\omega-i\epsilon}\equiv\theta(-t),\qquad p_0\equiv\sqrt{\vec p^2+m^2}\]</div>
+
+</div>
+<div class="math block">
+<div>\[G_{\rm rel}(\vec x,t)=\int d^3p\,\frac{e^{i\vec p\cdot\vec x}}{2\sqrt{\vec p^2+m^2}}\left(e^{-ip_0t}\theta(t)-e^{ip_0t}\theta(-t)\right)\]</div>
+
+</div>
+<div class="math block">
+<div>\[G_{\rm rel}(x^\mu)=\int d^3p\,\frac1{2\sqrt{\vec p^2+m^2}}\left(e^{-ip\cdot x}\theta(t)+e^{ip\cdot x}\theta(-t)\right)\]</div>
+
+</div>
+<p>vs. (<span class="math inline">\(|\vec p|\ll m\)</span>)
+<div class="math inline"><div>\[G_{\rm nr}(x^\mu)=\int d^3p\,e^{-i\frac{\vec p^2}{2m}t}e^{i\vec p\cdot\vec x}\theta(t)\]</div>
+</div></p>
+<p>To better understand the situation, compare initial conditions on <span class="math inline">\(G^{\rm rel}_{\rm nr}(\vec x,t)\)</span>:
+<div class="math inline"><div>\[G^{\rm nr}(\vec x,t=0)=\delta^3(\vec x)\qquad[\text{그림: 원점의 뾰족한 peak}]\qquad\textbf{H.W.}\]</div>
+</div>
+<div class="math inline"><div>\[G^{\rm rel}(\vec x,t=0^+)=\int\frac{d^3p}{2\sqrt{\vec p^2+m^2}}e^{ipr\cos\theta}
+=\text{Hankel f.t.}\to\text{asymptotic limit for }|\vec x|\to\infty\]</div>
+</div>
+<div class="math inline"><div>\[=\int_0^\infty\frac{dp\,p^2\,2\pi}{2\sqrt{p^2+m^2}}\frac{e^{ipr}-e^{-ipr}}{ipr}=2\pi\int_0^\infty dp\,\frac{p}{\sqrt{p^2+m^2}}\frac{\sin(pr)}{r}\]</div>
+</div>
+<div class="math inline"><div>\[=\pi\int_{-\infty}^{\infty}dp\,\frac{p}{\sqrt{p^2+m^2}}\frac{\sin(pr)}{r}\xrightarrow{r\to\infty}0\quad\text{shuts off for }r\to\infty\ \text{— how fast?}\]</div>
+</div>
+<div class="math inline"><div>\[=\frac{\pi}{ir}\int_{-\infty}^{\infty}dp\,\frac{p}{\sqrt{p^2+m^2}}e^{ipr},\qquad e^{i(i\alpha)r}=e^{-\alpha r}\]</div>
+</div>
+[그림: 복소 <span class="math inline">\(p\)</span> 평면. <span class="math inline">\(+im\)</span>에서 위로, <span class="math inline">\(-im\)</span>에서 아래로 branch cut. 위쪽 반원 contour → 0]</p>
+<p><span class="math inline">\(p\to i\alpha\)</span>, <span class="math inline">\(p\equiv i\rho\)</span>:
+<div class="math inline"><div>\[=\frac{2\pi}{r}\int_m^\infty d\rho\,\frac{\rho}{\sqrt{\rho^2-m^2}}e^{-\rho r}
+\qquad r\to\text{large}:\ \sim e^{-mr}\ (\text{near }\rho\sim m)\]</div>
+</div>
+Time-like separation:
+<div class="math inline"><div>\[G(\vec x=0,t&gt;0)=\int\frac{d^3p}{2\sqrt{\vec p^2+m^2}}e^{-i\sqrt{\vec p^2+m^2}\,t}=4\pi\int\frac{dp\,p^2}{2\sqrt{p^2+m^2}}e^{-i\sqrt{p^2+m^2}\,t}\]</div>
+</div></p>
+<h3>Relativistic causality</h3>
+<p>[그림: cause(원점)과 conseq. 1, conseq. 2; boost된 <span class="math inline">\(t',x'\)</span> 축. 오른쪽: <span class="math inline">\(t=x\)</span> 광추, <span class="math inline">\(v&lt;1\)</span>인 <span class="math inline">\(t'\)</span>축, <span class="math inline">\(v&gt;1=c\)</span>인 경우 <span class="math inline">\(x'\)</span>축]</p>
+<ol>
+<li><span class="math inline">\(|x_{\rm conseq}-x_{\rm cause}|^2&gt;0\)</span> : time-like separation</li>
+<li><span class="math inline">\(x^0_{\rm conseq}&gt;x^0_{\rm cause}\)</span></li>
+</ol>
+<p>⇒ ① &amp; ② are Lorentz invariant statements (to prove ②, you need ①).</p>
+<p><span class="math inline">\((t,x)\)</span>: conseq., <span class="math inline">\((0,0)\)</span>: cause. <span class="math inline">\(t'=\gamma(t-vx)\)</span>. If <span class="math inline">\(x&gt;t\)</span> (<span class="math inline">\(v&lt;1\)</span>), <span class="math inline">\(t&gt;0\to t'&lt;0\)</span> 가능.</p>
+<div class="math block">
+<div>\[[\phi(x),\phi(y)]=\int\frac{d^3p}{2\sqrt{\vec p^2+m^2}}\left(e^{-ip(x-y)}-e^{ip\cdot(x-y)}\right)
+\qquad\left(\begin{array}{c}[Q_1,Q_2]=0\ ?\\ Q_1,Q_2\ne0\end{array}\right)\]</div>
+
+</div>
+<p>Space-like separation: <span class="math inline">\(\vec x-\vec y=\vec r\)</span>, <span class="math inline">\(x^0-y^0=0\)</span>:
+<div class="math inline"><div>\[=\int\frac{d^3p}{2\sqrt{\vec p^2+m^2}}\left(e^{i\vec p\cdot\vec r}-e^{-i\vec p\cdot\vec r}\right)=0\qquad\textbf{HW 2.}\quad\left(\int d^3p\,\frac{i\sin(\vec p\cdot\vec r)}{\sqrt{p^2+m^2}}=0\right)\]</div>
+</div></p>
+<h3>Relativistic normalization of plane wave states</h3>
+<div class="math block">
+<div>\[A=\int d^4p\,\underbrace{J_{\rm rel}(p)\left(\frac1{2\sqrt{\ }}\right)^{1/2}}_{J_{\rm nr}(p)}
+\underbrace{\left(\frac{i}{p_0-\sqrt{\ }+i\epsilon}+\cdots\right)}_{G_{\rm rel}(p)}
+\underbrace{J_{\rm rel}(-p)\left(\frac1{2\sqrt{\ }}\right)^{1/2}}_{J_{\rm nr}(-p)}\]</div>
+
+</div>
+<div class="math block">
+<div>\[\psi_{\rm nr}(\vec p,t)=\int dt'\,e^{-i\sqrt{\vec p^2+m^2}(t-t')}J_{\rm nr}(\vec p,t'),\qquad
+J_{\rm nr}=\left(2\sqrt{\ }\right)^{-1/2}J_{\rm rel}(\vec p,t')\]</div>
+
+</div>
+<div class="math block">
+<div>\[\text{Prob}=\int d^3p\,|\psi_{\rm nr}|^2\ \to\ \int\frac{d^3p}{2\sqrt{\vec p^2+m^2}}|\psi_{\rm rel}|^2\]</div>
+
+</div>
+<div class="math block">
+<div>\[\sum_{\vec p}\to\int d^3p\ \searrow\ \int\frac{d^3p}{2\sqrt{\vec p^2+m^2}}=\int d^4p\,\delta(p^2-m^2)\,\theta(p_0)\quad:\ \text{every part is LI}\to\text{Lorentz inv.}\]</div>
+
+</div>
+<div class="math block">
+<div>\[p_0'=\gamma(p_0-\vec v\cdot\vec p),\qquad p_0=\sqrt{\vec p^2+m^2},\ |\vec v|\le1\quad\Rightarrow\ \text{sign of }p_0\text{ is Lorentz invariant}\]</div>
+
+</div>
+<div class="math block">
+<div>\[\psi_{\rm nr}=e^{-ip\cdot x}=e^{-i\sqrt{\vec p^2+m^2}\,t}e^{i\vec p\cdot\vec x},\qquad
+\psi_{\rm rel}=\left(2\sqrt{\ }\right)^{1/2}e^{-i\sqrt{\vec p^2+m^2}\,t}e^{i\vec p\cdot\vec x},\qquad \langle\vec x,\vec p\rangle_{\rm rel/nr}=?\]</div>
+
+</div>
+<hr />
+<h2>9/20 QFT</h2>
+<p>Even for the scalar particle, we can predict its anti-particle.
+<div class="math inline"><div>\[\text{propagation}=\frac{i}{p^2-m^2+i\epsilon}=\frac1{2\sqrt{\vec p^2+m^2}}\left(\frac{i}{p_0-\sqrt{\vec p^2+m^2}+i\epsilon}-\underbrace{\frac{i}{p_0+\sqrt{\vec p^2+m^2}-i\epsilon}}_{\text{prediction of new particle}}\right)\]</div>
+</div>
+In the relativistic view, it is meaningless to divide gun &amp; detector.</p>
+<p>Let's consider the <strong>kicker</strong> with two lines:</p>
+<p>[그림: <span class="math inline">\([J]_y \to \langle K\rangle_z \to [J]_x\)</span> — non-rel]
+<div class="math inline"><div>\[A=\int d^4y\,d^4x\,d^4z\,J(x)G(x-z)K(z)G(z-y)J(y)\]</div>
+</div>
+[그림: <span class="math inline">\([J]\leftrightarrow\langle K\rangle\leftrightarrow[J]\)</span> — rel; 시공간에서 <span class="math inline">\(K\)</span>에서 두 <span class="math inline">\(J\)</span>로 V자 모양] → <strong>particle # is not conserved.</strong></p>
+<p>The state <span class="math inline">\(|\psi\rangle\)</span> is described by a superposition of any fundamental states <span class="math inline">\(|1\rangle,|2\rangle,\dots,|n\text{-particle}\rangle\)</span>:
+<div class="math inline"><div>\[|\psi\rangle=\alpha|1\rangle+\beta|2\rangle+\cdots\]</div>
+</div>
+To keep the charge conservation, we can consider the propagation of opposite charge as an anti-particle → pair production of <span class="math inline">\(e^-\)</span> &amp; <span class="math inline">\(e^+\)</span>.</p>
+<p><strong>Locality</strong>: locality of interactions in spacetime. If interactions are not local, we have to minimize what happened in the interval. → All interactions are local.</p>
+<p>[그림: 떨어진 두 세계선 사이의 비국소 상호작용 → 한 점에서 만나는 국소 vertex]</p>
+<h3>Symmetry &amp; Gauge theory</h3>
+<p>To simplify our problem we deal with symmetry; symmetry is a guiding principle, which gives selection rules.</p>
+<p><span class="math inline">\(G=\{g_i\}\)</span>, <span class="math inline">\(i=1,2,3,\dots\)</span></p>
+<p>A <strong>group</strong> is a set of elements <span class="math inline">\(\{g_i\}\)</span> endowed with a binary operation that assigns to each pair of elements a 3rd element of the group: <span class="math inline">\(G\times G\to G\)</span>, <span class="math inline">\(g_1\circ g_2\to g_3\)</span>.</p>
+<p>※ Axioms: ① Associativity ② existence of (left) identity ③ existence of (left) inverse.</p>
+<p>※ Consequences (<strong>H.W.</strong>): ① Left inverse/identity is also right inverse/identity. ② Uniqueness of identity/inverse.</p>
+<ul>
+<li>finite group: ex) <span class="math inline">\(\mathbb Z_n\)</span> (cyclic)</li>
+<li>infinite group: ex) <span class="math inline">\(SO(2)\)</span></li>
+</ul>
+<p>Take <span class="math inline">\(N\)</span> coordinates <span class="math inline">\(\{q_i\}\)</span>, <span class="math inline">\(i=1,\dots,N\)</span>, which make a manifold. We can choose any coordinates; however, the physics doesn't change.</p>
+<p><span class="math inline">\(q_i\to f(q_i)=q_i'\)</span> : coordinate transformation. For a given TF, there exists only one <span class="math inline">\(\{q_i'\}\)</span> for <span class="math inline">\(\{q_i\}\)</span>.</p>
+<p><strong>Group</strong> = the set of all possible changes in coordinates (transformations).</p>
+<p>[그림: <span class="math inline">\(\{f_i\}\)</span> 집합 = subset (not physical, <span class="math inline">\(\not\ni I\)</span>) | subgroup (physical, <span class="math inline">\(\ni I\)</span>)] → group of <span class="math inline">\(f\)</span> where <span class="math inline">\(q_i\to f(q_i)=q_i'\)</span>. Relevant groups in physics are groups of symmetry.</p>
+<hr />
+<h2>9/25 QFT</h2>
+<p>Group of coordinate transformations.
+[그림: <span class="math inline">\(e\)</span>: identity. subset | subgroup (leaves phy. invariant) → <span class="math inline">\(f_i\)</span> = symmetry]</p>
+<p>Classical world: <span class="math inline">\(\dfrac{d\vec p}{dt}=\vec F_{\rm ext}\)</span> (Newton's law).
+The group that leaves the E.O.M invariant ⇒ <strong>&quot;Galileo group&quot;</strong>:
+<div class="math inline"><div>\[\vec x\to R(\alpha,\beta,\gamma)\vec x+\vec v_0t+\vec x_0,\qquad t\to t+t_0\]</div>
+</div>
+generated by 10 parameters <span class="math inline">\(\alpha,\beta,\gamma,\vec v_0,\vec x_0,t_0\)</span>.</p>
+<ul>
+<li>dimension of group (# of elements): <span class="math inline">\(\infty\)</span></li>
+<li>
+<h1>of parameters <span class="math inline">\(=10=\)</span> dimension of Lie group</h1>
+</li>
+</ul>
+<p>In rel. QFT, the most important groups are all Lie groups.</p>
+<p>Ex) <span class="math inline">\(\vec\alpha=(\alpha_1,\alpha_2,\dots,\alpha_N)\)</span>, <span class="math inline">\(N=10\)</span>. All possible (<span class="math inline">\(\infty\)</span>) values of <span class="math inline">\(f_i\)</span> (each group element) can appear as points in the space <span class="math inline">\(\vec\alpha\)</span>.</p>
+<p>[그림: <span class="math inline">\(\alpha_1=\alpha,\ \alpha_2=\beta,\ \alpha_3=\gamma,\dots,\alpha_N=t_0\)</span> 축] which point is a symmetry element; point → transformation.</p>
+<p>This space is spanned by <span class="math inline">\(N\)</span> &quot;continuous&quot; parameters. Each continuous parameter can be associated with a group element of an <span class="math inline">\(N\)</span>-dimensional Lie group.</p>
+<p>A <strong>Lie group</strong> is a group <span class="math inline">\(G\)</span> which is also a smooth manifold, for which multiplication and inversion are smooth maps:</p>
+<ol>
+<li><span class="math inline">\(G\times G\mapsto G\)</span>: <span class="math inline">\(g(\alpha)g(\beta)=g(\gamma)\)</span>, <span class="math inline">\(\gamma=f(\alpha,\beta)\)</span> ← smooth</li>
+<li><span class="math inline">\(g^{-1}(\alpha)=g(\beta)\)</span>, <span class="math inline">\(\beta=h(\alpha)\)</span> ← smooth</li>
+</ol>
+<p>[그림: 원 <span class="math inline">\(S^1\)</span> → Lie group; 정사각형 → not Lie group (kink, not smooth)]</p>
+<p>A group looks very abstract. Eventually we need to understand how the group acts — called <strong>&quot;realization&quot;</strong>: a concrete way of writing group elements in terms of transformations on the same space.</p>
+<p>An important realization is the <strong>matrix realization</strong>. When people say &quot;rep&quot;, they refer to the matrix rep: a particular embedding of the group into matrices.
+<div class="math inline"><div>\[D:g\mapsto D(g),\qquad D(g_1)D(g_2)=D(g_1g_2),\qquad D(e)=\mathbb 1\]</div>
+</div>
+In a Lie group, it is conventional to parametrize the elements such that <span class="math inline">\(\vec\alpha=0\)</span> corresponds to the identity element:
+<div class="math inline"><div>\[g(\vec\alpha=0)=e\ \leftrightarrow\ D(\vec\alpha=0)=\mathbb 1,\qquad D(g)=\mathbb 1+O(d\alpha)\]</div>
+</div>
+[그림: group manifold 위 identity 근처의 접벡터 <span class="math inline">\(\alpha_1,\alpha_2,\alpha_3\)</span>]</p>
+<p>Probe a rep in the vicinity of the identity:
+<div class="math inline"><div>\[D(d\alpha)=\mathbb 1+i\,d\alpha_aX^a+O(d\alpha^2),\qquad
+X^{a=1\ldots N}=-i\left.\frac{\partial D(\alpha)}{\partial\alpha_a}\right|_{\alpha=0}\ :\ \text{generators of the group}\]</div>
+</div></p>
+<p>Ex)
+<div class="math inline"><div>\[D(dx)\psi=\left(1+dx\frac{\partial}{\partial x}+\cdots\right)\psi,\qquad D(dt)\psi=\left(1+dt\frac{\partial}{\partial t}+\cdots\right)\psi,\qquad D(g)=e^{i\alpha_aX^a}\]</div>
+</div>
+<div class="math inline"><div>\[D(\alpha)D(\beta)=D(\gamma),\qquad
+D(\alpha)=\lim_{k\to\infty}\left(1+\frac{i\alpha_a}{k}X^a\right)^k=e^{i\alpha_aX^a}\ :\ \text{defining rep of group elements for finite }\vec\alpha\]</div>
+</div>
+Continuous parameter <span class="math inline">\(\alpha_a\)</span> is paired with generator <span class="math inline">\(X_a\)</span>, and the pair <span class="math inline">\((\alpha,X)\)</span> is associated with a group element <span class="math inline">\(g\)</span>.</p>
+<p>The generators <span class="math inline">\(X_a\)</span> form a vector space and <span class="math inline">\(X_a\)</span> are a basis in this vector space ⇒ <strong>Lie algebra</strong>.
+<div class="math inline"><div>\[D(\alpha)D(\beta)=D(\gamma):\qquad e^{i\alpha_aX^a}e^{i\beta_aX^a}=e^{i\delta_aX^a}\ne e^{i(\alpha_a+\beta_a)X^a}\ [?]\]</div>
+</div>
+There should exist <span class="math inline">\(\delta_a\)</span>. What is <span class="math inline">\(\delta\)</span>?
+<div class="math inline"><div>\[i\delta_aX^a=\ln\left(e^{i\alpha_aX^a}e^{i\beta_aX^a}\right)=\ln\Big(1+\underbrace{e^{i\alpha_aX^a}e^{i\beta_aX^a}-1}_{k}\Big)=\ln(1+k)=k-\frac12k^2+\cdots\]</div>
+</div>
+<div class="math inline"><div>\[=i\alpha_aX^a+i\beta_aX^a-\frac12\underbrace{[\alpha_aX^a,\beta_bX^b]}_{\text{should be linear in }X}+\cdots\qquad(\textbf{H.W.?})\]</div>
+</div>
+— for existence of <span class="math inline">\(\delta_a\)</span> as group property.</p>
+<p>Rewriting the previous eq. (<strong>H.W.?</strong>):
+<div class="math inline"><div>\[[\alpha_aX^a,\beta_bX^b]=-2i(\delta_c-\alpha_c-\beta_c)X^c+\cdots\equiv i\gamma_cX^c\ \ (\text{at this order}),\qquad \gamma_c=\alpha_a\beta_bf^{abc}\]</div>
+</div>
+<div class="math inline"><div>\[\boxed{[X^a,X^b]=if^{abc}X^c}\qquad\text{Lie algebra},\ f^{abc}:\ \text{structure constant}\]</div>
+</div></p>
+<hr />
+<h2>9/27 QFT</h2>
+<p>[그림: Group manifold; <span class="math inline">\(g=e\to D(g)=\mathbb 1=e^{i\alpha_aX^a}\)</span>; <span class="math inline">\(\alpha_a\)</span> … continuous parameter, <span class="math inline">\(X^a\)</span>: generator]
+<div class="math inline"><div>\[D(\alpha)D(\beta)=D(\gamma)?\qquad [X^a,X^b]=if^{abc}X_c\ \ (\text{structure constant})\]</div>
+</div>
+<span class="math inline">\(SU(2)\)</span>: <span class="math inline">\([\sigma_a,\sigma_b]=2i\epsilon_{abc}\sigma_c\)</span> : Lie algebra.</p>
+<p>A <strong>Lie algebra</strong> <span class="math inline">\(A\)</span> is an <span class="math inline">\(N\)</span>-dimensional vector space endowed with a binary operation called the Lie bracket (= Lie product):
+<div class="math inline"><div>\[[\ ,\ ]:A\times A\to A,\qquad (X,Y)\mapsto[X,Y]\]</div>
+</div>
+satisfying</p>
+<ol>
+<li>Anti-symmetry: <span class="math inline">\([X,Y]=-[Y,X]\)</span></li>
+<li>Jacobi identity: <span class="math inline">\([[X,Y],Z]+[[Y,Z],X]+[[Z,X],Y]=0\)</span></li>
+<li>Linearity: <span class="math inline">\([aX+bY,Z]=a[X,Z]+b[Y,Z]\)</span></li>
+</ol>
+<h3>Lorentz group / Poincaré group</h3>
+<p>Recall: ① Laws of physics should be the same for all inertial frames. ② The speed of light is the same in all inertial frames.
+<div class="math inline"><div>\[\eta_{\mu\nu}=\operatorname{diag}(+1,-1,-1,-1),\qquad x^\mu=(t,\vec x)\quad\text{metric of Minkowski spacetime}\]</div>
+</div>
+Consider <span class="math inline">\(x^\mu\to x'^\mu(x)\)</span>:
+<div class="math inline"><div>\[ds'^2=\eta_{\mu\nu}dx'^\mu dx'^\nu=\underbrace{\eta_{\mu\nu}\frac{\partial x'^\mu}{\partial x^\alpha}\frac{\partial x'^\nu}{\partial x^\beta}}_{\eta_{\alpha\beta}}dx^\alpha dx^\beta=\eta_{\alpha\beta}dx^\alpha dx^\beta=ds^2\quad(\text{we want this})\]</div>
+</div>
+<div class="math inline"><div>\[x^\mu\to x'^\mu=\Lambda^\mu{}_\nu x^\nu+a^\mu\ :\ \text{Poincaré transformation, with }\ \eta_{\mu\nu}\Lambda^\mu{}_\alpha\Lambda^\nu{}_\beta=\eta_{\alpha\beta}\]</div>
+</div>
+Each pair <span class="math inline">\((\Lambda,a)\)</span> is associated with a group element <span class="math inline">\(g\)</span>: e.g. <span class="math inline">\(g=(\Lambda,a)\)</span>, <span class="math inline">\(g_1=(\Lambda_1,a_1)\)</span>, <span class="math inline">\(g_2=(\Lambda_2,a_2)\)</span>.</p>
+<p>Group product:
+<div class="math inline"><div>\[g_1g_2=(\Lambda_1\Lambda_2,\ \Lambda_1a_2+a_1)\ne g_2g_1=(\Lambda_2\Lambda_1,\ \Lambda_2a_1+a_2)\]</div>
+</div>
+<div class="math inline"><div>\[x'=\Lambda_2x+a_2,\qquad x''=\Lambda_1x'+a_1=\Lambda_1(\Lambda_2x+a_2)+a_1=\Lambda_1\Lambda_2x+\Lambda_1a_2+a_1\]</div>
+</div>
+Suppose <span class="math inline">\(g_1=g_2^{-1}\)</span>: <span class="math inline">\(\Lambda_1=\Lambda_2^{-1}\)</span>, <span class="math inline">\(a_1=-\Lambda_1a_2=-\Lambda_2^{-1}a_2\)</span>. Given <span class="math inline">\(g\to g^{-1}=(\Lambda^{-1},-\Lambda^{-1}a)\)</span>, <span class="math inline">\(g\leftrightarrow\Lambda,a\)</span>.</p>
+<p><span class="math inline">\(\Lambda^\mu{}_\nu\)</span>: <span class="math inline">\(4\times4\)</span> matrix → 6 [?]; <span class="math inline">\(a^\mu\)</span>: 4-vector → <strong>10 parameters</strong> = dimension of the Poincaré group.</p>
+<p>Poincaré group → an important subgroup is the <strong>Lorentz group</strong> (= homogeneous Poincaré group): isometry group of spacetime with <span class="math inline">\(\eta_{\mu\nu}=\operatorname{diag}(+1,-1,-1,-1)\)</span>, denoted by <span class="math inline">\(O(1,3)\)</span> ← orthogonal.</p>
+<p>Ex) if <span class="math inline">\(\eta_{\mu\nu}=(+1,+1,-1,-1)\to O(2,2)\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><span class="math inline">\(\det\Lambda=1\)</span></th>
+<th><span class="math inline">\(\det\Lambda=-1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(\Lambda^0{}_0\ge1\)</span></td>
+<td>identity (subgroup: proper orthochronous)</td>
+<td>subset</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\Lambda^0{}_0\le-1\)</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>H.W.</strong>
+<div class="math inline"><div>\[\eta_{\mu\nu}\Lambda^\mu{}_\alpha\Lambda^\nu{}_\beta=\eta_{\alpha\beta}\Rightarrow(\det\Lambda)^2=1.\qquad
+00\text{ component: }1=(\Lambda^0{}_0)^2-\sum_{i=1}^3(\Lambda^i{}_0)^2,\quad \Lambda^0{}_0=\pm\sqrt{1+\sum_{i=1}^3(\Lambda^i{}_0)^2}\]</div>
+</div>
+(<span class="math inline">\(\Lambda^0{}_0\ge1\)</span>: orthochronous)</p>
+<p><strong>Lorentz group <span class="math inline">\(O(1,3)\)</span></strong>, <span class="math inline">\(SO^\uparrow(1,3)=L^\uparrow_+\)</span>:
+<div class="math inline"><div>\[\begin{array}{ccc}
+L^\uparrow_+ &amp; \overset{\ P:\ (t,\vec x)\to(t,-\vec x)\ }{\longleftrightarrow} &amp; L^\uparrow_-\ (\Lambda^0{}_0\ge1,\ \det\Lambda=-1)\\
+\updownarrow{\scriptstyle PT:\ (t,\vec x)\to(-t,-\vec x)} &amp; \searrow{\scriptstyle T:\ (t,\vec x)\to(-t,\vec x)} &amp; \\
+L^\downarrow_+\ (\Lambda^0{}_0\le-1,\ \det\Lambda=1) &amp; &amp; L^\downarrow_-\ (\Lambda^0{}_0\le-1,\ \det\Lambda=-1)
+\end{array}\]</div>
+</div>
+<strong>H.W. (Prove)</strong>: <span class="math inline">\(SO^\uparrow(1,3)\)</span>, the proper orthochronous Lorentz group, is the minimal subgroup.
+<div class="math inline"><div>\[O(1,3)=L^\uparrow_+\{\mathbb 1,P,T,PT\}\]</div>
+</div></p>
+<p><strong>Lie algebra of Lorentz group</strong> (smooth): <span class="math inline">\(g(\Lambda)x^\mu=\Lambda^\mu{}_\nu x^\nu\)</span>
+<div class="math inline"><div>\[\Lambda^\mu{}_\nu=\delta^\mu{}_\nu+\omega^\mu{}_\nu+O(\omega^2)\qquad(\text{infinitesimal})\]</div>
+</div>
+<div class="math inline"><div>\[\eta_{\alpha\beta}\Lambda^\alpha{}_\mu\Lambda^\beta{}_\nu=\eta_{\mu\nu}\]</div>
+</div>
+<div class="math inline"><div>\[\eta_{\mu\nu}=\eta_{\alpha\beta}(\delta^\alpha{}_\mu+\omega^\alpha{}_\mu)(\delta^\beta{}_\nu+\omega^\beta{}_\nu)=\eta_{\mu\nu}+\underbrace{\omega_{\mu\nu}+\omega_{\nu\mu}}_{0}+O(\omega^2)\]</div>
+</div>
+<div class="math inline"><div>\[\omega_{\mu\nu}=-\omega_{\nu\mu}\ \to\ 6\text{ components}\]</div>
+</div>
+<span class="math inline">\(D(\alpha)=1+i\alpha_aX^a+\cdots\)</span>
+<div class="math inline"><div>\[\omega_{\mu\nu}=\frac12(\omega_{\mu\nu}-\omega_{\nu\mu})=\frac12\omega_{\alpha\beta}(\delta^\alpha{}_\mu\delta^\beta{}_\nu-\delta^\alpha{}_\nu\delta^\beta{}_\mu)
+=-\frac i2\omega_{\alpha\beta}\underbrace{i(\delta^\alpha{}_\mu\delta^\beta{}_\nu-\delta^\alpha{}_\nu\delta^\beta{}_\mu)}_{(J^{\alpha\beta})_{\mu\nu}}
+=-\frac i2\omega_{\alpha\beta}(J^{\alpha\beta})_{\mu\nu}\]</div>
+</div>
+<div class="math inline"><div>\[\Lambda^\mu{}_\nu=\delta^\mu{}_\nu-\frac i2\omega_{\alpha\beta}(J^{\alpha\beta})^\mu{}_\nu+O(\omega^2)\ \Rightarrow\ e^{-\frac i2\omega_{\alpha\beta}J^{\alpha\beta}}\]</div>
+</div></p>
+<hr />
+<h2>10/11 QFT</h2>
+<p><span class="math inline">\(ds^2\)</span>; <span class="math inline">\(O(1,3)\)</span> <span class="math inline">\((+---)\)</span>: <span class="math inline">\(\eta\Lambda\Lambda=\eta\)</span>, <span class="math inline">\(\det\Lambda=\pm1\)</span>, <span class="math inline">\(\Lambda^0{}_0\ge1\)</span>.
+[그림: 4칸 표에서 <span class="math inline">\(SO^\uparrow(1,3)\)</span> 칸, <span class="math inline">\(P\)</span>로 옆칸 이동]</p>
+<h3>Lie algebra of the Lorentz group</h3>
+<p>(&quot;smooth&quot; manifold)
+<div class="math inline"><div>\[g(\Lambda)x^\mu=\Lambda^\mu{}_\nu x^\nu\ \to\ 3\text{ Rot}\oplus3\text{ Boost}\qquad(t'=\gamma(t-vx),\ x'=\gamma(x-vt))\]</div>
+</div>
+<div class="math inline"><div>\[\Lambda^\mu{}_\nu=\delta^\mu{}_\nu+\omega^\mu{}_\nu+O(\omega^2),\quad\omega\ll1\]</div>
+</div>
+<div class="math inline"><div>\[\eta_{\mu\nu}=\Lambda^\alpha{}_\mu\Lambda^\beta{}_\nu\eta_{\alpha\beta}=(\delta^\alpha{}_\mu+\omega^\alpha{}_\mu+O(\omega^2))(\delta^\beta{}_\nu+\omega^\beta{}_\nu+O(\omega^2))\eta_{\alpha\beta}
+=\eta_{\mu\nu}+\underbrace{\omega_{\mu\nu}+\omega_{\nu\mu}}_{0}+O(\omega^2)\]</div>
+</div>
+<span class="math inline">\(\omega_{\mu\nu}=-\omega_{\nu\mu}\)</span> (anti-symmetric).
+<div class="math inline"><div>\[D(\alpha)=1+i\alpha_aX^a+O(\alpha^2)\to e^{i\alpha_aX^a}\ (\text{generator}),\qquad [X_a,X_b]=if_{abc}X_c\ (\text{structure const.})\]</div>
+</div>
+<div class="math inline"><div>\[\omega_{\mu\nu}=\frac12(\omega_{\mu\nu}-\omega_{\nu\mu})=\frac12\omega_{\alpha\beta}(\delta^\alpha{}_\mu\delta^\beta{}_\nu-\delta^\alpha{}_\nu\delta^\beta{}_\mu)
+=-\frac i2\omega_{\alpha\beta}\underbrace{i(\delta^\alpha{}_\mu\delta^\beta{}_\nu-\delta^\alpha{}_\nu\delta^\beta{}_\mu)}_{(J^{\alpha\beta})_{\mu\nu}}
+=-\frac i2\omega_{\alpha\beta}(J^{\alpha\beta})_{\mu\nu}\]</div>
+</div>
+<div class="math inline"><div>\[\Lambda^\mu{}_\nu=\delta^\mu{}_\nu-\frac i2\omega_{\alpha\beta}(J^{\alpha\beta})^\mu{}_\nu+O(\omega^2)\to\left(e^{-\frac i2\omega_{\alpha\beta}J^{\alpha\beta}}\right)^\mu{}_\nu\]</div>
+</div>
+<div class="math inline"><div>\[\Lambda=e^{-\frac i2\omega_{\alpha\beta}J^{\alpha\beta}},\qquad \Lambda^\alpha{}_\beta=\left(e^{-\frac i2\omega_{\rho\sigma}J^{\rho\sigma}}\right)^\alpha{}_\beta\]</div>
+</div>
+6 generators = 3 rotations ⊕ 3 boosts.</p>
+<h3>Lorentz Lie algebra</h3>
+<div class="math block">
+<div>\[[J^{\mu\nu},J^{\rho\sigma}]=i\left(\eta^{\mu\sigma}J^{\nu\rho}+\eta^{\nu\rho}J^{\mu\sigma}-\eta^{\mu\rho}J^{\nu\sigma}-\eta^{\nu\sigma}J^{\mu\rho}\right)\]</div>
+
+</div>
+<blockquote>
+<p><strong>Prove</strong> <span class="math inline">\((J^{\alpha\beta})_{\mu\nu}=i(\delta^\alpha{}_\mu\delta^\beta{}_\nu-\delta^\alpha{}_\nu\delta^\beta{}_\mu)\)</span> satisfies the above Lie algebra.</p>
+</blockquote>
+<div class="math block">
+<div>\[J^{\mu\nu}\Rightarrow\begin{cases}J_i=\frac12\epsilon_{ijk}J^{jk},\quad \theta_i=\frac12\epsilon_{ijk}\omega^{jk}&amp;\text{Rotations (3)}\\ K_i\equiv J^{i0},\quad \eta_i\equiv\omega_{i0}&amp;\text{Boosts (3)}\end{cases}
+\qquad X_{a=1\sim6}=\{J_i,K_i\}\]</div>
+
+</div>
+<div class="math block">
+<div>\[[X_a,X_b]=if_{abc}X_c:\qquad
+\begin{aligned}
+[J_i,J_j]&amp;=i\epsilon_{ijk}J_k\quad(su(2)\text{ Lie algebra})\\
+[J_i,K_j]&amp;=i\epsilon_{ijk}K_k\\
+[K_i,K_j]&amp;=-i\epsilon_{ijk}J_k
+\end{aligned}\]</div>
+
+</div>
+<p>(지운 계산 일부)
+<div class="math inline"><div>\[\theta_iJ_i=\frac14(\epsilon_{ijm})\epsilon_{ilm}\omega_{jl}J^{\cdots}\,[?]=\frac12\omega_{ij}J^{ij}\]</div>
+</div>
+<div class="math inline"><div>\[\Lambda=e^{-\frac i2\omega_{\mu\nu}J^{\mu\nu}}=e^{-i\theta_iJ_i-i\eta_iK_i},\qquad J=J^\dagger,\ K=K^\dagger\ [?]\]</div>
+</div></p>
+<div class="math block">
+<div>\[(J^{\alpha\beta})_{\mu\nu}=i(\delta^\alpha{}_\mu\delta^\beta{}_\nu-\delta^\alpha{}_\nu\delta^\beta{}_\mu)\]</div>
+
+</div>
+<div class="math block">
+<div>\[(J^{10})^\mu{}_\nu=\eta^{\mu\rho}(J^{10})_{\rho\nu}=i(\delta^1{}_\rho\delta^0{}_\nu-\delta^1{}_\nu\delta^0{}_\rho)\eta^{\mu\rho}
+=i\begin{pmatrix}0&amp;-1&amp;0&amp;0\\-1&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0\end{pmatrix}\]</div>
+
+</div>
+<div class="math block">
+<div>\[(J^{10})^\dagger=-J^{10}\]</div>
+
+</div>
+<div class="math block">
+<div>\[e^{-i\omega_{10}J^{10}}=e^{-i\eta J^{10}}=\exp\left(-\eta\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}\oplus0\right)
+=\begin{pmatrix}\cosh\eta&amp;-\sinh\eta&amp;0&amp;0\\-\sinh\eta&amp;\cosh\eta&amp;0&amp;0\\0&amp;0&amp;1&amp;0\\0&amp;0&amp;0&amp;1\end{pmatrix}\]</div>
+
+</div>
+<p><span class="math inline">\(x^\mu\to x'^\mu=\Lambda^\mu{}_\nu x^\nu\)</span>:
+<div class="math inline"><div>\[\begin{pmatrix}t'\\x'\end{pmatrix}=\begin{pmatrix}\cosh\eta&amp;-\sinh\eta\\-\sinh\eta&amp;\cosh\eta\end{pmatrix}\begin{pmatrix}t\\x\end{pmatrix}\,[?]\]</div>
+</div>
+<div class="math inline"><div>\[t'=\cosh\eta\,t-\sinh\eta\,x=\cosh\eta\,(t-\tanh\eta\,x),\qquad
+x'=\cosh\eta\,x-\sinh\eta\,t=\cosh\eta\,(x-\tanh\eta\,t)\,[?]\]</div>
+</div>
+Define <span class="math inline">\(\gamma=\dfrac1{\sqrt{1-\beta^2}}=\cosh\eta\)</span>, <span class="math inline">\(\beta\equiv\tanh\eta\)</span>, <span class="math inline">\(\eta\in(-\infty,\infty)\)</span>, <span class="math inline">\(\beta=v/c=v\)</span>:
+<div class="math inline"><div>\[t'=\gamma(t-vx),\qquad x'=\gamma(x-vt),\qquad J^{\mu\nu}:\ SO(1,3)\sim SU(2)\otimes SU(2)\]</div>
+</div></p>
+<div class="math block">
+<div>\[J_1=\frac12\epsilon_{1jk}J^{jk}=J^{23},\qquad
+(J_1)^\mu{}_\nu=(J^{23})^\mu{}_\nu=i\begin{pmatrix}0&amp;&amp;&amp;\\&amp;0&amp;0&amp;0\\&amp;0&amp;0&amp;-1\\&amp;0&amp;1&amp;0\end{pmatrix}\,[?]\]</div>
+
+</div>
+<p><span class="math inline">\(\eta_{\mu\nu}=\operatorname{diag}(+,-,-,-)\)</span>:
+<div class="math inline"><div>\[e^{-i\theta J_1}=\begin{pmatrix}1&amp;0&amp;0&amp;0\\0&amp;1&amp;0&amp;0\\0&amp;0&amp;\cos\theta&amp;-\sin\theta\\0&amp;0&amp;\sin\theta&amp;\cos\theta\end{pmatrix}\,[?]\]</div>
+</div></p>
+<blockquote>
+<p><strong>(과제)</strong> <span class="math inline">\(J_2,J_3,K_2,K_3\)</span> → rotation, boost를 matrix form으로 나타내기.</p>
+</blockquote>
+<div class="math block">
+<div>\[J_i^\pm\equiv\frac12(J_i\pm iK_i)\]</div>
+
+</div>
+<p>Lorentz Lie algebra:
+<div class="math inline"><div>\[[J_i^\pm,J_j^\pm]=i\epsilon_{ijk}J_k^\pm,\qquad [J_i^\pm,J_j^\mp]=0\qquad\simeq\ su(2)\otimes su(2)\ \ (j_1,j_2)\]</div>
+</div>
+<span class="math inline">\((j_1,j_2)\)</span>: dim <span class="math inline">\(=(2j_1+1)(2j_2+1)\)</span></p>
+<table>
+<thead>
+<tr>
+<th><span class="math inline">\((j_1,j_2)\)</span></th>
+<th></th>
+<th>particles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\((0,0)\)</span></td>
+<td>scalar</td>
+<td><span class="math inline">\(\pi^0,\pi^\pm,H\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\((\frac12,0)\)</span></td>
+<td>left-handed spinor</td>
+<td><span class="math inline">\(\nu\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\((0,\frac12)\)</span></td>
+<td>right-handed spinor</td>
+<td><span class="math inline">\(\bar\nu\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\((\frac12,0)\oplus(0,\frac12)\)</span></td>
+<td>Dirac spinor</td>
+<td><span class="math inline">\(e^\pm,p,n,\dots\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\((\frac12,\frac12)\)</span> (spin 0, 1)</td>
+<td>vector</td>
+<td><span class="math inline">\(\gamma,W^\pm,Z^0,g\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\((1,1)\)</span> (spin 0, 1, 2)</td>
+<td>traceless metric tensor</td>
+<td>graviton</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>10/23 QFT</h2>
+<div class="math block">
+<div>\[\Phi_a\mapsto D_{ab}(\Lambda)\Phi_b\quad(\text{depends on spin}),\qquad D(\Lambda)=\exp\left[-\frac i2\omega_{\alpha\beta}J^{\alpha\beta}\right]\]</div>
+
+</div>
+<p><span class="math inline">\(\Phi_a\Rightarrow x_\mu\)</span>: <span class="math inline">\((J^{\alpha\beta})_{\mu\nu}=i(\delta^\alpha{}_\mu\delta^\beta{}_\nu-\delta^\beta{}_\mu\delta^\alpha{}_\nu)\)</span> — vector rep acting on vectors.
+<div class="math inline"><div>\[J_i^\pm=\frac12(\underbrace{J_i}_{\rm rotation}\pm i\underbrace{K_i}_{\rm boost}),\qquad
+[J_i^\pm,J_j^\pm]=i\epsilon_{ijk}J_k^\pm,\quad [J_i^\pm,J_j^\mp]=0\ \simeq\ su(2)\otimes su(2)\]</div>
+</div>
+<div class="math inline"><div>\[[\sigma_i,\sigma_j]=2i\epsilon_{ijk}\sigma_k\]</div>
+</div>
+<strong><span class="math inline">\((0,\frac12)\)</span> rep</strong>: <span class="math inline">\(J_i^+=\dfrac{\sigma_i}2\)</span>, <span class="math inline">\(J_i^-=0\)</span>, <span class="math inline">\([J_i^+,J_j^+]=i\epsilon_{ijk}J_k^+\)</span>
+<div class="math inline"><div>\[J_i=J_i^++J_i^-:\ \text{rotation},\qquad K_i=-i(J_i^+-J_i^-)\ \Rightarrow\ J_i=\frac{\sigma_i}{2}\ (\text{Hermitian}),\quad K_i=-i\frac{\sigma_i}{2}\,[?]\ (\text{anti-Hermitian})\]</div>
+</div>
+<strong><span class="math inline">\((\frac12,0)\)</span> rep</strong>: <span class="math inline">\(J_i^+=0\)</span>, <span class="math inline">\(J_i^-=\dfrac{\sigma_i}2\)</span> ⇒ <span class="math inline">\(J_i=\dfrac{\sigma_i}2\)</span>, <span class="math inline">\(K_i=i\dfrac{\sigma_i}2\)</span></p>
+<p>※ Consider a two-component spinor in the <span class="math inline">\((\frac12,0)\)</span> rep:
+<div class="math inline"><div>\[\psi_L\mapsto e^{-i\theta_iJ_i-i\eta_iK_i}\psi_L=e^{-\frac i2\theta_i\sigma_i+\frac{\eta_i}2\sigma_i}\psi_L\equiv\Lambda_L\psi_L=D(\tfrac12,0)\psi_L\]</div>
+</div>
+<div class="math inline"><div>\[\simeq\left(1-\frac i2\theta_i\sigma_i+\frac{\eta_i}2\sigma_i+\cdots\right)\psi_L,\qquad
+\delta\psi_L=\left(-\frac i2\theta_i\sigma_i+\frac{\eta_i}{2}\sigma_i\right)\psi_L\]</div>
+</div>
+<strong><span class="math inline">\((0,\frac12)\)</span> rep</strong>:
+<div class="math inline"><div>\[\psi_R\mapsto e^{-\frac i2\theta_i\sigma_i-\frac{\eta_i}2\sigma_i}\psi_R=\Lambda_R\psi_R=D(0,\tfrac12)\psi_R\]</div>
+</div></p>
+<p><strong><span class="math inline">\((\frac12,0)\oplus(0,\frac12)\)</span>: Dirac spinor</strong>
+<div class="math inline"><div>\[\psi_D\equiv\begin{pmatrix}\psi_L\\ \psi_R\end{pmatrix},\quad\text{e.g. }\begin{pmatrix}e_L\\ e_R\end{pmatrix}\]</div>
+</div>
+<div class="math inline"><div>\[\psi_D\to\exp\left[-i\theta_i\begin{pmatrix}\frac{\sigma_i}2&amp;0\\0&amp;\frac{\sigma_i}2\end{pmatrix}-i\eta_i\begin{pmatrix}\frac i2\sigma_i&amp;0\\0&amp;-\frac i2\sigma_i\end{pmatrix}\right]\psi_D
+=\left(e^{-\frac i2\omega_{\rho\sigma}J^{\rho\sigma}}\right)_\alpha{}^\beta\psi_D\]</div>
+</div>
+<div class="math inline"><div>\[J^{\mu\nu}=\frac i4[\gamma^\mu,\gamma^\nu]\ \ (\text{Dirac matrices}),\qquad
+\{\gamma^\mu,\gamma^\nu\}=2\eta^{\mu\nu}\ \ (\text{spinor rep}),\qquad
+\gamma^\mu=\begin{pmatrix}0&amp;\sigma^\mu\\ \bar\sigma^\mu&amp;0\end{pmatrix},\quad \sigma^\mu=\{\mathbb 1,\vec\sigma\},\ \bar\sigma^\mu=\{\mathbb 1,-\vec\sigma\}\]</div>
+</div>
+<span class="math inline">\(J^{\mu\nu}\Rightarrow J^i=\frac12\epsilon_{ijk}J^{jk}\)</span>, <span class="math inline">\(K_i=J^{i0}\)</span>.
+<div class="math inline"><div>\[J^{\mu\nu}=\frac i4\begin{pmatrix}\sigma^\mu\bar\sigma^\nu-\sigma^\nu\bar\sigma^\mu&amp;0\\0&amp;\bar\sigma^\mu\sigma^\nu-\bar\sigma^\nu\sigma^\mu\end{pmatrix}\]</div>
+</div>
+<div class="math inline"><div>\[J^{ij}=\frac i4\begin{pmatrix}-[\sigma^i,\sigma^j]&amp;0\\0&amp;-\underbrace{[\sigma^i,\sigma^j]}_{2i\epsilon^{ijk}\sigma^k}\end{pmatrix}=\frac12\epsilon^{ijk}\begin{pmatrix}\sigma^k&amp;0\\0&amp;\sigma^k\end{pmatrix},\qquad
+J^{i0}=\frac i2\begin{pmatrix}\sigma^i&amp;0\\0&amp;-\sigma^i\end{pmatrix}\]</div>
+</div>
+<div class="math inline"><div>\[-\frac i2\omega_{\mu\nu}J^{\mu\nu}=-\frac i2\omega_{ij}J^{ij}-i\omega_{i0}J^{i0}
+=-\frac i2\omega_{ij}\frac12\epsilon^{ijk}\begin{pmatrix}\sigma^k&amp;0\\0&amp;\sigma^k\end{pmatrix}-i\eta_i\begin{pmatrix}\frac i2\sigma^i&amp;0\\0&amp;-\frac i2\sigma^i\end{pmatrix}\]</div>
+</div>
+<div class="math inline"><div>\[=-i\theta_i\begin{pmatrix}\frac{\sigma_i}2&amp;0\\0&amp;\frac{\sigma_i}2\end{pmatrix}-i\eta_i\begin{pmatrix}\frac i2\sigma^i&amp;0\\0&amp;-\frac i2\sigma^i\end{pmatrix}\qquad\textbf{* Check again — HW 1.}\]</div>
+</div></p>
+<p>Finite dimensional reps of non-compact groups are not unitary.</p>
+<p><span class="math inline">\(ds^2=\eta_{\mu\nu}dx^\mu dx^\nu\)</span>; <span class="math inline">\(\sigma_{1,2}=\begin{pmatrix}0&amp;\times\\ \times&amp;0\end{pmatrix}\)</span>, <span class="math inline">\(\sigma_3=\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}\)</span>
+<div class="math inline"><div>\[\psi_{L/R}\to e^{-i\theta_i\frac{\sigma_i}2\pm\eta_i\frac{\sigma_i}2}\psi_{L/R}=\Lambda_{L/R}\psi_{L/R}\]</div>
+</div></p>
+<ol>
+<li><span class="math inline">\(\det\Lambda_{L/R}=+1\)</span> (<span class="math inline">\(\det e^A=e^{\operatorname{Tr}A}\)</span>, <span class="math inline">\(\operatorname{Tr}A=0\)</span>)</li>
+<li><span class="math inline">\(\Lambda_{L,R}\)</span> acts on a two-dim. complex object</li>
+</ol>
+<p>⇒ <span class="math inline">\(SL(2,\mathbb C)\)</span>. <span class="math inline">\(\quad SO(1,3)\cong SL(2,\mathbb C)\)</span> ↗ covering group of <span class="math inline">\(SO(1,3)\)</span>.
+<div class="math inline"><div>\[SO(3)\simeq SU(2)/\mathbb Z_2\]</div>
+</div>
+[그림: 원 <span class="math inline">\(a_0^2+a_1^2=1\)</span>, <span class="math inline">\(a_0=\pm\sqrt{1-a_1^2}\)</span> 두 가지]</p>
+<p><span class="math inline">\(SU(2)\Rightarrow U^\dagger=U^{-1}\)</span>.</p>
+<div class="math block">
+<div>\[\Phi_a\mapsto D(\Lambda)_a{}^b\Phi_b\ \Rightarrow\ \Phi_a(x)\mapsto D(\Lambda)_a{}^b\Phi_b(\Lambda^{-1}x)
+=\left(e^{-\frac i2\omega_{\alpha\beta}J^{\alpha\beta}}\right)_a{}^b e^{-\frac i2\omega_{\mu\nu}L^{\mu\nu}}\Phi_b(x)\qquad\textbf{H.W. 2},\quad \mathcal J^{\mu\nu}=J^{\mu\nu}+L^{\mu\nu}\]</div>
+
+</div>
+<p>Infinitesimal:
+<div class="math inline"><div>\[\Phi(\Lambda^{-1}x)\simeq\Phi(x^\mu-\omega^\mu{}_\nu x^\nu)=\Phi\left(x^\mu-\tfrac12\omega^{\mu\nu}x_\nu+\tfrac12\omega^{\nu\mu}x_\nu\right)\]</div>
+</div>
+<div class="math inline"><div>\[=\Phi(x)-\frac12\omega^{\mu\nu}x_\nu\partial_\mu\Phi(x)+\frac12\omega^{\nu\mu}x_\nu\partial_\mu\Phi(x)
+=\Phi(x)-\frac i2\omega^{\mu\nu}\underbrace{i(x_\mu\partial_\nu-x_\nu\partial_\mu)}_{L_{\mu\nu}}\Phi(x)\]</div>
+</div>
+<div class="math inline"><div>\[=\left(1-\frac i2\omega_{\mu\nu}L^{\mu\nu}\right)\Phi(x)\simeq e^{-\frac i2\omega_{\mu\nu}L^{\mu\nu}}\Phi(x)\]</div>
+</div></p>
+<hr />
+<h2>10/25 QFT</h2>
+<div class="math block">
+<div>\[\Phi_a(x)\mapsto D_a{}^b(\Lambda)\Phi_b(\Lambda^{-1}x)=\left(e^{-\frac i2\omega_{\mu\nu}\mathcal J^{\mu\nu}}\right)_a{}^b\Phi_b(x),\qquad
+\mathcal J^{\mu\nu}=J^{\mu\nu}+L^{\mu\nu},\quad L^{\mu\nu}=i(x^\mu\partial^\nu-x^\nu\partial^\mu)\]</div>
+
+</div>
+<p><span class="math inline">\(L_{\mu\nu}\)</span>, <span class="math inline">\(P_\mu\)</span>: <span class="math inline">\(x'_\mu=\Lambda_\mu{}^\nu x_\nu+a_\mu\to ds^2=ds'^2\)</span>.</p>
+<p><span class="math inline">\(D(\Lambda,a)\to D(\mathbb 1,a)\)</span>:
+<div class="math inline"><div>\[D(\mathbb 1,a)\Phi=\Phi'(x)=\Phi(x-a)=\Phi(x)-a^\mu\partial_\mu\Phi(x)+O(a^2)=\Phi(x)+ia^\mu\underbrace{i\partial_\mu}_{P_\mu}\Phi(x)\to e^{ia^\mu P_\mu}\Phi(x)\]</div>
+</div>
+<strong>Poincaré Lie algebra</strong>:
+<div class="math inline"><div>\[\begin{aligned}
+[J^{\mu\nu},J^{\rho\sigma}]&amp;=i\left(\eta^{\mu\sigma}J^{\nu\rho}+\eta^{\nu\rho}J^{\mu\sigma}-\eta^{\mu\rho}J^{\nu\sigma}-\eta^{\nu\sigma}J^{\mu\rho}\right)\\
+[P^\mu,P^\nu]&amp;=0\\
+[P^\mu,J^{\alpha\beta}]&amp;=i\left(\eta^{\mu\alpha}P^\beta-\eta^{\mu\beta}P^\alpha\right)
+\end{aligned}
+\qquad P^\mu\ni P^0=H,\ \vec P\]</div>
+</div>
+<span class="math inline">\(J^{\mu\nu},P^\mu\to K_i,J_i,P_i,H\)</span>.</p>
+<p><strong>Classical fields → Quantum fields.</strong>
+Particles in our world should transform under a <strong>unitary</strong> rep of the Poincaré group. → Rep on the 1-particle Hilbert space.</p>
+<p>[그림: <span class="math inline">\(|0\rangle\)</span> (vacuum) <span class="math inline">\(\xrightarrow{a^\dagger(p)}|p,s\rangle\)</span>; Hilbert space <span class="math inline">\(=\mathcal H_1\oplus\mathcal H_2\oplus\mathcal H_3\oplus\cdots\)</span>]</p>
+<p>We want to construct a unitary rep of the Poincaré algebra acting on one-particle states.</p>
+<p>We can express physical state vectors in terms of eigenvalues of <span class="math inline">\(P_\mu\)</span>:
+<div class="math inline"><div>\[\hat P_\mu|p,s\rangle=p_\mu|p,s\rangle\]</div>
+</div>
+Then we look at how the 1-particle state transforms under Lorentz tr.:
+<div class="math inline"><div>\[U(\Lambda)|p,s\rangle=\sum_rC_{rs}(\Lambda,p)|\Lambda p,r\rangle\]</div>
+</div>
+[그림: block-diagonal 행렬 <span class="math inline">\(C^{(1)},C^{(2)},\dots\)</span>]</p>
+<p>Question: how to get that guy, <span class="math inline">\(C_{rs}(\Lambda,p)\)</span>? (Our task is to work out <span class="math inline">\(C_{rs}\)</span>.)</p>
+<p>There are two invariant functions of <span class="math inline">\(p_\mu\)</span> under <span class="math inline">\(SO^\uparrow(1,3)\)</span>: <span class="math inline">\(\big(p^2=\eta_{\mu\nu}p^\mu p^\nu=m^2\big)\)</span> &amp; (sign of <span class="math inline">\(p_0\)</span>) (timelike).</p>
+<p>⇒ We can classify <span class="math inline">\(p_\mu\)</span> according to <span class="math inline">\(p^2\)</span> and the sign of <span class="math inline">\(p_0\)</span>. To each such set of momenta, we choose a &quot;standard&quot; four-momentum <span class="math inline">\(k_\mu\)</span> and express any <span class="math inline">\(p_\mu\)</span> in this class [as <span class="math inline">\(p=L(p)k\)</span>].</p>
+<p>Four-momenta with <span class="math inline">\(m^2\ge0\)</span> (physical particles):</p>
+<ol>
+<li><span class="math inline">\(p^2=m^2&gt;0\)</span>: <span class="math inline">\(k_\mu=(m,0,0,0)\)</span> (<span class="math inline">\(\vec p=0\)</span>) — <strong>massive</strong></li>
+<li><span class="math inline">\(p^2=m^2=0\)</span>: <span class="math inline">\(k_\mu=(k,0,0,k)\)</span> — <strong>massless</strong></li>
+<li><span class="math inline">\(p^2=m^2=0\)</span>: <span class="math inline">\(k_\mu=(0,0,0,0)\)</span> — the vacuum ✗</li>
+</ol>
+<div class="math block">
+<div>\[|p,s\rangle=U(L(p))|k,s\rangle\qquad\boxed{|p,s\rangle:\ \text{momentum, spin}}\]</div>
+
+</div>
+<div class="math block">
+<div>\[P_\mu U(\Lambda)|p,s\rangle=\Lambda_\mu{}^\nu p_\nu U(\Lambda)|p,s\rangle,\qquad U(\Lambda)|p,s\rangle=\sum_rC_{rs}(\Lambda,p)|\Lambda p,r\rangle\]</div>
+
+</div>
+<div class="math block">
+<div>\[\begin{aligned}
+U(\Lambda)|p,s\rangle&amp;=U(\Lambda)U(L(p))|k,s\rangle=U(\Lambda L(p))|k,s\rangle\\
+&amp;=U\big(\underbrace{L(\Lambda p)L^{-1}(\Lambda p)}_{\mathbb 1}\Lambda L(p)\big)|k,s\rangle\\
+&amp;=U(L(\Lambda p))\,U\big(L^{-1}(\Lambda p)\Lambda L(p)\big)|k,s\rangle
+\end{aligned}\]</div>
+
+</div>
+<p><span class="math inline">\(k_\mu\leftarrow\Lambda p\leftarrow p_\mu\leftarrow k_\mu\)</span> → <strong>Little group</strong>
+<div class="math inline"><div>\[L^{-1}(\Lambda p)\Lambda L(p)=W(\Lambda,p)\ :\ \text{little group},\qquad k_\mu=W_\mu{}^\nu k_\nu\]</div>
+</div>
+<div class="math inline"><div>\[U(W)|k,s\rangle=\sum_rD_{rs}(W)|k,r\rangle\]</div>
+</div>
+Finally,
+<div class="math inline"><div>\[U(\Lambda)|p,s\rangle=U(L(\Lambda p))U(W(\Lambda,p))|k,s\rangle=\sum_rD_{rs}(W)\underbrace{U(L(\Lambda p))|k,r\rangle}_{|\Lambda p,r\rangle}=\sum_rD_{rs}(W)|\Lambda p,r\rangle\]</div>
+</div>
+<div class="math inline"><div>\[\left(\begin{aligned}
+U(\Lambda)|p,s\rangle&amp;=\textstyle\sum_rC_{rs}(\Lambda,p)|\Lambda p,r\rangle&amp;&amp;\text{original Poincaré group}\\
+U(\Lambda)|p,s\rangle&amp;=\textstyle\sum_rD_{rs}(W(\Lambda,p))|\Lambda p,r\rangle&amp;&amp;\text{little group}
+\end{aligned}\right)\]</div>
+</div>
+<strong>Method of induced representation.</strong></p>
+<hr />
+<h2>10/30 QFT</h2>
+<div class="math block">
+<div>\[|p,s\rangle=a_p^\dagger(s)|0\rangle,\qquad ①\ p^2=p_\mu p^\mu=m^2\ \text{invariant},\qquad ②\ \text{sign of }p_0\ \text{invariant (for time-like)}\]</div>
+
+</div>
+<p>[그림: <span class="math inline">\(p^2=m^2\ge0\)</span> → <span class="math inline">\(p^2=m^2&gt;0\)</span> 또는 <span class="math inline">\(p^2=m^2=0\)</span>; <span class="math inline">\(p_0&gt;0\)</span>]</p>
+<table>
+<thead>
+<tr>
+<th><span class="math inline">\(p^2\ge0,\ m^2&gt;0\)</span></th>
+<th><span class="math inline">\(p_0\ge0,\ m^2=0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(k_\mu=(m,0,0,0)\)</span></td>
+<td><span class="math inline">\(k_\mu=(k,0,0,k)\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="math block">
+<div>\[U(\Lambda)|p,s\rangle=\sum_rC_{rs}(\Lambda,p)|\Lambda p,r\rangle=\sum_rD_{rs}(W(\Lambda,p))|\Lambda p,r\rangle\]</div>
+
+</div>
+<p>Determining <span class="math inline">\(C_{rs}\)</span> → determining <span class="math inline">\(D_{rs}\)</span> (much easier).</p>
+<p><strong>Massive case</strong> <span class="math inline">\(p^2=m^2&gt;0\to k_\mu=(m,0,0,0)\)</span>, <span class="math inline">\(W_\mu{}^\nu k_\nu=k_\mu\)</span>:
+<div class="math inline"><div>\[\underbrace{\begin{pmatrix}m\\0\\0\\0\end{pmatrix}_\mu}_{k_\mu}=\begin{pmatrix}1&amp;\\&amp;R\end{pmatrix}_\mu{}^\nu\begin{pmatrix}m\\0\\0\\0\end{pmatrix}_\nu\qquad R:\ \text{rotation }SO(3)\]</div>
+</div>
+Lorentz = 3 rotations ⊕ 3 boosts. Little group <span class="math inline">\(=SO(3)\)</span>, <span class="math inline">\(ds^2=x_1^2+x_2^2+x_3^2\)</span>.
+<div class="math inline"><div>\[D_{rs}=\bigoplus_jD^{(j)}_{rs}\]</div>
+</div>
+Two Casimir operators:
+<div class="math inline"><div>\[P_\mu P^\mu=P^2\to m^2,\qquad W_\mu W^\mu=W^2\to-m^2j(j+1),\quad W_\mu=-\frac12\epsilon_{\mu\nu\rho\sigma}J^{\nu\rho}P^\sigma\,[?]\]</div>
+</div>
+<strong>Massless rep</strong> <span class="math inline">\(k_\mu=(k,0,0,k)\)</span> ⇒ little group <span class="math inline">\(=ISO(2)\)</span>: isometry of 2d Euclidean plane: rotation ⊕ translation.
+<div class="math inline"><div>\[h=\frac{\vec S\cdot\vec p}{|\vec S||\vec p|}\,[?]\]</div>
+</div>
+Continuous spin particle? Not in nature; theoretically difficult to understand — representation.</p>
+<h3>Lagrangian (scalar field) — Klein–Gordon fields</h3>
+<p>The simplest Lagrangian can be built of terms up to quadratic order in the scalar field.</p>
+<p>E.g. in QM:
+<div class="math inline"><div>\[S=\int dt\,L,\qquad L=\frac12m\dot q^2-V(q),\qquad V(q_0+\delta q)\simeq\frac12m\omega^2(\delta q)^2\]</div>
+</div>
+<div class="math inline"><div>\[L=\frac12m(\delta\dot q)^2-\frac12m\omega^2(\delta q)^2\]</div>
+</div>
+In field theory, we define the Lagrangian density:
+<div class="math inline"><div>\[L=\int d^3x\,\mathcal L,\qquad S=\int d^4x\,\mathcal L\]</div>
+</div></p>
+<blockquote>
+<p><strong>* Feynman</strong>: amplitude <span class="math inline">\(\sim e^{iS/\hbar}\)</span>; natural units <span class="math inline">\(c=\hbar=1\)</span>: amplitude <span class="math inline">\(\sim e^{iS}=e^{i\int d^4x\,\mathcal L}\)</span>.
+<span class="math inline">\([d^4x]=-4\,[?]\to[\mathcal L]=4\)</span>, <span class="math inline">\([\partial]=+1\)</span>, <span class="math inline">\([\phi]=1\)</span>.</p>
+</blockquote>
+<p>How to construct <span class="math inline">\(\mathcal L\)</span>? <strong>Cook book</strong>:</p>
+<ul>
+<li>Ingredient: <span class="math inline">\(\phi(\vec x)\)</span></li>
+<li>A guiding principle: ① Lorentz inv. ② <span class="math inline">\(\#(\partial)\le2\)</span> ③ <span class="math inline">\(n\le2\)</span> in <span class="math inline">\(\phi^n\)</span></li>
+</ul>
+<div class="math block">
+<div>\[\mathcal L=\frac12c_1\underbrace{(\partial_\mu\phi)(\partial^\mu\phi)}_{\text{kinetic term}}+\frac12c_2\phi^2+c_3\phi+c_4\partial_\mu\partial^\mu\phi+c_5\phi\,\partial_\mu\partial^\mu\phi\ \ (\leftarrow\text{부분적분}\ [?])\]</div>
+
+</div>
+<p><span class="math inline">\(c_1=1\)</span>:
+<div class="math inline"><div>\[c_3\phi+\frac12c_2\phi^2=\frac12c_2\left(\phi+\frac{c_3}{c_2}\right)^2-\frac{c_3^2}{2c_2}\,[?],\qquad \phi\to\phi'-\frac{c_3}{c_2}\]</div>
+</div>
+<div class="math inline"><div>\[\mathcal L=\frac12(\partial_\mu\phi)(\partial^\mu\phi)+\frac12c_2\phi^2,\qquad c_4\partial^2\phi\ \text{gives total derivatives}\to\text{boundary condition}\]</div>
+</div></p>
+<p>Without loss of generality:
+<div class="math inline"><div>\[\mathcal L=\frac12(\partial_\mu\phi)(\partial^\mu\phi)-\frac12m^2\phi^2\qquad\text{(Klein–Gordon Lagrangian)}\]</div>
+</div>
+<span class="math inline">\([\mathcal L]=4\)</span>, <span class="math inline">\([\partial_\mu]=1\)</span>, <span class="math inline">\([\phi]=1\)</span>, <span class="math inline">\([m]=1\)</span>.
+<div class="math inline"><div>\[S=\int d^4x\left[-\frac12\phi(\partial^2+m^2)\phi\right],\qquad 0=\delta S=-\int d^4x\,\delta\phi(\partial^2+m^2)\phi\ \Rightarrow\ (\partial^2+m^2)\phi=0\]</div>
+</div>
+Momentum space (<span class="math inline">\(p_\mu=i\partial_\mu\)</span>): <span class="math inline">\((-p^2+m^2)\phi(p)=0\)</span> → <span class="math inline">\(p^2=m^2\)</span> dispersion relation.</p>
+<p><strong>A general form of the equation of motion</strong>: <span class="math inline">\(\mathcal L=\mathcal L(\partial_\mu\phi,\phi)\)</span>
+<div class="math inline"><div>\[\delta\mathcal L=\frac{\partial\mathcal L}{\partial\phi}\delta\phi+\underbrace{\frac{\partial\mathcal L}{\partial(\partial_\mu\phi)}\delta(\partial_\mu\phi)}_{\partial_\mu\left[\frac{\partial\mathcal L}{\partial(\partial_\mu\phi)}\delta\phi\right]-\partial_\mu\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi)}\right)\delta\phi}\]</div>
+</div>
+Boundary term <span class="math inline">\(=0\)</span> by <span class="math inline">\(\delta\phi=0\)</span> at the boundary.
+<div class="math inline"><div>\[=\underbrace{\left[\frac{\partial\mathcal L}{\partial\phi}-\partial_\mu\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi)}\right)\right]}_{\stackrel{!}{=}0}\delta\phi\qquad\text{Lorentz invariant Euler–Lagrange eq.}\]</div>
+</div>
+Hamiltonian → Lorentz inv. ✗. <span class="math inline">\(L&gt;H\)</span>: much more useful.</p>
+<p><strong>Promoting <span class="math inline">\(\phi(x)\)</span> to a quantum field.</strong></p>
+<p>In QM, conjugate momentum <span class="math inline">\(p_i\equiv\dfrac{\partial L}{\partial\dot q_i}\)</span>:
+<div class="math inline"><div>\[L=\sum\frac12m\dot q^2-V(q),\qquad H=p_i\dot q_i-L,\qquad p_i=\frac{\partial L}{\partial\dot q_i}=m\dot q_i\ \Rightarrow\ H=\sum\frac{p_i^2}{2m}+V(q_i)\]</div>
+</div>
+Hamilton's equations:
+<div class="math inline"><div>\[H=\sum p_i\dot q_i-L,\qquad \delta H=\sum\left(\delta p_i\dot q_i+\cancel{p_i\delta\dot q_i}-\cancel{\frac{\partial L}{\partial\dot q_i}\delta\dot q_i}-\frac{\partial L}{\partial q_i}\delta q_i\right)\]</div>
+</div>
+<div class="math inline"><div>\[H=H(p,q),\qquad \delta H=\sum\left(\frac{\partial H}{\partial p_i}\delta p_i+\frac{\partial H}{\partial q_i}\delta q_i\right)\]</div>
+</div></p>
+<hr />
+<h2>11/1 QFT</h2>
+<p><span class="math inline">\(L=\int d^3x\,\mathcal L\)</span>. Conjugate momentum density:
+<div class="math inline"><div>\[\pi(\vec x)\equiv\frac{\partial\mathcal L}{\partial\dot\phi(\vec x)},\qquad
+\mathcal H=\pi(\vec x)\dot\phi(\vec x)-\mathcal L\ \ (\text{Hamiltonian density}),\qquad
+H=\int d^3x\,\mathcal H=\int d^3x\left(\pi\dot\phi-\mathcal L\right)\]</div>
+</div>
+<strong>Free field theory</strong> <span class="math inline">\((+---)\)</span>:
+<div class="math inline"><div>\[\mathcal L=\frac12(\partial_\mu\phi)(\partial^\mu\phi)-\frac12m^2\phi^2=\frac12\dot\phi^2-\frac12(\nabla\phi)^2-\frac12m^2\phi^2\]</div>
+</div>
+<div class="math inline"><div>\[\pi(\vec x)=\dot\phi(\vec x),\qquad \mathcal H=\frac12\pi^2+\frac12(\nabla\phi)^2+\frac12m^2\phi^2,\qquad
+\dot\phi=\frac{\partial\mathcal H}{\partial\pi},\quad \dot\pi=-\frac{\partial\mathcal H}{\partial\phi}\]</div>
+</div></p>
+<blockquote>
+<p><strong>H.W.</strong> Make a report on covering groups: <span class="math inline">\(SO(3)=SU(2)/\mathbb Z_2\)</span>. Convince yourself of the meaning of this equation. Try to get intuition. (due 11/6)
+Ex) <span class="math inline">\(SO(1,3)=SL(2,\mathbb C)/\mathbb Z_2\)</span>, <span class="math inline">\(SO(3)=SU(2)/\mathbb Z_2\)</span>.</p>
+</blockquote>
+<h3>Quantization of the Klein–Gordon field</h3>
+<p>Canonical quantization: <span class="math inline">\(\phi(\vec x),\pi(\vec x)\to\)</span> Hermitian operators acting on a Hilbert space. Poisson bracket <span class="math inline">\(\{\ ,\ \}\to[\ ,\ ]\)</span>.
+<div class="math inline"><div>\[[\phi(\vec x),\pi(\vec y)]=i\delta^3(\vec x-\vec y),\qquad [\pi(\vec x),\pi(\vec y)]=0,\qquad [\phi(\vec x),\phi(\vec y)]=0\]</div>
+</div>
+Operator-valued functions of space ≡ quantum field.</p>
+<p>Task: find the Hilbert space that realizes this. A suitable basis is given by the eigenvectors of <span class="math inline">\(H\)</span>.
+<div class="math inline"><div>\[H=\int d^3x\,\mathcal H=\int d^3x\left(\frac12\pi(\vec x)^2+\frac12(\nabla\phi(\vec x))^2+\frac12m^2\phi^2(\vec x)\right)\]</div>
+</div>
+<div class="math inline"><div>\[\phi(\vec x)=\int\frac{d^3p}{(2\pi)^3}e^{i\vec p\cdot\vec x}\phi(\vec p,t),\qquad \pi(\vec x)=\int\frac{d^3p}{(2\pi)^3}e^{i\vec p\cdot\vec x}\pi(\vec p)\]</div>
+</div>
+<div class="math inline"><div>\[H=\frac12\int\frac{d^3p}{(2\pi)^3}\Big[\pi(\vec p)\pi(-\vec p)+\underbrace{(\vec p^2+m^2)}_{\omega^2}\phi(\vec p)\phi(-\vec p)\Big]\]</div>
+</div>
+→ linear superposition of a number of SHOs.</p>
+<p><strong>Review QM</strong>: <span class="math inline">\(H=\frac12p^2+\frac12\omega^2q^2\)</span> with <span class="math inline">\([q,p]=i\)</span>:
+<div class="math inline"><div>\[q=\frac1{\sqrt{2\omega}}(a+a^\dagger),\qquad p=-i\sqrt{\frac\omega2}(a-a^\dagger),\qquad [a,a^\dagger]=1\]</div>
+</div>
+<div class="math inline"><div>\[H=\omega\left(a^\dagger a+\frac12\right)\Rightarrow E_n=\omega\left(n+\frac12\right),\qquad
+a=\sqrt{\frac\omega2}q+\frac{i}{\sqrt{2\omega}}p,\quad a^\dagger=\sqrt{\frac\omega2}q-\frac{i}{\sqrt{2\omega}}p\]</div>
+</div>
+<div class="math inline"><div>\[a(\vec p)=\sqrt{\frac\omega2}\phi(\vec p)+\frac{i}{\sqrt{2\omega}}\pi(\vec p),\qquad a^\dagger(\vec p)=\sqrt{\frac\omega2}\phi(-\vec p)-\frac{i}{\sqrt{2\omega}}\pi(-\vec p)\]</div>
+</div>
+or
+<div class="math inline"><div>\[\phi(\vec p)=\frac1{\sqrt{2\omega}}\left(a(\vec p)+a^\dagger(-\vec p)\right),\qquad \pi(\vec p)=-i\sqrt{\frac\omega2}\left(a(\vec p)-a^\dagger(-\vec p)\right)\]</div>
+</div></p>
+<blockquote>
+<p><strong>H.W.</strong> <span class="math inline">\([a(\vec p),a(\vec q)]=0,\quad [a^\dagger(\vec p),a^\dagger(\vec q)]=0,\quad [a(\vec p),a^\dagger(\vec q)]=(2\pi)^3\delta^{(3)}(\vec p-\vec q)\)</span></p>
+</blockquote>
+<div class="math block">
+<div>\[[a(\vec p),a^\dagger(\vec q)]=\frac12\sqrt{\frac{\omega(\vec p)}{\omega(\vec q)}}(-i)\underbrace{[\phi(\vec p),\pi(-\vec q)]}_{i\delta(\vec p-\vec q)(2\pi)^3}+\frac12\sqrt{\frac{\omega(\vec q)}{\omega(\vec p)}}\cdots\qquad\textbf{H.W.}\]</div>
+
+</div>
+<div class="math block">
+<div>\[H=\frac12\int\frac{d^3p}{(2\pi)^3}\left[-\frac\omega2\big(a(\vec p)-a^\dagger(-\vec p)\big)\big(a(-\vec p)-a^\dagger(\vec p)\big)+\omega^2\frac1{2\omega}\big(a(\vec p)+a^\dagger(-\vec p)\big)\big(a(-\vec p)+a^\dagger(\vec p)\big)\right]\]</div>
+
+</div>
+<div class="math block">
+<div>\[=\frac12\int\frac{d^3p}{(2\pi)^3}\omega\left(a(\vec p)a^\dagger(\vec p)+a^\dagger(-\vec p)a(-\vec p)\right),\qquad aa^\dagger-a^\dagger a=(2\pi)^3\delta,\ \ aa^\dagger=a^\dagger a+(2\pi)^3\delta\]</div>
+
+</div>
+<div class="math block">
+<div>\[=\int\frac{d^3p}{(2\pi)^3}\omega\left(a^\dagger(\vec p)a(\vec p)+\frac12(2\pi)^3\delta^{(3)}(0)\right)\]</div>
+
+</div>
+<div class="math block">
+<div>\[H|0\rangle=E_0|0\rangle=\left(\int\frac{d^3p}{(2\pi)^3}\underbrace{\omega(\vec p)}_{\sqrt{\vec p^2+m^2}}\frac12(2\pi)^3\delta^{(3)}(0)\right)|0\rangle\]</div>
+
+</div>
+<div class="math block">
+<div>\[(2\pi)^3\delta^{(3)}(\vec p)=\lim_{L\to\infty}\left.\int_{-L/2}^{L/2}d^3x\,e^{i\vec x\cdot\vec p}\right|_{\vec p=0}=\lim_{L\to\infty}\int_{-L/2}^{L/2}d^3x\,1=V\]</div>
+
+</div>
+<div class="math block">
+<div>\[E_0=\int\frac{d^3p}{(2\pi)^3}\omega(p)\frac12V\ :\ \text{total energy},\qquad
+\epsilon_0=\frac{E_0}V=\int\frac{d^3p}{(2\pi)^3}\frac12\omega(\vec p)\to\infty\xrightarrow{\text{cut off}}\Lambda^4\ \gg\ \Lambda^4_{\rm obs}\sim(10^{-3}\,\mathrm{eV})^4\]</div>
+
+</div>
+<p>• <strong>Cosmological constant problem.</strong></p>
+<p>[그림: Vacuum energy <span class="math inline">\(V_0\)</span> 축; cut-off <span class="math inline">\(\Lambda\)</span> 높이 vs. 관측값 (Hydrogen?) [?]]</p>
+<p>If we neglect the zero-point energy <span class="math inline">\(E_0\)</span>:
+<div class="math inline"><div>\[H=\int\frac{d^3p}{(2\pi)^3}\omega(\vec p)a^\dagger(\vec p)a(\vec p),\qquad H|0\rangle=0|0\rangle\ \leftrightarrow\ \text{Normal ordering}\]</div>
+</div>
+<strong>Hilbert space</strong>:
+<div class="math inline"><div>\[[H,a^\dagger]=\omega a^\dagger,\qquad [H,a]=-\omega a\]</div>
+</div>
+<div class="math inline"><div>\[H|\psi\rangle=E|\psi\rangle:\quad H(a^\dagger|\psi\rangle)=\underbrace{[H,a^\dagger]}_{\omega a^\dagger}|\psi\rangle+\underbrace{a^\dagger H|\psi\rangle}_{Ea^\dagger|\psi\rangle}=(E+\omega)a^\dagger|\psi\rangle,\qquad
+H(a|\psi\rangle)=(E-\omega)(a|\psi\rangle)\]</div>
+</div>
+<span class="math inline">\(a|0\rangle\equiv0\)</span>: vacuum is the lowest state (energy <span class="math inline">\(\ne0\)</span>).</p>
+<p>All other states ← <span class="math inline">\(|0\rangle\)</span> by acting with <span class="math inline">\(a^\dagger(\vec p)\)</span>:
+<div class="math inline"><div>\[|\vec k_1,\dots,\vec k_n\rangle=\underbrace{a^\dagger(\vec k_1)\cdots a^\dagger(\vec k_n)}_{\text{symmetric exchange}}|0\rangle\ \Rightarrow\ \text{Bose–Einstein states}\]</div>
+</div>
+<div class="math inline"><div>\[H|\vec k_1,\dots,\vec k_n\rangle=\big(\omega(\vec k_1)+\cdots+\omega(\vec k_n)\big)|\vec k_1,\dots,\vec k_n\rangle\]</div>
+</div>
+— state with <span class="math inline">\(E_{\vec k}=\sqrt{\vec k^2+m^2}\)</span>, <span class="math inline">\(\vec k\)</span>.</p>
+<p><span class="math inline">\(\{|0\rangle,|\vec k\rangle,\dots,|\vec k_1\cdots\vec k_n\rangle,\dots\}\)</span>: <strong>Fock space</strong>.</p>
+<p>We can interpret the state <span class="math inline">\(|\vec k\rangle\)</span> as the momentum eigenstate of 1 particle with mass <span class="math inline">\(m\)</span>:
+<div class="math inline"><div>\[a^\dagger(\vec k)|0\rangle=|\vec k\rangle\quad\text{with energy }\omega(\vec k)=\sqrt{\vec k^2+m^2}\]</div>
+</div>
+Momentum operator (from <span class="math inline">\(T^{\mu\nu}\)</span>):
+<div class="math inline"><div>\[P^i(=-P_i)=-\int d^3x\,\pi(\vec x)\partial_i\phi(\vec x)=\int\frac{d^3p}{(2\pi)^3}p^ia^\dagger(\vec p)a(\vec p),\qquad \vec P|\vec k\rangle=\vec k|\vec k\rangle\]</div>
+</div>
+<strong>The Hilbert space</strong>:</p>
+<ul>
+<li>Vacuum <span class="math inline">\(|0\rangle\)</span></li>
+<li>1-particle: <span class="math inline">\(\int d\vec k\,f(\vec k)\,a^\dagger(\vec k)|0\rangle\)</span></li>
+<li>2-particle: <span class="math inline">\(\int d\vec k_1\int d\vec k_2\,f(\vec k_1,\vec k_2)\,a^\dagger(\vec k_1)a^\dagger(\vec k_2)|0\rangle\)</span></li>
+</ul>
+<p>Particles associated with the relativistic quantum scalar field.</p>
+<hr />
+<h2>11/6 QFT</h2>
+<p><span class="math inline">\(a^\dagger(\vec k)|0\rangle=|\vec k\rangle\Rightarrow E_{\vec k}=\sqrt{\vec k^2+m^2}\)</span>, momentum <span class="math inline">\(\vec k\)</span>.</p>
+<p>Hilbert space is composed of states which are superpositions…
+[그림: 국소화된 파속과 평면파]</p>
+<ul>
+<li>Vacuum: <span class="math inline">\(1|0\rangle\)</span></li>
+<li>1-particle state: <span class="math inline">\(\int d^3k\,f(\vec k)a^\dagger(\vec k)|0\rangle\)</span></li>
+<li>2-particle states: <span class="math inline">\(\int d^3k_1\int d^3k_2\,f(\vec k_1)f(\vec k_2)\,a^\dagger(\vec k_1)a^\dagger(\vec k_2)|0\rangle\)</span> (symmetric exchange ⇒ Bose–Einstein states)</li>
+<li><span class="math inline">\(n\)</span>-particle states: <span class="math inline">\(\int\prod_{i=1}^nd^3k_i\,f(\vec k_1,\dots,\vec k_n)\,a^\dagger(\vec k_1)\cdots a^\dagger(\vec k_n)|0\rangle\)</span></li>
+</ul>
+<p>States localized in space, at a fixed time:
+<div class="math inline"><div>\[\phi(\vec x)=\int\frac{d^3p}{(2\pi)^3}e^{i\vec p\cdot\vec x}\phi(\vec p)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}e^{i\vec p\cdot\vec x}\left(a(\vec p)+a^\dagger(-\vec p)\right)
+=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\left(a(\vec p)e^{i\vec p\cdot\vec x}+a^\dagger(\vec p)e^{-i\vec p\cdot\vec x}\right)\]</div>
+</div>
+— quantum operator (or quantum field) in the Schrödinger picture.
+<div class="math inline"><div>\[\phi(\vec x)|0\rangle=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}a^\dagger(\vec p)e^{-i\vec p\cdot\vec x}|0\rangle
+=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}e^{-i\vec p\cdot\vec x}\left(\frac1{\sqrt{2E_{\vec p}}}|\vec p\rangle\right)
+=\int\frac{d^3p}{(2\pi)^3}\frac1{2E_{\vec p}}e^{-i\vec p\cdot\vec x}|\vec p\rangle,\qquad E_{\vec p}=\sqrt{\vec p^2+m^2}\]</div>
+</div></p>
+<h3>Time evolution (Heisenberg picture)</h3>
+<p>Time evolution of the Hilbert space states in the Schrödinger picture:
+<div class="math inline"><div>\[|\psi\rangle=e^{-iHt}|\psi(0)\rangle\quad(\text{operators time-independent})\]</div>
+</div>
+Amplitude:
+<div class="math inline"><div>\[A(t)=\langle\psi(t)|\hat A|\psi(t)\rangle=\langle\psi(0)|\underbrace{e^{iHt}\hat A(0)e^{-iHt}}_{\hat A(t)}|\psi(0)\rangle\]</div>
+</div>
+Similarly,
+<div class="math inline"><div>\[\phi(x^\mu)=\phi(\vec x,t)=e^{iHt}\phi(\vec x)e^{-iHt},\qquad \pi(x^\mu)=e^{iHt}\pi(\vec x)e^{-iHt}\]</div>
+</div>
+<div class="math inline"><div>\[a(\vec p,t)=e^{iHt}a(\vec p)e^{-iHt}\stackrel{\rm H.W.}{=}e^{-iE_{\vec p}t}a(\vec p),\qquad
+a^\dagger(\vec p,t)=e^{iHt}a^\dagger(\vec p)e^{-iHt}\stackrel{\rm H.W.}{=}e^{iE_{\vec p}t}a^\dagger(\vec p)\]</div>
+</div>
+<strong>Quantum field in the Heisenberg picture</strong>:
+<div class="math inline"><div>\[\phi(x)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\Big(\underbrace{e^{iHt}a(\vec p)e^{-iHt}}_{e^{-iE_pt}a(\vec p)}e^{i\vec p\cdot\vec x}+\underbrace{e^{iHt}a^\dagger(\vec p)e^{-iHt}}_{e^{iE_pt}a^\dagger(\vec p)}e^{-i\vec p\cdot\vec x}\Big)\]</div>
+</div>
+<div class="math inline"><div>\[=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\Big(\underbrace{a(\vec p)e^{-ip^\mu x_\mu}}_{e^{i\hat P\cdot x}a(\vec p)e^{-i\hat P\cdot x}}+\underbrace{a^\dagger(\vec p)e^{ip^\mu x_\mu}}_{e^{i\hat P\cdot x}a^\dagger(\vec p)e^{-i\hat P\cdot x}}\Big),\qquad p\cdot x\equiv p^\mu x_\mu,\ \ \hat P:\ \text{operator}\]</div>
+</div>
+<div class="math inline"><div>\[=e^{i\hat P\cdot x}\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\left(a(\vec p)+a^\dagger(\vec p)\right)e^{-i\hat P\cdot x}=e^{i\hat P\cdot x}\phi(0)e^{-i\hat P\cdot x}\]</div>
+</div></p>
+<div class="math block">
+<div>\[D(\Lambda)\phi(x)=\phi'(x)=\phi(\Lambda^{-1}x)\]</div>
+
+</div>
+<p>For Poincaré:
+<div class="math inline"><div>\[D(\Lambda,a)\phi(x)=\phi'(x)=\phi(\Lambda^{-1}x-\Lambda^{-1}a)\]</div>
+</div>
+Since quantum fields are operators, the representation of the Lorentz group acts as
+<div class="math inline"><div>\[D^\dagger(\Lambda,a)\,\phi(x)\,D(\Lambda,a)=\phi(\Lambda^{-1}x-\Lambda^{-1}a)\,[?],\qquad D=e^{-\frac i2\omega_{\mu\nu}L^{\mu\nu}-ia_\mu P^\mu}\]</div>
+</div>
+<strong>— End of canonical quantization —</strong></p>
+<h3>Causal scalar field (Weinberg): causality revisited</h3>
+<p>Suppose we want to construct a Hamiltonian density <span class="math inline">\(\mathcal H(\vec x)\)</span> — consistency of <span class="math inline">\(a\)</span> and <span class="math inline">\(a^\dagger\)</span>. It is complicated due to the non-trivial Lorentz transformation of <span class="math inline">\(a(\vec p),a^\dagger(\vec p)\)</span>.
+<div class="math inline"><div>\[H=\int d^3x\,\mathcal H(\vec x)\]</div>
+</div>
+• Introduce two fields:
+<div class="math inline"><div>\[\text{Annihilation field: }\phi^+(x)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}a(\vec p)e^{-ip\cdot x}\ \leftarrow\int\frac{d^3p}{(2\pi)^3}u(\vec p,x)a(\vec p)\]</div>
+</div>
+<div class="math inline"><div>\[\text{Creation field: }\phi^-(x)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}a^\dagger(\vec p)e^{ip\cdot x}\ \leftarrow\int\frac{d^3p}{(2\pi)^3}u^*(\vec p,x)a^\dagger(\vec p)\]</div>
+</div>
+⇒ try to construct <span class="math inline">\(\mathcal H(x)\)</span>. <strong>&quot;Causality&quot;</strong>: <span class="math inline">\([\mathcal H(x),\mathcal H(y)]=0\)</span> (for spacelike separation).</p>
+<p>① What if <span class="math inline">\(\mathcal H(x)\)</span> is a polynomial of <span class="math inline">\(\phi^+(x)\)</span>?
+<span class="math inline">\([a,a]=0\to[\phi^+(x),\phi^+(y)]=0\Rightarrow[\mathcal H(x),\mathcal H(y)]=0\)</span> ✓. But <span class="math inline">\(\mathcal H(x)\)</span> is not Hermitian.</p>
+<p>⇒ <span class="math inline">\(\mathcal H(x)\)</span> is a polynomial of <span class="math inline">\(\phi^+(x),\phi^-(x)\)</span>: <span class="math inline">\([\mathcal H(x),\mathcal H(y)]\Rightarrow[\phi^+(x),\phi^-(y)]\ne0\)</span>
+<div class="math inline"><div>\[[\phi^+(x),\phi^-(y)]=\int\frac{d^3p}{(2\pi)^3}\frac1{2E_{\vec p}}e^{-ip\cdot(x-y)}
+\ \underset{\vec x-\vec y=\vec r}{\overset{x^0-y^0=0}{=}}\ \int\frac{d^3p}{(2\pi)^3}\frac1{2\sqrt{\vec p^2+m^2}}e^{i\vec p\cdot\vec r}
+=\frac{m}{4\pi^2\sqrt{r^2}}K_1\!\left(m\sqrt{r^2}\right)\ne0\]</div>
+</div>
+Try to construct <span class="math inline">\(\mathcal H(x)\)</span> out of a linear combination:
+<div class="math inline"><div>\[\phi(x)=\kappa\phi^+(x)+\lambda\phi^-(x)\]</div>
+</div>
+<span class="math inline">\([\mathcal H(x),\mathcal H(y)]\)</span> involves <span class="math inline">\([\phi(x),\phi(y)]\)</span>, <span class="math inline">\([\phi(x),\phi^\dagger(y)]\)</span>.</p>
+<p>①
+<div class="math inline"><div>\[[\phi(x),\phi^\dagger(y)]=[\kappa\phi^+(x)+\lambda\phi^-(x),\ \kappa^*\phi^-(y)+\lambda^*\phi^+(y)]
+=|\kappa|^2[\phi^+(x),\phi^-(y)]+|\lambda|^2[\phi^-(x),\phi^+(y)]
+=(|\kappa|^2-|\lambda|^2)[\phi^+,\phi^-]\ \Rightarrow\ |\kappa|^2=|\lambda|^2\]</div>
+</div>
+<div class="math inline"><div>\[[\phi(x),\phi(y)]=[\kappa\phi^+(x)+\lambda\phi^-(x),\ \kappa\phi^+(y)+\lambda\phi^-(y)]
+=\kappa\lambda[\phi^+(x),\phi^-(y)]+\kappa\lambda[\phi^-(x),\phi^+(y)]=\kappa\lambda(1-1)[\phi^+,\phi^-]=0\quad(\text{Boson})\]</div>
+</div>
+<div class="math inline"><div>\[\phi(x)=e^{i\alpha_\kappa}\phi^+(x)+e^{i\alpha_\lambda}\phi^-(x)\qquad\big(a(\vec p)\to e^{i\alpha}a(\vec p),\ a^\dagger(\vec p)\to e^{-i\alpha}a^\dagger(\vec p)\big)\]</div>
+</div>
+<div class="math inline"><div>\[=\left(e^{i(\alpha_\kappa+\alpha)}\right)\phi^++\left(e^{i(\alpha_\lambda-\alpha)}\right)\phi^-=e^{i\theta}\left(\phi^+(x)+\phi^-(x)\right)
+=e^{i\theta}\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\left(a(\vec p)e^{-ip\cdot x}+a^\dagger(\vec p)e^{ip\cdot x}\right)\,[?]\]</div>
+</div>
+<div class="math inline"><div>\[\phi(x)=\phi^+(x)+\phi^-(x),\qquad \tilde\phi(x)=e^{i\alpha}(\phi^+(x)+\phi^-(x))\qquad\Big\}\ \text{not causal}\ [?]\]</div>
+</div></p>
+<hr />
+<h2>11/8 QFT</h2>
+<div class="math block">
+<div>\[\phi(x)=\phi^+(x)+\underbrace{\phi^-(x)}_{(\phi^+)^\dagger(x)}=\phi^\dagger(x)\qquad\text{self-adjoint scalar field}\]</div>
+
+</div>
+<h3>Anti-particle (from the causality viewpoint)</h3>
+<p>What if <span class="math inline">\(\phi(x)\)</span> carries a conserved electric charge?</p>
+<p><span class="math inline">\(\mathcal H(x)\)</span> can conserve electric charge, in principle, if and only if each term in <span class="math inline">\(\mathcal H(x)\)</span> contains equal numbers of <span class="math inline">\(a(\vec p)\)</span> and <span class="math inline">\(a^\dagger(\vec p)\)</span>. This cannot happen in <span class="math inline">\(\mathcal H(x)\)</span> as a function of <span class="math inline">\(\phi(x)\)</span>:
+<div class="math inline"><div>\[\phi(x)=\underbrace{\phi^+(x)}_{\propto a}+\underbrace{\phi^-(x)}_{\propto a^\dagger}\ ;\ \text{not a }Q\text{ eigenstate}\]</div>
+</div>
+<div class="math inline"><div>\[[Q,\phi^+(x)]=-q\phi^+(x),\qquad [Q,\phi^-(x)]=+q\phi^-(x)\,[?]\qquad\Rightarrow\ [H,Q]\ne0\]</div>
+</div>
+We need two spin-0 bosons with the same mass <span class="math inline">\(m\)</span> and charges <span class="math inline">\(+q\)</span> and <span class="math inline">\(-q\)</span>:
+<div class="math inline"><div>\[[Q,\phi^+(x)]=-q\phi^+(x),\qquad [Q,\phi^{c+}(x)]=+q\phi^{c+}(x)\]</div>
+</div>
+<div class="math inline"><div>\[\phi(x)=\kappa\phi^+(x)+\lambda\phi^{c-}(x)\,[?],\qquad [Q,\phi(x)]=-q\phi(x)\]</div>
+</div>
+<div class="math inline"><div>\[[\mathcal H(x),\mathcal H(y)]=0\ \Downarrow\quad [\phi(x),\phi^\dagger(y)]=|\kappa|^2[\phi^+(x),\phi^-(y)]+|\lambda|^2[\phi^{c-}(x),\phi^{c+}(y)]\]</div>
+</div>
+<div class="math inline"><div>\[\phi(x)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\left(a(\vec p)e^{-ip\cdot x}+a^{c\dagger}(\vec p)e^{ip\cdot x}\right)\]</div>
+</div></p>
+<h3>Spinor &amp; covariant wave equation</h3>
+<p>&quot;Review&quot;:
+<div class="math inline"><div>\[J_{\mu\nu}\ (6)\Rightarrow\begin{cases}J_i&amp;\text{rotation}\\K_i&amp;\text{boost}\end{cases}\Rightarrow J_i^\pm=\frac12(J_i\pm iK_i),\qquad
+[J_i^\pm,J_j^\pm]=i\epsilon_{ijk}J_k^\pm,\quad [J_i^\pm,J_j^\mp]=0\]</div>
+</div>
+<span class="math inline">\(SU(2)\otimes SU(2)\)</span>, <span class="math inline">\((j_-,j_+)\)</span>.</p>
+<p>Representation of the Lorentz algebra ⇒ two quantum numbers <span class="math inline">\((j_-,j_+)\)</span>, <span class="math inline">\(\dim=(2j_-+1)(2j_++1)\)</span>.</p>
+<p>For a generic multicomponent field <span class="math inline">\(\Phi_a(x)\)</span>, under Lorentz transformation:
+<div class="math inline"><div>\[\Phi_a\longmapsto\underbrace{D_{ab}(\Lambda)}_{\text{spin part}}\underbrace{\Phi_b(\Lambda^{-1}x)}_{\text{orbital part}}=\left(e^{-\frac i2\omega_{\mu\nu}\mathcal J^{\mu\nu}}\right)_a{}^b\Phi_b(x)\qquad(\text{restrict to spin})\]</div>
+</div>
+<div class="math inline"><div>\[\mathcal J=\underbrace{J_{\mu\nu}}_{\text{depends on spin (finite)}}+\underbrace{L_{\mu\nu}}_{i(x_\mu\partial_\nu-x_\nu\partial_\mu):\ \infty\text{-dim rep}}\]</div>
+</div>
+<span class="math inline">\((\frac12,0)\)</span> and <span class="math inline">\((0,\frac12)\)</span>: <span class="math inline">\([\sigma_i,\sigma_j]=2i\epsilon_{ijk}\sigma_k\)</span> → <span class="math inline">\(\sigma_i/2\)</span> can be candidates for <span class="math inline">\(J_i,K_i\)</span>.</p>
+<ul>
+<li><span class="math inline">\((\frac12,0)\)</span> acting on <span class="math inline">\(\psi_L\)</span>: <span class="math inline">\(J_i^+=0,\ J_i^-=\frac{\sigma_i}2\Rightarrow J_i=\frac{\sigma_i}2,\ K_i=\frac{i\sigma_i}2\)</span></li>
+<li><span class="math inline">\((0,\frac12)\)</span> acting on <span class="math inline">\(\psi_R\)</span>: <span class="math inline">\(J_i^+=\frac{\sigma_i}2,\ J_i^-=0\Rightarrow J_i=\frac{\sigma_i}2,\ K_i=-\frac{i\sigma_i}2\)</span></li>
+</ul>
+<div class="math block">
+<div>\[\psi_{L/R}\to e^{-i\theta_iJ_i-i\eta_iK_i}\psi_{L/R}=e^{-\frac i2\vec\theta\cdot\vec\sigma\pm\frac12\vec\eta\cdot\vec\sigma}\psi_{L/R},\qquad \psi_{L/R}\mapsto\Lambda_{L/R}\psi_{L/R}\]</div>
+
+</div>
+<p><span class="math inline">\(\Lambda_L,\Lambda_R\)</span>: <span class="math inline">\(\det\Lambda_{L/R}=+1\)</span>. <span class="math inline">\(\Lambda_{L,R}\)</span> act on a 2-dim complex space (<span class="math inline">\(\mathbb C^2\)</span>): group represented by complex <span class="math inline">\(2\times2\)</span> matrices with <span class="math inline">\(\det(\ )=+1\)</span>, called <span class="math inline">\(SL(2,\mathbb C)\)</span>. <span class="math inline">\(\Lambda_L,\Lambda_R\in SL(2,\mathbb C)\)</span>.</p>
+<h3>Parity</h3>
+<p>Why do we have two different representations, <span class="math inline">\((\frac12,0)\)</span> and <span class="math inline">\((0,\frac12)\)</span>? ⇒ It is due to <strong>parity</strong>.
+<div class="math inline"><div>\[P:(t,\vec x)\to(t,-\vec x)\]</div>
+</div>
+<div class="math inline"><div>\[\left(\begin{aligned}L_{\mu\nu}&amp;=i(x_\mu\partial_\nu-x_\nu\partial_\mu)\quad(J_i,K_i)\\ J_i&amp;\leftarrow J_{ij}=i(x_i\partial_j-x_j\partial_i)\\ K_i&amp;\leftarrow J_{i0}=i(x_i\partial_0-x_0\partial_i)\end{aligned}\right)\]</div>
+</div>
+Under parity <span class="math inline">\(P\)</span>: <span class="math inline">\(J_i\to J_i\)</span>, <span class="math inline">\(K_i\to-K_i\)</span>, <span class="math inline">\((0,\frac12)\to(\frac12,0)\)</span>
+<div class="math inline"><div>\[\Rightarrow\ (j_-,j_+)\xrightarrow{P}(j_+,j_-),\qquad (\tfrac12,0)\mapsto(0,\tfrac12)\]</div>
+</div>
+Consequences of parity:</p>
+<ol>
+<li>If we want to represent parity, we need to <strong>double</strong> the number of fields.</li>
+<li>Only reps with <span class="math inline">\(j_+=j_-\)</span> are irreducible reps of the full Lorentz group.</li>
+</ol>
+<div class="math block">
+<div>\[\Lambda_L=\Lambda_L(\vec\theta,\vec\eta)=e^{-i\vec\theta\cdot\vec J-i\vec\eta\cdot\vec K},\qquad e^{-i\vec\theta\cdot\vec J+i\vec\eta\cdot\vec K}=\Lambda_R\]</div>
+
+</div>
+<div class="math block">
+<div>\[P\Lambda_{L/R}(\vec\theta,\vec\eta)P=\Lambda_{L/R}(\vec\theta,-\vec\eta)=\Lambda_{R/L}(\vec\theta,\vec\eta)\]</div>
+
+</div>
+<p>When representing parity, we consider the <strong>Dirac spinor</strong>: <span class="math inline">\((\frac12,0)\oplus(0,\frac12)\)</span>, <span class="math inline">\(\psi_D=\begin{pmatrix}\psi_L\\ \psi_R\end{pmatrix}\)</span>, <span class="math inline">\(\Lambda_D=\Lambda_L\oplus\Lambda_R\)</span>.</p>
+<p>How does parity act on <span class="math inline">\(\psi_D\)</span>?
+<div class="math inline"><div>\[P:\ \psi_D=\psi_L(x)\oplus\psi_R(x)\ \mapsto\ P\psi_D=\psi_R'(Px)\oplus\psi_L'(Px)\]</div>
+</div>
+Let's be specific on <span class="math inline">\(P\psi_{L/R}(x)\)</span>:
+<div class="math inline"><div>\[\left(\sigma_i^*=\sigma_i^T=-\sigma_2\sigma_i\sigma_2=(i\sigma_2)\sigma_i(i\sigma_2)=\epsilon\sigma_i\epsilon\right),\qquad
+\epsilon\equiv i\sigma_2=i\begin{pmatrix}0&amp;-i\\i&amp;0\end{pmatrix}=\begin{pmatrix}0&amp;1\\-1&amp;0\end{pmatrix}=-\epsilon^T=-\epsilon^{-1}\]</div>
+</div>
+<div class="math inline"><div>\[\Lambda_R=e^{-\frac12(\vec\eta+i\vec\theta)\cdot\vec\sigma}\]</div>
+</div>
+<div class="math inline"><div>\[\Lambda_R^T=e^{-\frac12(\vec\eta+i\vec\theta)\cdot\vec\sigma^T}=e^{-\frac12(\vec\eta+i\vec\theta)\cdot\epsilon\vec\sigma\epsilon}
+=e^{+\frac12(\vec\eta+i\vec\theta)\cdot\epsilon^{-1}\vec\sigma\epsilon}=\epsilon^{-1}e^{\frac12(\vec\eta+i\vec\theta)\cdot\vec\sigma}\epsilon=\epsilon^{-1}\Lambda_R^{-1}\epsilon\]</div>
+</div>
+<div class="math inline"><div>\[(\Lambda_R^\dagger)^{-1}=\Lambda_L=e^{+\frac12(\vec\eta-i\vec\theta)\cdot\vec\sigma}=e^{-\frac12(-\vec\eta+i\vec\theta)\cdot\vec\sigma}\]</div>
+</div>
+<div class="math inline"><div>\[\Rightarrow\ \Lambda_R=\epsilon^{-1}\Lambda_L^*\epsilon\qquad\Lambda_R\text{ is related to the "complex conjugate" of }\Lambda_L\]</div>
+</div>
+Consider
+<div class="math inline"><div>\[\epsilon\psi_L^*\mapsto\epsilon(\Lambda_L\psi_L)^*=\epsilon\Lambda_L^*\psi_L^*=(\epsilon\Lambda_L^*\epsilon^{-1})\epsilon\psi_L^*=\epsilon^{-1}\Lambda_L^*\epsilon\,(\epsilon\psi_L^*)=\Lambda_R(\epsilon\psi_L^*)\]</div>
+</div>
+<div class="math inline"><div>\[P:\ \psi_{L/R}(x)\mapsto\epsilon\psi^*_{L/R}(Px)=\psi'_{R/L}=i\sigma_2\psi^*_{L/R}(Px)\]</div>
+</div></p>
+<hr />
+<h2>11/13 QFT</h2>
+<div class="math block">
+<div>\[P:\psi_D(x)=\psi_L(x)\oplus\psi_R(x),\qquad P\psi_D=\psi_R'(Px)\oplus\psi_L'(Px)\]</div>
+
+</div>
+<div class="math block">
+<div>\[\sigma_i^*=\sigma_i^T=\epsilon\sigma_i\epsilon,\qquad \epsilon\equiv i\sigma_2=\begin{pmatrix}0&amp;1\\-1&amp;0\end{pmatrix},\ \epsilon_{12}=+1,\qquad \Lambda_R=\epsilon^{-1}\Lambda_L^*\epsilon\]</div>
+
+</div>
+<div class="math block">
+<div>\[P:\psi_{L/R}(x)\mapsto\epsilon\psi^*_{L/R}(x)=\psi'_{R/L},\qquad \Lambda_L,\Lambda_R\leftarrow SL(2,\mathbb C)\ \leftrightarrow\ SO^\uparrow(1,3)\]</div>
+
+</div>
+<p>Let's put indices on spinors: <span class="math inline">\(\psi_{L\alpha}\)</span> (undotted index), <span class="math inline">\(\psi_R{}^{\dot\alpha}\)</span> (dotted index) &amp; <span class="math inline">\((\Lambda_L)_\alpha{}^\beta\)</span>, <span class="math inline">\((\Lambda_R)^{\dot\alpha}{}_{\dot\beta}\)</span>.</p>
+<p><strong>Convention!</strong> Indices are lowered/raised by the <span class="math inline">\(\epsilon\)</span> tensor:
+<div class="math inline"><div>\[\psi_L{}^\alpha=\epsilon^{\alpha\beta}\psi_{L\beta},\quad \psi_{L\alpha}=\psi_L{}^\beta\epsilon_{\beta\alpha};\qquad
+\psi_{R\dot\alpha}=\epsilon_{\dot\alpha\dot\beta}\psi_R{}^{\dot\beta},\quad \psi_R{}^{\dot\alpha}=\psi_{R\dot\beta}\epsilon^{\dot\beta\dot\alpha}\]</div>
+</div>
+(undotted: NW↘SE, dotted: SW↗NE)</p>
+<p>We want a field on which the <span class="math inline">\((\frac12,\frac12)\)</span> rep acts simply as <span class="math inline">\((\psi_L)_\alpha\otimes(\psi_R)^{\dot\alpha}\equiv\hat V_\alpha{}^{\dot\alpha}\)</span> (bi-spinor).
+We will use this rep to demonstrate the relation b/w <span class="math inline">\(SL(2,\mathbb C)\)</span> and <span class="math inline">\(SO^\uparrow(1,3)\)</span>. But <span class="math inline">\((\frac12,\frac12)\)</span> is also an important ingredient in constructing covariant wave eqs.</p>
+<p>Under Lorentz transformation:
+<div class="math inline"><div>\[\hat V_\alpha{}^{\dot\alpha}\mapsto(\Lambda_L)_\alpha{}^\beta(\Lambda_R)^{\dot\alpha}{}_{\dot\beta}\hat V_\beta{}^{\dot\beta}\qquad\text{matrix form: }\Lambda_L\hat V\Lambda_R^T\]</div>
+</div>
+From <span class="math inline">\(\hat V_\alpha{}^{\dot\alpha}\)</span>:
+<div class="math inline"><div>\[V_{\alpha\dot\alpha}=\epsilon_{\dot\alpha\dot\beta}\hat V_\alpha{}^{\dot\beta}=\hat V\epsilon^T\]</div>
+</div>
+Under Lorentz transformation, with <span class="math inline">\(\Lambda_R=\epsilon^{-1}\Lambda_L^*\epsilon\)</span>:
+<div class="math inline"><div>\[V\mapsto\Lambda_L\hat V\Lambda_R^T\epsilon^T=\Lambda_L\hat V\epsilon^T\Lambda_L^\dagger=\Lambda_LV\Lambda_L^\dagger\]</div>
+</div>
+<div class="math inline"><div>\[\tilde V^{\alpha\dot\alpha}\equiv\epsilon^{\alpha\beta}\hat V_\beta{}^{\dot\alpha}=\epsilon\hat V\ (\text{matrix form})\]</div>
+</div>
+Under Lorentz transformation:
+<div class="math inline"><div>\[\tilde V\mapsto\epsilon\Lambda_L\hat V\Lambda_R^T=\epsilon\Lambda_L\epsilon^{-1}\epsilon\hat V\Lambda_R^T=\Lambda_R^*\epsilon\hat V\Lambda_R^T,\qquad
+\tilde V^T\mapsto\Lambda_R(\epsilon\hat V)^T\Lambda_R^\dagger=\Lambda_R\tilde V^T\Lambda_R^\dagger\]</div>
+</div>
+<div class="math inline"><div>\[\bar V\equiv\tilde V^T=(\epsilon\hat V)^T=\bar V^{\dot\alpha\alpha}\]</div>
+</div>
+<strong>Summary</strong>:
+<div class="math inline"><div>\[V=\hat V\epsilon^T,\ V_{\alpha\dot\alpha}:\ V\mapsto\Lambda_LV\Lambda_L^\dagger;\qquad
+\bar V=(\epsilon\hat V)^T,\ \bar V^{\dot\alpha\alpha}:\ \bar V\mapsto\Lambda_R\bar V\Lambda_R^\dagger\]</div>
+</div></p>
+<ol>
+<li>If <span class="math inline">\(V,\bar V\)</span> are Hermitian, hermiticity is preserved under Lorentz transformation.</li>
+<li>The rep of the Lorentz algebra acting on bi-spinors is reducible → two subspaces, e.g. <span class="math inline">\((\Lambda_L,\Lambda_L)\)</span> [?].</li>
+</ol>
+<p>Natural basis for an arbitrary Hermitian matrix: <span class="math inline">\(\sigma^\mu=\{\mathbb 1,\vec\sigma\}\)</span>:
+<div class="math inline"><div>\[V=a_\mu\sigma^\mu\quad\text{or}\quad \eta_{\mu\nu}V^\mu\sigma^\nu=\begin{pmatrix}V^0-V^3&amp;-V^1+iV^2\\-V^1-iV^2&amp;V^0+V^3\end{pmatrix}\]</div>
+</div>
+<div class="math inline"><div>\[\bar V=\eta_{\mu\nu}V^\mu\bar\sigma^\nu,\quad \bar\sigma^\mu=\{\mathbb 1,-\vec\sigma\};\qquad V^\mu:\ \text{vector of }SO(1,3),\ V_\mu\to\Lambda_\mu{}^\nu V_\nu\]</div>
+</div>
+<span class="math inline">\(\sigma^\mu,\bar\sigma^\mu\)</span> are related; <span class="math inline">\((\frac12,0)\otimes(0,\frac12)\to\)</span> vector of <span class="math inline">\(SO(1,3)\)</span>:
+<div class="math inline"><div>\[\sigma_\mu\bar\sigma_\nu+\sigma_\nu\bar\sigma_\mu=2\eta_{\mu\nu}=\bar\sigma_\mu\sigma_\nu+\bar\sigma_\nu\sigma_\mu\]</div>
+</div>
+<strong>To sum up</strong>:</p>
+<ul>
+<li><span class="math inline">\(\Lambda_L,\Lambda_R\in SL(2,\mathbb C)\)</span>, <span class="math inline">\(\det(\Lambda_{L/R})=1\)</span></li>
+<li><span class="math inline">\(V\mapsto\Lambda_LV\Lambda_L^\dagger\)</span> satisfies <span class="math inline">\(\det V'=\det V\)</span>:
+<div class="math inline"><div>\[\det V=\det(\eta_{\mu\nu}V^\mu\sigma^\nu)=\det\begin{pmatrix}V^0-V^3&amp;-V^1+iV^2\\-V^1-iV^2&amp;V^0+V^3\end{pmatrix}
+=(V^0)^2-(V^3)^2-(V^1-iV^2)(V^1+iV^2)\]</div>
+</div>
+<div class="math inline"><div>\[=(V^0)^2-(V^1)^2-(V^2)^2-(V^3)^2=\eta_{\mu\nu}V^\mu V^\nu=\text{length of }SO(1,3)\]</div>
+</div>
+In general, <span class="math inline">\(\forall u\in SL(2,\mathbb C)\)</span> and <span class="math inline">\(X=\eta_{\mu\nu}x^\mu\sigma^\nu\)</span>:
+<div class="math inline"><div>\[X\mapsto uXu^\dagger=X'=\eta_{\mu\nu}x'^\mu\sigma^\nu=(\Lambda_\mu{}^\nu x_\nu)\sigma^\mu\,[?]\]</div>
+</div>
+This defines a mapping
+<div class="math inline"><div>\[\Lambda:SL(2,\mathbb C)\longrightarrow L^\uparrow_+=SO^\uparrow(1,3)\qquad(\text{or }\Lambda=\Lambda(u))\]</div>
+</div></li>
+</ul>
+<h3>Covariant wave equation</h3>
+<p>Consider two quantities in momentum space:
+<div class="math inline"><div>\[V\Rightarrow P=p_\mu\sigma^\mu=p\cdot\sigma,\ P_{\alpha\dot\alpha};\qquad \bar V\Rightarrow\bar P=p_\mu\bar\sigma^\mu=p\cdot\bar\sigma,\ \bar P^{\dot\alpha\alpha}\]</div>
+</div>
+<em>(이하 이 페이지는 필기가 매우 흐림 — 전체적으로 [?])</em></p>
+<p>Under Lorentz transformation:
+<div class="math inline"><div>\[P\mapsto P'=p'\cdot\sigma=(\Lambda p)\cdot\sigma=\Lambda_L(p\cdot\sigma)\Lambda_L^\dagger=\Lambda_L(p\cdot\sigma)\Lambda_R^{-1}\]</div>
+</div>
+<div class="math inline"><div>\[\bar P\mapsto\bar P'=p'\cdot\bar\sigma=(\Lambda p)\cdot\bar\sigma=\Lambda_R(p\cdot\bar\sigma)\Lambda_R^\dagger=\Lambda_R(p\cdot\bar\sigma)\Lambda_L^{-1}\]</div>
+</div>
+Consider <span class="math inline">\((p\cdot\bar\sigma)\psi_L\)</span>, <span class="math inline">\((p\cdot\sigma)\psi_R\)</span>. They transform like:
+<div class="math inline"><div>\[(p\cdot\bar\sigma)\psi_L\mapsto\Lambda_R(p\cdot\bar\sigma)\underbrace{\Lambda_R^\dagger\Lambda_L}_{\mathbb 1}\psi_L=\Lambda_R(p\cdot\bar\sigma)\psi_L,\qquad
+(p\cdot\sigma)\psi_R\mapsto\Lambda_L(p\cdot\sigma)\underbrace{\Lambda_L^\dagger\Lambda_R}_{\mathbb 1}\psi_R=\Lambda_L(p\cdot\sigma)\psi_R\]</div>
+</div>
+<div class="math inline"><div>\[(p\cdot\bar\sigma)\psi_L=0,\qquad (p\cdot\sigma)\psi_R=0\]</div>
+</div>
+In one frame ⇒ this equality will hold in any frame. In position space, <span class="math inline">\(p_\mu=i\partial_\mu\)</span>:
+<div class="math inline"><div>\[i\bar\sigma^\mu\partial_\mu\psi_L=0,\qquad i\sigma^\mu\partial_\mu\psi_R=0\quad\to\ \textbf{Weyl equation}\]</div>
+</div>
+<div class="math inline"><div>\[P\bar P\psi_L\mapsto\Lambda_LP\underbrace{\Lambda_R^{-1}\Lambda_R}_{\mathbb 1}\bar P\underbrace{\Lambda_L^{-1}\Lambda_L}_{\mathbb 1}\psi_L=\Lambda_LP\bar P\psi_L\]</div>
+</div>
+<div class="math inline"><div>\[(p\cdot\sigma)(p\cdot\bar\sigma)\psi_L=\frac12p_\mu p_\nu\underbrace{(\sigma^\mu\bar\sigma^\nu+\sigma^\nu\bar\sigma^\mu)}_{2\eta^{\mu\nu}}\psi_L=p_\mu p_\nu\eta^{\mu\nu}\psi_L=p^2\psi_L\to-\partial^2\psi_L\]</div>
+</div>
+<span class="math inline">\(p^2=0\)</span> → massless.</p>
+<p>Mass? <span class="math inline">\(\psi_L\)</span> = (mass candidate which transforms like <span class="math inline">\(\psi_R\)</span>):</p>
+<ul>
+<li>① <span class="math inline">\(\epsilon\psi_L^*\)</span> → Majorana mass</li>
+<li>② <span class="math inline">\(\psi_R\)</span> → Dirac mass</li>
+</ul>
+<hr />
+<h2>11/15 QFT</h2>
+<h3>How to add a mass term?</h3>
+<p>Suppose we start with the Weyl equation of ONLY a L-handed spinor. From the transformations we know that there are two types of fields that transform like a R-handed spinor.
+<div class="math inline"><div>\[\psi_L\ (\tfrac12,0):\qquad i\underbrace{\bar\sigma^\mu\partial_\mu}_{p\cdot\bar\sigma}\psi_L=\ \leftarrow\ \text{mass candidate},\qquad \to\Lambda_R(p\cdot\bar\sigma)\Lambda_R^{-1}\cdots\ (\Lambda_L^{-1})\]</div>
+</div></p>
+<ul>
+<li>① <span class="math inline">\(\psi_L\to\epsilon\psi_L^*\)</span> transforms like right-handed guys.</li>
+<li>② Introduce a new spinor <span class="math inline">\(\psi_R\)</span> <span class="math inline">\((0,\frac12)\)</span>.</li>
+</ul>
+<h4>① Majorana spinor</h4>
+<div class="math block">
+<div>\[\psi_L\oplus\epsilon\psi_L^*\ \Rightarrow\ (\tfrac12,0)\oplus(0,\tfrac12)\]</div>
+
+</div>
+<div class="math block">
+<div>\[i\bar\sigma^\mu\partial_\mu\psi_L=c\,\epsilon\psi_L^*\qquad(c:\ \text{mass-like parameter})\]</div>
+
+</div>
+<p>Complex conjugate, using <span class="math inline">\(\epsilon^{-1}\bar\sigma^{\mu*}\epsilon=\sigma^\mu\)</span>:
+<div class="math inline"><div>\[-i\bar\sigma^{\mu*}\partial_\mu\psi_L^*=c^*\epsilon\psi_L\]</div>
+</div>
+<span class="math inline">\(\times\epsilon^{-1}\)</span> from the left:
+<div class="math inline"><div>\[-i\underbrace{\epsilon^{-1}\bar\sigma^{\mu*}\epsilon}_{\sigma^\mu}\underbrace{\epsilon^{-1}}_{-\epsilon}\partial_\mu\psi_L^*=c^*\psi_L
+\ \Rightarrow\ i\sigma^\mu\partial_\mu(\epsilon\psi_L^*)=c^*\psi_L\]</div>
+</div>
+<div class="math inline"><div>\[-\sigma^\mu\partial_\mu\bar\sigma^\nu\partial_\nu\psi_L=c\,\sigma^\mu\partial_\mu(\epsilon\psi_L^*)\cdots=|c|^2\psi_L,\qquad
+\sigma^\mu\bar\sigma^\nu+\sigma^\nu\bar\sigma^\mu=2\eta^{\mu\nu}\ \Rightarrow\ \text{LHS}=-\partial^2\psi_L\]</div>
+</div>
+<div class="math inline"><div>\[\Rightarrow\ -\partial^2\psi_L=|c|^2\psi_L,\qquad (p^2-|c|^2)\psi_L=0,\qquad p^2=|c|^2=m^2\]</div>
+</div>
+<div class="math inline"><div>\[i\bar\sigma\cdot\partial\psi_L=m\,\epsilon\psi_L^*\quad\text{never invariant under}\ U(1)_{EM}:\ \psi_L\to e^{i\alpha}\psi_L\ \Rightarrow\ \psi_L=\text{(neutral)}\]</div>
+</div></p>
+<h4>② Dirac spinor</h4>
+<div class="math block">
+<div>\[\psi_L\oplus\psi_R\ \leftrightarrow\ (\tfrac12,0)\oplus(0,\tfrac12)\]</div>
+
+</div>
+<div class="math block">
+<div>\[\begin{cases}i\bar\sigma^\mu\partial_\mu\psi_L(x)=c\,\psi_R(x)\\ i\sigma^\mu\partial_\mu\psi_R(x)=\tilde c\,\psi_L(x)\end{cases}
+\qquad\text{via field redefinition we can make } c=\tilde c=m\]</div>
+
+</div>
+<div class="math block">
+<div>\[\Rightarrow\begin{cases}i\bar\sigma^\mu\partial_\mu\psi_L(x)=m\psi_R(x)\\ i\sigma^\mu\partial_\mu\psi_R(x)=m\psi_L(x)\end{cases},\qquad
+\begin{pmatrix}\psi_L\\ \psi_R\end{pmatrix}=\begin{pmatrix}e_L\\ e_R\end{pmatrix}=\psi\]</div>
+
+</div>
+<div class="math block">
+<div>\[\psi_L\to e^{i\alpha}\psi_L,\ \ \psi_R\to e^{i\alpha}\psi_R\ \Rightarrow\ U(1)_{EM}\to j_\mu\to Q\text{ density}\]</div>
+
+</div>
+<h3>Lagrangian</h3>
+<div class="math block">
+<div>\[\psi_L(x)\to\Lambda_L\psi_L(\Lambda^{-1}x),\qquad \psi_R\to\Lambda_R\psi_R\]</div>
+
+</div>
+<div class="math block">
+<div>\[\psi_L^\dagger(x)\to\psi_L^\dagger(\Lambda^{-1}x)\underbrace{\Lambda_L^\dagger}_{\Lambda_R^{-1}},\qquad \psi_R^\dagger\to\psi_R^\dagger\Lambda_L^{-1}\]</div>
+
+</div>
+<p><span class="math inline">\(\psi_L^\dagger\psi_L\)</span> cannot be Lorentz inv.
+<div class="math inline"><div>\[\psi_R^\dagger\psi_L\to\psi_R^\dagger\Lambda_L^{-1}\Lambda_L\psi_L=\psi_R^\dagger\psi_L\ :\ \text{invariant}\]</div>
+</div>
+<div class="math inline"><div>\[p_\mu\leftrightarrow P=p_\mu\sigma^\mu\to\Lambda_L(p\cdot\sigma)\underbrace{\Lambda_L^\dagger}_{\Lambda_R^{-1}},\qquad
+\bar P=p_\mu\bar\sigma^\mu\to\Lambda_R(p\cdot\bar\sigma)\underbrace{\Lambda_R^\dagger}_{\Lambda_L^{-1}}\]</div>
+</div>
+<div class="math inline"><div>\[\left.\begin{aligned}&amp;\psi_L^\dagger(p\cdot\bar\sigma)\psi_L\\&amp;\psi_R^\dagger(p\cdot\sigma)\psi_R\end{aligned}\right\}\ \text{Lorentz inv.}\ \Rightarrow\ \begin{cases}i\psi_L^\dagger\bar\sigma^\mu\partial_\mu\psi_L\\ i\psi_R^\dagger\sigma^\mu\partial_\mu\psi_R\end{cases}\]</div>
+</div>
+• <strong>Lagrangian for a Weyl spinor (massless)</strong>:
+<div class="math inline"><div>\[\mathcal L_W=\underbrace{i\psi_L^\dagger\bar\sigma^\mu\partial_\mu\psi_L}_{\text{self-conjugate}},\qquad
+(i\psi_L^\dagger\bar\sigma^\mu\partial_\mu\psi_L)^\dagger=-i\partial_\mu\psi_L^\dagger\bar\sigma^\mu\psi_L\ \Rightarrow\ i\psi_L^\dagger\bar\sigma^\mu\partial_\mu\psi_L\ (\text{up to total derivative})\]</div>
+</div></p>
+<div class="math block">
+<div>\[\psi_L^T\epsilon\psi_L=\psi_{L\alpha}\epsilon^{\alpha\beta}\psi_{L\beta}=-\psi_{L\alpha}\epsilon^{\beta\alpha}\psi_{L\beta}\]</div>
+
+</div>
+<ul>
+<li>if <span class="math inline">\([\psi_{L\alpha},\psi_{L\beta}]=0\)</span>: <span class="math inline">\(\to-\psi_{L\beta}\epsilon^{\beta\alpha}\psi_{L\alpha}=-\psi_L^T\epsilon\psi_L\Rightarrow\psi_L^T\epsilon\psi_L=0\)</span></li>
+<li>if <span class="math inline">\(\{\psi_{L\alpha},\psi_{L\beta}\}=0\)</span>: <span class="math inline">\(\to\psi_{L\beta}\epsilon^{\beta\alpha}\psi_{L\alpha}=\psi_L^T\epsilon\psi_L\)</span></li>
+</ul>
+<p><span class="math inline">\(\psi_L\)</span> follows Fermi–Dirac statistics: <strong>Grassmann variable</strong>.</p>
+<h3>Solving the Dirac eq.</h3>
+<div class="math block">
+<div>\[(i\gamma^\mu\partial_\mu-m)\psi=0,\qquad\text{try }\psi=e^{-ipx}u(p)\]</div>
+
+</div>
+<div class="math block">
+<div>\[e^{-ipx}(\gamma^\mu p_\mu-m)u(p)=0,\qquad (\gamma^\mu p_\mu-m)u(p)=0,\qquad \gamma^\mu p_\mu\equiv\not p\]</div>
+
+</div>
+<p><span class="math inline">\((\not p-m)u(p)=0\)</span>: non-trivial sol. if, with <span class="math inline">\(\gamma^\mu=\begin{pmatrix}0&amp;\sigma^\mu\\ \bar\sigma^\mu&amp;0\end{pmatrix}\)</span>,
+<div class="math inline"><div>\[0=\det(\not p-m)=\det\begin{pmatrix}-m&amp;p\cdot\sigma\\p\cdot\bar\sigma&amp;-m\end{pmatrix}=m^2-\underbrace{(p\cdot\sigma)(p\cdot\bar\sigma)}_{p^2}=0\ \Rightarrow\ m^2-p^2=0,\qquad p_0=\pm\sqrt{\vec p^2+m^2}\]</div>
+</div>
+Two solutions: <span class="math inline">\(\psi=e^{-ip\cdot x}u(p)\)</span>, <span class="math inline">\(e^{ip\cdot x}v(p)\)</span>:
+<div class="math inline"><div>\[(\gamma^\mu p_\mu-m)u(p)=0,\qquad (\gamma^\mu p_\mu+m)v(p)=0\]</div>
+</div>
+→ rest frame <span class="math inline">\((m,0,0,0)\)</span>:
+<div class="math inline"><div>\[m(\gamma^0-1)u(p)=0:\ \begin{pmatrix}-1&amp;1\\1&amp;-1\end{pmatrix}\begin{pmatrix}\xi_L\\ \xi_R\end{pmatrix}=0\Rightarrow\begin{pmatrix}\xi\\ \xi\end{pmatrix};\qquad
+m(\gamma^0+1)v(p)=0:\ \begin{pmatrix}1&amp;1\\1&amp;1\end{pmatrix}\begin{pmatrix}\eta_L\\ \eta_R\end{pmatrix}=0\Rightarrow\begin{pmatrix}\eta\\-\eta\end{pmatrix}\]</div>
+</div></p>
+<h3>Massive case</h3>
+<div class="math block">
+<div>\[\mathcal L_D=\underbrace{i\psi_L^\dagger\bar\sigma^\mu\partial_\mu\psi_L}_{\text{self-conj.}}+\underbrace{i\psi_R^\dagger\sigma^\mu\partial_\mu\psi_R}_{\text{self-conj.}}\underbrace{-m\psi_L^\dagger\psi_R-m^*\psi_R^\dagger\psi_L}_{\text{conjugate to each other}}\]</div>
+
+</div>
+<div class="math block">
+<div>\[\psi=\begin{pmatrix}\psi_L\\ \psi_R\end{pmatrix}:\ \text{4-component spinor},\qquad \gamma^\mu=\begin{pmatrix}0&amp;\sigma^\mu\\ \bar\sigma^\mu&amp;0\end{pmatrix},\ \{\gamma^\mu,\gamma^\nu\}=2\eta^{\mu\nu}\]</div>
+
+</div>
+<div class="math block">
+<div>\[i\psi_L^\dagger\bar\sigma^\mu\partial_\mu\psi_L+i\psi_R^\dagger\sigma^\mu\partial_\mu\psi_R
+=i(\psi_L^\dagger\ \psi_R^\dagger)\underbrace{\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}}_{\gamma^0}\underbrace{\begin{pmatrix}0&amp;\sigma^\mu\\ \bar\sigma^\mu&amp;0\end{pmatrix}}_{\gamma^\mu}\begin{pmatrix}\partial_\mu\psi_L\\ \partial_\mu\psi_R\end{pmatrix}
+=i\underbrace{\psi^\dagger\gamma^0}_{\bar\psi\equiv\psi^\dagger\gamma^0}\gamma^\mu\partial_\mu\psi\]</div>
+
+</div>
+<div class="math block">
+<div>\[\mathcal L_D=i\bar\psi\gamma^\mu\partial_\mu\psi+\text{mass term}\]</div>
+
+</div>
+<div class="math block">
+<div>\[-m\psi_L^\dagger\psi_R-m\psi_R^\dagger\psi_L=-m(\psi_L^\dagger\ \psi_R^\dagger)\begin{pmatrix}\psi_R\\ \psi_L\end{pmatrix}=-m\underbrace{(\psi_L^\dagger\ \psi_R^\dagger)\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}}_{\bar\psi}\begin{pmatrix}\psi_L\\ \psi_R\end{pmatrix}=-m\bar\psi\psi\]</div>
+
+</div>
+<p><strong>Lagrangian</strong> in terms of 4-component <span class="math inline">\(\psi\)</span>:
+<div class="math inline"><div>\[\boxed{\mathcal L_D=i\bar\psi\gamma^\mu\partial_\mu\psi-m\bar\psi\psi=\bar\psi(i\not\partial-m)\psi}\]</div>
+</div>
+<strong>For the Majorana case</strong>: <span class="math inline">\(\psi_R\to\epsilon\psi_L^*\)</span>
+<div class="math inline"><div>\[\mathcal L_M=i\psi_L^\dagger\bar\sigma^\mu\partial_\mu\psi_L-m\,\psi_L^T\epsilon\psi_L-m^*\psi_L^\dagger\epsilon\psi_L^*\,[?]
+\qquad\big(\psi_{L\alpha}\epsilon^{\alpha\beta}\psi_{L\beta}:\ \text{singlet}\big)
+=\cdots-m(\psi_L\psi_L+\psi_L^\dagger\psi_L^\dagger)\]</div>
+</div>
+(옆 메모) <span class="math inline">\(SU(2)\)</span>, <span class="math inline">\((\frac12,0)\)</span>: <span class="math inline">\(\frac12\otimes\frac12=V_\alpha V_\beta\)</span> → triplet, singlet (<span class="math inline">\(V_\alpha\epsilon^{\alpha\beta}V_\beta\)</span>)</p>
+<div class="math block">
+<div>\[\psi=e^{-ip\cdot x}u(p),\quad e^{ip\cdot x}v(p);\qquad u=\begin{pmatrix}\xi\\ \xi\end{pmatrix},\quad v=\begin{pmatrix}\eta\\-\eta\end{pmatrix}\]</div>
+
+</div>
+<hr />
+<h2>11/22 QFT</h2>
+<h3>Solving the Dirac eq.</h3>
+<div class="math block">
+<div>\[(i\gamma^\mu\partial_\mu-m)\psi=0,\qquad\text{two solutions: }\psi=e^{-ip\cdot x}u(p),\ \ e^{ip\cdot x}v(p)\]</div>
+
+</div>
+<p>Go to the rest frame <span class="math inline">\(p_\mu=(m,0,0,0)\)</span>:
+<div class="math inline"><div>\[m(\gamma^0-1)u(p)=0:\ \begin{pmatrix}-1&amp;1\\1&amp;-1\end{pmatrix}\begin{pmatrix}\xi_1\\ \xi_2\end{pmatrix}\,[?];\qquad
+m(\gamma^0+1)v(p)=0:\ \begin{pmatrix}1&amp;1\\1&amp;1\end{pmatrix}\begin{pmatrix}\eta_1\\ \eta_2\end{pmatrix}\]</div>
+</div>
+<div class="math inline"><div>\[u^s(p)=\begin{pmatrix}\sqrt{\sigma\cdot p}\,\xi^s\\ \sqrt{\bar\sigma\cdot p}\,\xi^s\end{pmatrix},\qquad \sigma\cdot p=\sigma_\mu p^\mu,\quad
+\sigma^\mu=\{\mathbb 1,\vec\sigma\},\ \bar\sigma^\mu=\{\mathbb 1,-\vec\sigma\}\]</div>
+</div>
+In momentum space, <span class="math inline">\((\gamma^\mu p_\mu-m)u(p)=0\)</span> with <span class="math inline">\(\gamma^\mu p_\mu=\begin{pmatrix}0&amp;\sigma\cdot p\\ \bar\sigma\cdot p&amp;0\end{pmatrix}\)</span>:
+<div class="math inline"><div>\[\begin{pmatrix}-m&amp;\sigma\cdot p\\ \bar\sigma\cdot p&amp;-m\end{pmatrix}\begin{pmatrix}\sqrt{\sigma\cdot p}\,\xi\\ \sqrt{\bar\sigma\cdot p}\,\xi\end{pmatrix}=0\]</div>
+</div></p>
+<ul>
+<li>1st: <span class="math inline">\(-m\sqrt{\sigma\cdot p}+\sigma\cdot p\sqrt{\bar\sigma\cdot p}=\sqrt{\sigma\cdot p}\left(-m+\sqrt{(\sigma\cdot p)(\bar\sigma\cdot p)}\right)=0\)</span>, <span class="math inline">\(\ (\sigma\cdot p)(\bar\sigma\cdot p)=p^2=m^2\)</span></li>
+<li>2nd: <span class="math inline">\(\bar\sigma\cdot p\sqrt{\sigma\cdot p}-m\sqrt{\bar\sigma\cdot p}=\sqrt{\bar\sigma\cdot p}\left(\sqrt{(\sigma\cdot p)(\bar\sigma\cdot p)}-m\right)=0\)</span></li>
+</ul>
+<div class="math block">
+<div>\[u^s(p)=\begin{pmatrix}\sqrt{\sigma\cdot p}\,\xi^s\\ \sqrt{\bar\sigma\cdot p}\,\xi^s\end{pmatrix},\qquad
+v^s(p)=\begin{pmatrix}\sqrt{\sigma\cdot p}\,\eta^s\\ -\sqrt{\bar\sigma\cdot p}\,\eta^s\end{pmatrix},\qquad (\sigma\cdot p)(\bar\sigma\cdot p)=p^2=m^2\]</div>
+
+</div>
+<p><strong>Orthogonality relations</strong> (<span class="math inline">\(\gamma^0=\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}\)</span>):
+<div class="math inline"><div>\[\bar u^s(p)u^r(p)=u^{s\dagger}(p)\gamma^0u^r(p)=\left(\xi^{s\dagger}\sqrt{\bar\sigma\cdot p}\ \ \xi^{s\dagger}\sqrt{\sigma\cdot p}\right)\begin{pmatrix}\sqrt{\sigma\cdot p}\,\xi^r\\ \sqrt{\bar\sigma\cdot p}\,\xi^r\end{pmatrix}=2m\delta^{sr}\]</div>
+</div>
+<div class="math inline"><div>\[\bar v^s(p)v^r(p)=-2m\delta^{sr}\]</div>
+</div>
+<div class="math inline"><div>\[\bar u^s(p)\gamma^\mu u^r(p)=2p^\mu\delta^{rs}\ \ (\textbf{H.W.}),\qquad \bar v^s(p)\gamma^\mu v^r(p)=2p^\mu\delta^{sr}\ \ (\textbf{H.W.})\qquad\text{— derive these identities}\]</div>
+</div>
+Check!
+<div class="math inline"><div>\[\bar u^s(p)\underbrace{p_\mu\gamma^\mu u^r(p)}_{=\,mu^r(p)\ \text{by E.O.M.}}=2\underbrace{p_\mu p^\mu}_{m^2}\delta^{sr}
+\ \Rightarrow\ m\,\bar u^s(p)u^r(p)=2m^2\delta^{sr}\,[?]\]</div>
+</div>
+<strong>Spin sum</strong>:
+<div class="math inline"><div>\[\sum_su^s(p)\bar u^s(p)=\begin{pmatrix}\sqrt{\sigma\cdot p}\,\xi^s\\ \sqrt{\bar\sigma\cdot p}\,\xi^s\end{pmatrix}\left(\xi^{s\dagger}\sqrt{\bar\sigma\cdot p}\ \ \xi^{s\dagger}\sqrt{\sigma\cdot p}\right)
+=\begin{pmatrix}\sqrt{\sigma\cdot p}\sqrt{\bar\sigma\cdot p}&amp;\sqrt{\sigma\cdot p}\sqrt{\sigma\cdot p}\\ \sqrt{\bar\sigma\cdot p}\sqrt{\bar\sigma\cdot p}&amp;\sqrt{\bar\sigma\cdot p}\sqrt{\sigma\cdot p}\end{pmatrix}
+=\begin{pmatrix}m&amp;\sigma\cdot p\\ \bar\sigma\cdot p&amp;m\end{pmatrix}=(\gamma^\mu p_\mu+m)_{4\times4}\]</div>
+</div>
+<div class="math inline"><div>\[\sum_su^s(p)\bar u^s(p)=(\not p+m)_{4\times4},\qquad \sum_sv^s(p)\bar v^s(p)=(\not p-m)_{4\times4}\]</div>
+</div>
+<div class="math inline"><div>\[\psi=\begin{pmatrix}\psi_L\\ \psi_R\end{pmatrix},\qquad \psi_R\text{ can be either a new def. or }\epsilon\psi_L^*\]</div>
+</div>
+Define <span class="math inline">\(\gamma^5=\begin{pmatrix}1&amp;0\\0&amp;-1\end{pmatrix}\)</span> (필기 그대로; Peskin은 <span class="math inline">\(\operatorname{diag}(-1,1)\)</span>).</p>
+<p><strong>Projection operators</strong>:
+<div class="math inline"><div>\[P_{L/R}=\frac{1\pm\gamma^5}2=\begin{pmatrix}1&amp;0\\0&amp;0\end{pmatrix},\ \begin{pmatrix}0&amp;0\\0&amp;1\end{pmatrix};\qquad
+P_L\psi=\begin{pmatrix}\psi_L\\0\end{pmatrix}\ (\text{left chirality}),\quad P_R\psi=\begin{pmatrix}0\\ \psi_R\end{pmatrix}\ (\text{right chirality})\]</div>
+</div>
+<strong>Helicity</strong>:
+<div class="math inline"><div>\[\hat h=\frac{\vec\sigma\cdot\vec p}{2|\vec p|}\,[?],\qquad h=\begin{pmatrix}\hat h&amp;0\\0&amp;\hat h\end{pmatrix}\]</div>
+</div>
+E.g. <span class="math inline">\(u(p)\sim\begin{pmatrix}\xi_s\\0\end{pmatrix}\)</span>: <span class="math inline">\(-\frac12\)</span>, left-handed; <span class="math inline">\(\quad v(p)\sim\begin{pmatrix}0\\ \xi_s\end{pmatrix}\)</span>: <span class="math inline">\(+\frac12\)</span>, right-handed.</p>
+<h3>Quantizing the spinor field</h3>
+<div class="math block">
+<div>\[\mathcal L=\bar\psi i\not\partial\psi-m\bar\psi\psi\]</div>
+
+</div>
+<p>Covariant momentum (<span class="math inline">\(\gamma^0=\begin{pmatrix}0&amp;1\\1&amp;0\end{pmatrix}\)</span>):
+<div class="math inline"><div>\[\pi\equiv\frac{\partial\mathcal L}{\partial\dot\psi}=i\bar\psi\gamma^0=i\psi^\dagger\gamma^0\gamma^0=i\psi^\dagger\]</div>
+</div>
+<div class="math inline"><div>\[\mathcal H=i\psi^\dagger\partial_0\psi-\mathcal L=i\psi^\dagger\partial_0\psi-\bar\psi i\gamma^0\partial_0\psi-\bar\psi i\vec\gamma\cdot\nabla\psi+m\bar\psi\psi
+=\psi^\dagger\gamma^0(-i\vec\gamma\cdot\nabla+m)\psi\]</div>
+</div>
+<div class="math inline"><div>\[\mathcal H=\psi^\dagger\left(-i\gamma^0\vec\gamma\cdot\nabla+m\gamma^0\right)\psi\ \Rightarrow\ \text{Hamiltonian operator }h_D\text{ that we know from Dirac}\]</div>
+</div>
+<div class="math inline"><div>\[=i\psi^\dagger\partial_0\psi\ \ (\text{by E.O.M.})\,[?],\qquad h_D=-i\gamma^0\vec\gamma\cdot\nabla+m\gamma^0\]</div>
+</div>
+Eigenvectors ⇒ <span class="math inline">\(u(p)e^{-ip\cdot x}\)</span>, <span class="math inline">\(v(p)e^{ip\cdot x}\)</span>:
+<div class="math inline"><div>\[(i\gamma^\mu\partial_\mu-m)u(p)e^{-ip\cdot x}=0=(i\gamma^0\partial_0+i\vec\gamma\cdot\nabla-m)u(p)e^{-i(Et-\vec p\cdot\vec x)}
+=(\gamma^0p_0-\vec\gamma\cdot\vec p-m)u(p)e^{-ip\cdot x}\,[?],\qquad \vec p\to-i\nabla\]</div>
+</div>
+<div class="math inline"><div>\[\psi(x)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\sum_s\left(a^s_{\vec p}u^s(p)e^{-ip\cdot x}+b^{s\dagger}_{\vec p}v^s(p)e^{ip\cdot x}\right)\]</div>
+</div>
+<div class="math inline"><div>\[H=\int d^3x\,\mathcal H=\int d^3x\,\psi^\dagger h_D\psi
+=\int d^3x\int\frac{d^3p}{(2\pi)^3}\int\frac{d^3q}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\frac1{\sqrt{2E_{\vec q}}}
+\left(a^{s\dagger}_{\vec p}u^{s\dagger}(p)e^{ip\cdot x}+b^s_{\vec p}v^{s\dagger}(p)e^{-ip\cdot x}\right)
+\times h_D\left(a^s_{\vec q}u^s(q)e^{-iq\cdot x}+b^{s\dagger}_{\vec q}v^s(q)e^{iq\cdot x}\right)\]</div>
+</div>
+<div class="math inline"><div>\[\to\int\frac{d^3p}{(2\pi)^3}\frac{E_{\vec p}}{2}\cdots\left(a^{s\dagger}_{\vec p}a^s_{\vec p}\ \cdots\ b^s_{\vec p}b^{s\dagger}_{\vec p}\right)\,[?]\]</div>
+</div>
+<div class="math inline"><div>\[H=\int\frac{d^3p}{(2\pi)^3}E_{\vec p}\left(a^{s\dagger}_{\vec p}a^s_{\vec p}-b^s_{\vec p}b^{s\dagger}_{\vec p}\right),\qquad \{a,a^\dagger\}\sim1,\ \ \{b,b^\dagger\}\sim1\]</div>
+</div></p>
+<h3>Right quantization rule</h3>
+<div class="math block">
+<div>\[\{\psi_\alpha(\vec x),\psi_\beta(\vec y)\}=0,\qquad \{\psi_\alpha(\vec x),\psi^\dagger_\beta(\vec y)\}=\delta_{\alpha\beta}\delta^3(\vec x-\vec y)\,[?]\]</div>
+
+</div>
+<div class="math block">
+<div>\[\{a^r_{\vec p},a^{s\dagger}_{\vec q}\}=(2\pi)^3\delta^3(\vec p-\vec q)\delta^{rs}\,[?]=\{b^r_{\vec p},b^{s\dagger}_{\vec q}\}\]</div>
+
+</div>
+<p>(필기에는 우변에 <span class="math inline">\(i\)</span>가 붙은 것처럼 보임 — <span class="math inline">\(\pi=i\psi^\dagger\)</span> 기준이면 <span class="math inline">\(\{\psi,\pi\}=i\delta\)</span>)</p>
+<hr />
+<h2>11/27 QFT</h2>
+<p><strong>Noether's theorem</strong>: statement about the dynamical consequence of symmetry, e.g. conservation.</p>
+<h3>• Symmetry revisited</h3>
+<p>Consider a change of coordinates corresponding to a Lie group with parameters <span class="math inline">\(\{\alpha_i\}\)</span>:
+<div class="math inline"><div>\[x'^\mu=f^\mu(x,\alpha),\qquad \phi'_a(x')=F_a(\phi(x),\alpha)\]</div>
+</div>
+Under this transformation:
+<div class="math inline"><div>\[S=\int_\Omega d^4x\,\mathcal L(\phi(x),\partial_\mu\phi(x))=\int_{f(\Omega)}d^4x'\,\mathcal L'\big(\phi'(x'),\partial'_\mu\phi'(x')\big)\quad(\text{just renaming with prime})\]</div>
+</div>
+In general, <span class="math inline">\(\mathcal L\ne\mathcal L'\)</span>. <strong>If <span class="math inline">\(\mathcal L=\mathcal L'\)</span>, then we call the tr. a symmetry.</strong> In this case:
+<div class="math inline"><div>\[\int_\Omega d^4x\,\mathcal L(\phi(x),\partial_\mu\phi(x))=\int_{f(\Omega,\alpha)}d^4x'\,\mathcal L\big(\phi'(x'),\partial'\phi'(x')\big)\]</div>
+</div>
+E.o.M in the primed system has the same form as in the original.</p>
+<p>Since the equality holds for all <span class="math inline">\(\Omega\)</span>:
+<div class="math inline"><div>\[\mathcal L(\phi(x),\partial\phi(x))\,d^4x=\mathcal L(\phi'(x'),\partial'\phi'(x'))\,d^4x'\]</div>
+</div></p>
+<ol>
+<li>If <span class="math inline">\(\phi_a(x)\)</span> solves the e.o.m. in the original system, so does <span class="math inline">\(\phi'_a(x')\)</span> in the primed system.</li>
+<li>Symmetry yields a degeneracy of solutions: if <span class="math inline">\(\phi_a(x)\)</span> is a sol., so will be <span class="math inline">\(\phi'_a(x)\)</span>, which is <span class="math inline">\(F_a\big(\phi(f^{-1}(x,\alpha)),\alpha\big)\)</span> for all <span class="math inline">\(F,f^\mu\)</span>.</li>
+</ol>
+<p>Since all necessary information in a Lie group is encoded in the infinitesimal tr., we proceed as follows.</p>
+<p>For <span class="math inline">\(\vec\alpha=0\)</span>:
+<div class="math inline"><div>\[x^\mu=f^\mu(x,\alpha=0),\quad \phi_a(x)=F_a(\phi(x),\alpha=0)\ \Rightarrow\ \text{No tr.}\]</div>
+</div>
+At leading order in small <span class="math inline">\(\alpha\)</span>:
+<div class="math inline"><div>\[\begin{cases}x'^\mu=x^\mu-\epsilon^\mu(x)=x^\mu-\epsilon^\mu{}_i(x)\alpha^i\\ \phi'_a(x')=\phi_a(x)+\varepsilon_a(x)=\phi_a(x)+\varepsilon_{ai}(\phi(x))\alpha^i\end{cases}\]</div>
+</div>
+On the other hand,
+<div class="math inline"><div>\[\phi'_a(x')=\phi'_a(x-\epsilon)=\phi'_a(x)-\epsilon^\mu\partial_\mu\phi_a(x)\qquad(\phi'(x)=\phi(x)+\cdots,\ O(\epsilon^2)=0\ \text{then}\ \phi'\to\phi)\]</div>
+</div>
+<div class="math inline"><div>\[\Rightarrow\ \phi'_a(x)=\phi_a(x)+\underbrace{\left(\varepsilon_{ai}(\phi(x))+\epsilon^\mu{}_i(x)\partial_\mu\phi_a(x)\right)}_{\equiv\Delta_{ai}(\phi(x))}\alpha^i
+=\phi_a(x)+\underbrace{\Delta_{ai}(\phi(x))\alpha^i}_{\Delta_a(x)}=\phi_a(x)+\Delta_a(x)\]</div>
+</div>
+<div class="math inline"><div>\[\delta\phi_a(x)=\Delta_a(x)\]</div>
+</div></p>
+<blockquote>
+<p><strong>Noether theorem.</strong> Consider a Lie group <span class="math inline">\(G\)</span> with coordinates <span class="math inline">\(\{\alpha_i\}\)</span>, <span class="math inline">\(i=1,\dots,N\)</span>. If <span class="math inline">\(G\)</span> is a symmetry of the system, there are <span class="math inline">\(N\)</span> conserved quantities, described by <span class="math inline">\(N\)</span> currents
+<div class="math inline"><div>\[j^\mu_i\equiv\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\Delta_{ai}-\epsilon^\mu{}_i\mathcal L\qquad\text{such that}\quad \partial_\mu j^\mu_i=0\quad(i=1,2,\dots,N)\]</div>
+</div></p>
+</blockquote>
+<p><strong>Proof</strong>:
+<div class="math inline"><div>\[\int d^4x\,\mathcal L(\phi,\partial\phi)=\underbrace{\int d^4x'\,\mathcal L(\phi',\partial'\phi')}_{\text{express as ftn of }x=f^{-1}(x',\alpha)}\qquad\text{if }G\text{ is a symmetry}\]</div>
+</div>
+Work at leading order in <span class="math inline">\(\alpha\)</span> (<span class="math inline">\(x'^\mu=x^\mu-\epsilon^\mu\)</span>, <span class="math inline">\(\delta\phi_a(x)=\Delta_a(x)\)</span>; <span class="math inline">\(\mathcal L(x')=\mathcal L(x-\epsilon)=\mathcal L(x)-\epsilon^\mu\partial_\mu\mathcal L(x)\)</span>):
+<div class="math inline"><div>\[\text{Jacobian}=\left|\frac{\partial x'^\mu}{\partial x^\nu}\right|=\det(\delta^\mu{}_\nu-\partial_\nu\epsilon^\mu)=1-\partial\cdot\epsilon\]</div>
+</div>
+<div class="math inline"><div>\[\underbrace{\int\mathcal L(\phi',\partial'\phi')d^4x'}_{\text{as ftn of }x'}=\underbrace{\int\left[\mathcal L(\phi',\partial\phi')-\epsilon^\mu\partial_\mu\mathcal L(\phi',\partial\phi')\right](1-\partial\cdot\epsilon)\,d^4x}_{\text{as ftn of }x}
+=\int\left[\mathcal L(\phi',\partial\phi')-\partial_\mu\big(\epsilon^\mu\mathcal L(\phi',\partial\phi')\big)\right]d^4x\]</div>
+</div>
+<div class="math inline"><div>\[0=\mathcal L(\phi'(x),\partial\phi'(x))-\mathcal L(\phi(x),\partial\phi(x))-\partial_\mu(\epsilon^\mu\mathcal L)
+=\frac{\partial\mathcal L}{\partial\phi_a}\underbrace{\delta\phi_a}_{\Delta_a}+\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\underbrace{\delta(\partial_\mu\phi_a)}_{\partial_\mu\Delta_a}-\partial_\mu(\epsilon^\mu\mathcal L)\]</div>
+</div>
+<div class="math inline"><div>\[=\frac{\partial\mathcal L}{\partial\phi_a}\Delta_a+\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\partial_\mu\Delta_a-\partial_\mu(\epsilon^\mu\mathcal L)
+=\left(\frac{\partial\mathcal L}{\partial\phi_a}-\partial_\mu\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\right)\Delta_a+\partial_\mu\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\Delta_a-\epsilon^\mu\mathcal L\right)\]</div>
+</div>
+Suppose the field configuration satisfies the Euler–Lagrange eq.:
+<div class="math inline"><div>\[0=\partial_\mu\underbrace{\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\Delta_a-\epsilon^\mu\mathcal L\right)}_{\equiv j^\mu(x)},\qquad 0=\partial_\mu j^\mu(x)=\partial_\mu j^\mu_i\alpha^i\]</div>
+</div>
+<strong>To summarize</strong>: i) Lie group <span class="math inline">\(G\)</span> is a sym. of the system; ii) find config. satisfying e.o.m. ⇒ conserved current for each <span class="math inline">\(\alpha^i\)</span>.</p>
+<h3>Conservation of the total charge</h3>
+<div class="math block">
+<div>\[Q_i\equiv\int d^3x\,j^0_i\]</div>
+
+</div>
+<p>Consider the spacetime region <span class="math inline">\(\mathbb R^3\times\Delta T\)</span>, <span class="math inline">\(\Delta T=[0,t]\)</span>:
+<div class="math inline"><div>\[0=\int d^4x\,\partial_\mu j^\mu_i=\int_0^tdt\int d^3x\,\partial_\mu j^\mu_i=\int_0^tdt\int d^3x\left(\partial_0j^0_i+\nabla\cdot\vec j_i\right)\,[?]\]</div>
+</div>
+<div class="math inline"><div>\[=\int d^3x\left[j^0_i(t,\vec x)-j^0_i(t=0,\vec x)\right]+\int dt\underbrace{\int d^3x\,\nabla\cdot\vec j_i}_{\oint_{\partial S}d\vec S\cdot\vec j_i\ \to\ \text{if this is }0}\]</div>
+</div>
+<div class="math inline"><div>\[Q_i(t)=\int d^3x\,j^0_i(t,\vec x)=\int d^3x\,j^0_i(t=0,\vec x)=Q_i(t=0)\ \Rightarrow\ \frac{dQ_i}{dt}=0\]</div>
+</div></p>
+<h3>Energy–momentum tensor</h3>
+<p>Current associated with spacetime translational symmetry. Noether's current ⇒ conservation of <span class="math inline">\((E,\vec p)=P^\mu\)</span>.
+<div class="math inline"><div>\[\partial_\mu\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\Delta_a-\epsilon^\mu{}_i\mathcal L\right)\alpha^i=0\]</div>
+</div>
+<div class="math inline"><div>\[\begin{cases}x'^\mu=x^\mu-a^\mu\equiv x^\mu-\epsilon^\mu{}_i(x)\alpha^i,\quad a^\mu=\delta^\mu{}_\nu a^\nu\ (\epsilon^\mu{}_\nu=\delta^\mu{}_\nu,\ \alpha^\nu=a^\nu)\\
+\phi'_a(x')=\phi_a(x)+\varepsilon_{ai}(\phi(x))\alpha^i=\phi_a(x)\\
+\phi'_a(x')=\phi'_a(x-a)=\phi'_a(x)-a^\mu\partial_\mu\phi(x)\end{cases}
+\ \to\ \delta\phi_a(x)=a^\mu\partial_\mu\phi_a(x)=\Delta_a(x)\]</div>
+</div>
+<div class="math inline"><div>\[0=\partial_\mu\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\Delta_a-\epsilon^\mu{}_i\mathcal L\right)\alpha^i
+=\partial_\mu\Big(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\partial_\nu\phi_a-\underbrace{\epsilon^\mu{}_\nu}_{\delta^\mu{}_\nu}\mathcal L\Big)a^\nu=\partial_\mu(T^\mu{}_\nu)a^\nu\]</div>
+</div>
+<div class="math inline"><div>\[\boxed{T^\mu{}_\nu\equiv\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\partial_\nu\phi_a(x)-\delta^\mu{}_\nu\mathcal L}\]</div>
+</div></p>
+<hr />
+<h2>11/29 QFT</h2>
+<div class="math block">
+<div>\[j^\mu_{i=1,\dots,N}=\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\Delta_{ai}-\epsilon^\mu{}_i\mathcal L,\qquad
+\partial_\mu j^\mu_i\alpha^i=\partial_\mu j^\mu=0,\qquad Q_{i=1,\dots,N}=\int d^3x\,j^0_i\]</div>
+
+</div>
+<p>When <span class="math inline">\(G\)</span> = translational inv., <span class="math inline">\(x'^\mu=x^\mu-a^\mu=x^\mu-\epsilon^\mu\)</span> (<span class="math inline">\(\epsilon^\mu{}_i\alpha^i\)</span>):
+<div class="math inline"><div>\[T^\mu{}_\nu=\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\partial_\nu\phi_a-\delta^\mu{}_\nu\mathcal L\ :\ \text{energy–momentum tensor},\qquad j^\mu=T^\mu{}_\nu a^\nu\ \ (a^\nu:\ \text{4-translation})\]</div>
+</div>
+<div class="math inline"><div>\[P_\nu=Q_\nu=\int d^3x\,T^0{}_\nu,\qquad \frac{dP_\mu}{dt}=0\]</div>
+</div></p>
+<h3>Noether's current for Lorentz symmetry</h3>
+<p>Finite tr.:
+<div class="math inline"><div>\[x'^\mu=\Lambda^\mu{}_\nu x^\nu,\qquad \phi'_a(x')=F_a(\phi(x),\alpha)=D(\Lambda)_a{}^b\phi_b(x)=\left(e^{-\frac i2\omega_{\mu\nu}\Sigma^{\mu\nu}}\right)_a{}^b\phi_b(x)\]</div>
+</div>
+At the infinitesimal level (<span class="math inline">\(\omega\ll1\)</span>):
+<div class="math inline"><div>\[x'^\mu=x^\mu+\omega^\mu{}_\nu x^\nu=x^\mu-\epsilon^\mu\qquad(\epsilon^\mu=-\omega^{\mu\nu}x_\nu)\]</div>
+</div>
+<div class="math inline"><div>\[\begin{cases}\phi'_a(x')=\phi_a(x)-\frac i2(\omega_{\mu\nu}\Sigma^{\mu\nu})_a{}^b\phi_b(x)\\
+\phi'_a(x')=\phi'_a(x^\mu+\omega^{\mu\nu}x_\nu)=\phi'_a(x)+\omega_{\mu\nu}x^\nu\partial^\mu\phi_a(x)\,[?]\end{cases}\]</div>
+</div>
+<div class="math inline"><div>\[\Delta_a=\delta\phi_a=-\frac i2(\omega_{\mu\nu}\Sigma^{\mu\nu})_a{}^b\phi_b(x)-\omega^{\mu\nu}x_\nu\partial_\mu\phi_a(x)
+=-\frac i2\omega^{\mu\nu}\Big(\Sigma_{\mu\nu}+i(x_\mu\partial_\nu-x_\nu\partial_\mu)\Big)_a{}^b\phi_b(x)\]</div>
+</div>
+(For simplicity, consider a scalar field: <span class="math inline">\(\Sigma_{\mu\nu}=0\)</span>.)
+<div class="math inline"><div>\[\epsilon^\mu=\epsilon^\mu{}_i\alpha^i=-\omega^{\mu\nu}x_\nu\]</div>
+</div>
+<div class="math inline"><div>\[j^\mu=\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\left(-\frac i2\omega^{\alpha\beta}\Sigma_{\alpha\beta}\right)_a{}^b\phi_b+\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\frac12\omega^{\alpha\beta}(x_\alpha\partial_\beta-x_\beta\partial_\alpha)\phi_a(x)+\omega^{\mu\beta}x_\beta\mathcal L\]</div>
+</div>
+<div class="math inline"><div>\[=\frac12\omega^{\alpha\beta}\Bigg[-i\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}(\Sigma_{\alpha\beta})_a{}^b\phi_b(x)
++\underbrace{\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}x_\alpha\partial_\beta\phi_a-x_\alpha\delta^\mu{}_\beta\mathcal L\right)}_{=x_\alpha T^\mu{}_\beta}
+-\underbrace{\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}x_\beta\partial_\alpha\phi_a-x_\beta\delta^\mu{}_\alpha\mathcal L\right)}_{=x_\beta T^\mu{}_\alpha}\Bigg]\]</div>
+</div>
+<div class="math inline"><div>\[=\frac12\omega^{\alpha\beta}\left(-i\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}(\Sigma_{\alpha\beta})_a{}^b\phi_b+x_\alpha T^\mu{}_\beta-x_\beta T^\mu{}_\alpha\right)\ [?]\ (\text{필기 중단})\]</div>
+</div></p>
+<p><strong>Charges associated with boosts</strong>:
+<div class="math inline"><div>\[Q_{i0}=\int d^3x\,j^0_{i0}=\int d^3x\left(x_iT^0{}_0-x_0T^0{}_i\right)=\int d^3x\,(x_i\rho-\underbrace{x_0}_{t}P_i)\]</div>
+</div>
+<div class="math inline"><div>\[0=\frac{d}{dt}Q_{i0}=-P_i+\frac{d}{dt}\left(\int d^3x\,x_i\rho\right)\ \Rightarrow\ \frac{d}{dt}\underbrace{\left(\int d^3x\,x_i\rho\right)}_{\text{center of energy}}=P_i=\text{const.}\]</div>
+</div></p>
+<blockquote>
+<p><strong>H.W. 1</strong>: Write an essay about Noether's current (only 1 page). • Why is it important? (By next Monday)
+<strong>H.W. 2</strong>: Rederive Noether's current.
+<strong>H.W. 3</strong>: Investigate the conserved charge under boosts → what does &quot;center of energy travels with const. velocity&quot; mean?</p>
+</blockquote>
+<h3>Why perturbation theory? <span class="math inline">\(\phi^4\)</span> theory, QED</h3>
+<p>To be specific, consider an example: <span class="math inline">\(\phi^4\)</span> theory.
+<div class="math inline"><div>\[\mathcal L_{\rm free}=\frac12(\partial_\mu\phi)^2-\frac12m_0^2\phi^2\]</div>
+</div>
+We add a <span class="math inline">\(\phi^4\)</span> interaction:
+<div class="math inline"><div>\[\mathcal L=\frac12(\partial_\mu\phi)^2-\frac12m_0^2\phi^2-\frac\lambda{4!}\phi^4\]</div>
+</div>
+<div class="math inline"><div>\[\mathcal H=\underbrace{\frac12\pi^2+\frac12(\nabla\phi)^2+\frac12m_0^2\phi^2}_{\mathcal H_0}+\underbrace{\frac\lambda{4!}\phi^4}_{\mathcal H_I}\]</div>
+</div>
+Without <span class="math inline">\(H_I\)</span> ⇒ free theory ⇒ superposition principle applies: <span class="math inline">\(\phi_1,\phi_2\)</span> are sols ⇒ <span class="math inline">\(\alpha_1\phi_1+\alpha_2\phi_2\)</span> = sol.</p>
+<p>[그림: <span class="math inline">\(x_0\)</span>에서 오른쪽으로 가는 wave packet 1과 <span class="math inline">\(y_0\)</span>에서 왼쪽으로 가는 wave packet 2 → 겹침 → 그대로 통과]</p>
+<ul>
+<li>Overlapping does not change shape or direction.</li>
+<li>They follow their original paths without being disturbed.</li>
+</ul>
+<p><span class="math inline">\(H_I\ne0\)</span> (in presence of interaction):
+[그림: <span class="math inline">\(t=-\infty\)</span>에서 well-separated 두 파속 → Interaction 영역 → <span class="math inline">\(x_0,y_0,z_0,w_0\)</span> 네 개의 파속으로 나감] <span class="math inline">\(|\langle f|V|i\rangle|^2\)</span></p>
+<ul>
+<li>Define the incoming set of states as the <strong>&quot;in&quot;</strong> state <span class="math inline">\(|\psi\rangle_{\rm in}\)</span> ↓ asymptotes that match to <span class="math inline">\(|\phi\rangle_{\rm in}\)</span>.</li>
+<li>Define the outgoing set of states as the <strong>&quot;out&quot;</strong> state <span class="math inline">\(|\psi\rangle_{\rm out}\)</span> ↓ asymptotic to <span class="math inline">\(|\phi\rangle_{\rm out}\)</span>.</li>
+</ul>
+<p>We can naively relate two asymptotic states: <span class="math inline">\(|\psi\rangle\)</span> of <span class="math inline">\(H=H_0+H_I\)</span> &amp; <span class="math inline">\(|\phi\rangle\)</span> of <span class="math inline">\(H_0\)</span>.
+<div class="math inline"><div>\[e^{-iHt}|\psi\rangle_{\rm in/out}\longrightarrow e^{-iH_0t}|\phi\rangle_{\rm in/out}\qquad\text{when }t\to\mp\infty\]</div>
+</div>
+<div class="math inline"><div>\[\boxed{|\psi\rangle_{\rm in/out}=\lim_{t\to\mp\infty}e^{iHt}e^{-iH_0t}|\phi\rangle_{\rm in/out}}\equiv\Omega(\mp\infty)|\phi\rangle_{\rm in/out},\qquad \Omega(t)=e^{iHt}e^{-iH_0t}\]</div>
+</div>
+<div class="math inline"><div>\[\Omega(\mp\infty)=\lim_{t\to\mp\infty}e^{iHt}e^{-iH_0t}=\lim_{t\to\mp\infty}e^{iH(t-t_0)}e^{-iH_0(t-t_0)}\]</div>
+</div>
+<div class="math inline"><div>\[0=\frac{\partial\Omega(\mp\infty)}{\partial t_0}=-iH\Omega(\mp\infty)+i\Omega(\mp\infty)H_0\ \Rightarrow\ H\Omega(\mp\infty)=\Omega(\mp\infty)H_0\]</div>
+</div>
+<div class="math inline"><div>\[H|\psi\rangle_{\rm in/out}=H\Omega(\mp\infty)|\phi\rangle_{\rm in/out}=\Omega(\mp\infty)\underbrace{H_0|\phi\rangle_{\rm in/out}}_{E|\phi\rangle_{\rm in/out}}=E\,\Omega(\mp\infty)|\phi\rangle_{\rm in/out}=E|\psi\rangle_{\rm in/out}\]</div>
+</div></p>
+<hr />
+<h2>12/4 QFT</h2>
+<p>[그림: 가운데 Interaction region; 아래쪽 시간 <span class="math inline">\(t\to-\infty\)</span>에 <span class="math inline">\(|\psi\rangle_{\rm in}\)</span> of <span class="math inline">\(H=H_0+H_{\rm int}\)</span> / <span class="math inline">\(|\phi\rangle_{\rm in}\)</span> of <span class="math inline">\(H_0\)</span>, 위쪽에 <span class="math inline">\(|\psi\rangle_{\rm out}\)</span>, <span class="math inline">\(|\phi\rangle_{\rm out}\)</span>]
+<div class="math inline"><div>\[\lim_{t\to\mp\infty}e^{-iHt}|\psi\rangle_{\rm in/out}=e^{-iH_0t}|\phi\rangle_{\rm in/out}\]</div>
+</div>
+<div class="math inline"><div>\[|\psi\rangle_{\rm in/out}=\lim_{t\to\mp\infty}\underbrace{e^{iHt}e^{-iH_0t}}_{\Omega(t)}|\phi\rangle_{\rm in/out}=\Omega(\mp\infty)|\phi\rangle_{\rm in/out}=\lim_{t\to\mp\infty}e^{iH(t-t_0)}e^{-iH_0(t-t_0)}|\phi\rangle_{\rm in/out}\]</div>
+</div>
+<div class="math inline"><div>\[0=\frac{\partial}{\partial t_0}\Omega(\mp\infty)\ \Rightarrow\ H\Omega(\mp\infty)=\Omega(\mp\infty)H_0,\qquad H_0|\phi\rangle_{\rm in/out}=E|\phi\rangle_{\rm in/out}\]</div>
+</div>
+<div class="math inline"><div>\[H|\psi\rangle_{\rm in/out}=H\Omega|\phi\rangle=\Omega H_0|\phi\rangle=E\Omega|\phi\rangle=E|\psi\rangle_{\rm in/out}\]</div>
+</div>
+<span class="math inline">\(\lambda\)</span>: coupling (interaction); <span class="math inline">\(\lambda=0\)</span> → no interaction.</p>
+<p>If <span class="math inline">\(\dfrac{\lambda^2}{16\pi^2}\ll1\)</span>:
+<div class="math inline"><div>\[A^{2\to2}_{\rm phy}=1+\lambda A^{(1)}+\lambda^2A^{(2)}+\cdots\]</div>
+</div>
+[그림: (평행한 두 선) + (X 모양 vertex) + (one-loop: 두 vertex 사이 loop) + ⋯] — 원하는 정확도까지 계산.</p>
+<p>In presence of interaction, time-evolution of operators or states is done by <span class="math inline">\(H=H_0+H_I\)</span>. They need to be related systematically.</p>
+<div class="math block">
+<div>\[\underbrace{\phi(x^\mu)}_{\text{Heisenberg picture}}=e^{iH(t-t_0)}\underbrace{\phi(\vec x)}_{\text{Schrödinger picture, at }t_0}e^{-iH(t-t_0)}\qquad\leftarrow\text{full Hamiltonian }H\]</div>
+
+</div>
+<div class="math block">
+<div>\[\underbrace{\phi_I(x^\mu)}_{\text{interaction picture}}=e^{iH_0(t-t_0)}\phi(\vec x)e^{-iH_0(t-t_0)}\qquad\leftarrow\text{unperturbed }H_0\]</div>
+
+</div>
+<div class="math block">
+<div>\[\underbrace{\phi(x)}_{\text{time dep., evolves w/ }H}=\underbrace{e^{iH(t-t_0)}e^{-iH_0(t-t_0)}}_{U^\dagger(t,t_0)}\underbrace{\phi_I(x)}_{\text{time dep., evolves w/ }H_0}\underbrace{e^{iH_0(t-t_0)}e^{-iH(t-t_0)}}_{U(t,t_0)}\]</div>
+
+</div>
+<div class="math block">
+<div>\[\phi(x)=U^\dagger(t,t_0)\,\phi_I(x)\,U(t,t_0),\qquad \lim_{t\to\mp\infty}U(t,t_0)=\Omega(\mp\infty)\,[?]\]</div>
+
+</div>
+<p>We want a more useful rep of <span class="math inline">\(U(t,t_0)\)</span> in terms of only <span class="math inline">\(\phi_I(x)\)</span>. The prescription comes from the diff. eq.:
+<div class="math inline"><div>\[U(t,t_0)=e^{iH_0(t-t_0)}e^{-iH(t-t_0)}\]</div>
+</div>
+<div class="math inline"><div>\[i\frac{\partial U}{\partial t}=e^{iH_0(t-t_0)}\underbrace{(-H_0+H)}_{H_I}e^{-iH(t-t_0)}
+=\underbrace{e^{iH_0(t-t_0)}H_Ie^{-iH_0(t-t_0)}}_{H_I(t)}e^{iH_0(t-t_0)}e^{-iH(t-t_0)}=H_I(t)U(t,t_0)\]</div>
+</div>
+<div class="math inline"><div>\[i\frac{\partial U}{\partial t}=H_I(t)U(t,t_0)\qquad\text{with}\quad U(t=t_0,t_0)=\mathbb 1\]</div>
+</div>
+<div class="math inline"><div>\[U(t,t_0)=\sum_nU^{(n)}(t,t_0)\]</div>
+</div></p>
+<ul>
+<li><strong>0-th</strong>: <span class="math inline">\(i\dfrac{\partial U^{(0)}}{\partial t}=0\)</span>, <span class="math inline">\(\ U^{(0)}(t,t_0)=\mathbb 1\)</span></li>
+<li><strong>1-st</strong>: <span class="math inline">\(i\dfrac{\partial U^{(1)}}{\partial t}=H_I(t)\underbrace{U^{(0)}(t,t_0)}_{1}\)</span>, <span class="math inline">\(\ U^{(1)}(t,t_0)=-i\displaystyle\int_{t_0}^tdt_1H_I(t_1)\)</span></li>
+<li><strong>2-nd</strong>: <span class="math inline">\(i\dfrac{\partial U^{(2)}}{\partial t}=H_I(t)U^{(1)}(t,t_0)=H_I(t)\left(-i\displaystyle\int_{t_0}^tdt_1H_I(t_1)\right)\)</span></li>
+</ul>
+<div class="math block">
+<div>\[U^{(2)}(t,t_0)=(-i)^2\int_{t_0}^tdt_2H_I(t_2)\int_{t_0}^{t_2}dt_1H_I(t_1)\qquad(t&gt;t_2&gt;t_1&gt;t_0)\]</div>
+
+</div>
+<div class="math block">
+<div>\[=(-i)^2\int_{t_0}^tdt_1H_I(t_1)\int_{t_0}^tdt_2H_I(t_2)\,\theta(t_1-t_2)
+=\frac{(-i)^2}{2}\int_{t_0}^tdt_1\int_{t_0}^tdt_2\left[\theta(t_1-t_2)H_I(t_1)H_I(t_2)+\theta(t_2-t_1)H_I(t_2)H_I(t_1)\right]
+=\frac{(-i)^2}2\iint T\{H_I(t_1)H_I(t_2)\}\]</div>
+
+</div>
+<p>⋮ <em>(sleep.)</em></p>
+<div class="math block">
+<div>\[U(t,t')=T\left\{e^{-i\int_{t'}^tdt''H_I(t'')}\right\},\qquad i\frac{\partial U(t,t')}{\partial t}=H_I(t)U(t,t'),\quad U(t=t',t')=I\]</div>
+
+</div>
+<div class="math block">
+<div>\[U(t,t')=e^{iH_0(t-t_0)}e^{-iH(t-t')}e^{-iH_0(t'-t_0)}\,[?]\]</div>
+
+</div>
+<p><span class="math inline">\(U(t,t')\)</span> for <span class="math inline">\(t_1&gt;t_2&gt;t_3\)</span> satisfies … (→ 12/20)</p>
+<h3>Vacuum persistence amplitude</h3>
+<p>Consider the following situation:
+<div class="math inline"><div>\[A\big(\text{Vacuum}\to\text{source produces particle}\to\text{evolve}\to\text{source cleans up particle}\to\text{Vacuum}\big)\]</div>
+</div>
+(<span class="math inline">\(H=H_0+H_I\)</span>, <span class="math inline">\(\langle\Omega|\equiv\)</span> vacuum)
+<div class="math inline"><div>\[=1+\big[J\text{—}J\big]+\big[\times\big]+\big[\,|\ \ |\,\big]+\cdots=\langle\Omega|U(+\infty,-\infty)|\Omega\rangle\]</div>
+</div>
+Introduce
+<div class="math inline"><div>\[\int_{-\infty}^{\infty}dt\,\Delta H_0(t)=-\int d^4x\,\phi(x)J(x)\]</div>
+</div>
+<div class="math inline"><div>\[H=\underbrace{H_0+H_I}_{\text{pretend}}+\int d^3x\,J(\vec x)\phi(\vec x)\,[?]=H_0+H_I\]</div>
+</div>
+<div class="math inline"><div>\[A=\langle\Omega|U(+\infty,-\infty)|\Omega\rangle=\langle\Omega|T\left\{e^{-i\int d^4x\,J(x)\phi(x)}\right\}|\Omega\rangle\,[?]
+=\sum_{n=0}^\infty\frac{(-i)^n}{n!}\int d^4x_1\cdots d^4x_n\,J(x_1)\cdots J(x_n)\times\underbrace{\langle\Omega|T\{\phi(x_1)\cdots\phi(x_n)\}|\Omega\rangle}_{n\text{-point Green's function}}\]</div>
+</div>
+Ex) <span class="math inline">\(A_\mu J^\mu=A_\mu\bar\psi\gamma^\mu\psi\)</span></p>
+<hr />
+<h2>12/20 QFT</h2>
+<div class="math block">
+<div>\[U(t,t')=T\left\{e^{-i\int_{t'}^tdt''H_I(t'')}\right\},\qquad i\frac{\partial U(t,t')}{\partial t}=H_I(t)U(t,t'),\quad U(t=t',t')=\mathbb 1\]</div>
+
+</div>
+<div class="math block">
+<div>\[U(t,t')=e^{iH_0(t-t_0)}e^{-iH(t-t')}e^{-iH_0(t'-t_0)}\]</div>
+
+</div>
+<p><span class="math inline">\(t_1&gt;t_2&gt;t_3\)</span>:
+<div class="math inline"><div>\[U(t_1,t_3)=U(t_1,t_2)U(t_2,t_3),\qquad
+U(t_1,t_2)=U(t_1,t_3)[U(t_2,t_3)]^\dagger=U(t_1,t_3)U^{-1}(t_2,t_3)=U(t_1,t_3)U(t_3,t_2)\]</div>
+</div></p>
+<h3>Vacuum persistence amplitude</h3>
+<div class="math block">
+<div>\[A\big(\underset{t\to-\infty}{\text{Vac}}\to\text{source creating a particle}\to\text{evolve}\to\text{source destroys particle}\to\text{Vac}\big)\]</div>
+
+</div>
+<div class="math block">
+<div>\[=1+\left[\begin{matrix}\times_J\\|\\ \times_J\end{matrix}\right]+\Big(\big[\text{두 }J\text{쌍이 bubble로 연결}\big]+\big[\text{네 }J\text{가 }\lambda\text{ vertex에서 만남}\big]\Big)+\cdots\]</div>
+
+</div>
+<p><span class="math inline">\(\text{Vac}\equiv|\Omega\rangle\)</span>, <span class="math inline">\(\langle\Omega|\)</span>:
+<div class="math inline"><div>\[=\langle\Omega|U(\infty,-\infty)|\Omega\rangle\,[?]\]</div>
+</div>
+<div class="math inline"><div>\[H=\underbrace{H_0}_{\text{unperturbed}}+\underbrace{\underset{\lambda:\ \text{coupling const.}}{H_I}-\int d^4x\,J(x)\phi(x)}_{\text{perturbed (recategorized)}},\qquad -\int d^4x\,J\phi=\int dt\,\Delta H(t)\ (\text{source})\]</div>
+</div>
+<div class="math inline"><div>\[A=\langle\Omega|U(+\infty,-\infty)|\Omega\rangle=\langle\Omega|T\left\{e^{-i\int dt\,H_I(t)}\right\}|\Omega\rangle=\langle\Omega|T\left\{e^{i\int d^4x\,\phi J}\right\}|\Omega\rangle
+=\sum_{n=0}^\infty\frac{i^n}{n!}\int d^4x_1\cdots\int d^4x_n\,J(x_1)\cdots J(x_n)\,\langle\Omega|T\{\phi(x_1)\cdots\phi(x_n)\}|\Omega\rangle\]</div>
+</div>
+— <span class="math inline">\(n\)</span>-pt Green's function.</p>
+<p>In perturbation theory, we want to connect <span class="math inline">\(|\Omega\rangle,\phi(x)\)</span> to those of <span class="math inline">\(H_0\)</span>:
+<div class="math inline"><div>\[e^{-iHT}|0\rangle=\sum_ne^{-iHT}|n\rangle\langle n|0\rangle=e^{-iE_0T}|\Omega\rangle\langle\Omega|0\rangle+\sum_{n\ne0}\underbrace{e^{-iE_nT}}_{\to0}|n\rangle\langle n|0\rangle,\qquad T\to\infty(1-i\epsilon)\]</div>
+</div>
+<div class="math inline"><div>\[1=\langle\Omega|\Omega\rangle=\lim_{T\to\infty(1-i\epsilon)}\left(e^{-iE_0\cdot2T}|\langle0|\Omega\rangle|^2\right)^{-1}\langle0|U(T,t_0)U(t_0,-T)|0\rangle\]</div>
+</div>
+<div class="math inline"><div>\[\lim_{T\to\infty(1-i\epsilon)}\left(e^{-i2E_0T}|\langle0|\Omega\rangle|^2\right)^{-1}=\frac1{\langle0|\underbrace{U(T,t_0)U(t_0,-T)}_{U(T,-T)}|0\rangle}\]</div>
+</div>
+Three pictures:
+<div class="math inline"><div>\[\left.\begin{aligned}&amp;\phi(\vec x,t_0)\\&amp;\phi(x)_H\\&amp;\phi_I(x)_{H_0}\end{aligned}\right\}\quad\begin{aligned}&amp;\text{Schrödinger}\\&amp;\text{Heisenberg}\\&amp;\text{Interaction}\end{aligned}\]</div>
+</div>
+<strong><span class="math inline">\(n\)</span>-pt Green's function.</strong> For <span class="math inline">\(x_1^0&gt;\cdots&gt;x_n^0\)</span>:
+<div class="math inline"><div>\[\langle\Omega|\phi(x_1)\cdots\phi(x_n)|\Omega\rangle,\qquad \phi(x_1)=U^\dagger(x_1^0,t_0)\phi_I(x_1)U(x_1^0,t_0)\]</div>
+</div>
+<div class="math inline"><div>\[=\frac1{\langle0|U(T,-T)|0\rangle}\langle0|U(T,t_0)\,\phi(x_1)\cdots\phi(x_n)\,U(t_0,-T)|0\rangle\]</div>
+</div>
+<div class="math inline"><div>\[\left(\begin{aligned}|\Omega\rangle&amp;=\lim\left(e^{-iE_0T}\langle\Omega|0\rangle\right)^{-1}U(t_0,-T)|0\rangle\\ \langle\Omega|&amp;=\langle0|U(T,t_0)\left(\exp\cdots\right)\end{aligned}\right)\]</div>
+</div>
+<div class="math inline"><div>\[=\frac1{\langle0|U(T,-T)|0\rangle}\langle0|U(T,t_0)U^\dagger(x_1^0,t_0)\phi_I(x_1)U(x_1^0,t_0)\cdots U^\dagger(x_n^0,t_0)\phi_I(x_n)U(x_n^0,t_0)U(t_0,-T)|0\rangle\]</div>
+</div>
+<div class="math inline"><div>\[=\frac1{\langle0|U(T,-T)|0\rangle}\langle0|U(T,x_1^0)\phi_I(x_1)U(x_1^0,x_2^0)\phi_I(x_2)U(x_2^0,x_3^0)\phi_I(x_3)\cdots\phi_I(x_n)U(x_n^0,-T)|0\rangle\]</div>
+</div>
+In general:
+<div class="math inline"><div>\[\boxed{\langle\Omega|T\{\phi(x_1)\cdots\phi(x_n)\}|\Omega\rangle=\lim_{T\to\infty(1-i\epsilon)}\frac{\langle0|T\left\{\phi_I(x_1)\cdots\phi_I(x_n)\,e^{-i\int_{-T}^Tdt\,H_I(t)}\right\}|0\rangle}{\langle0|T\left\{e^{-i\int_{-T}^Tdt\,H_I(t)}\right\}|0\rangle}}\qquad(H_I\ni\lambda\phi_I^4)\]</div>
+</div>
+[그림: 네 개의 <span class="math inline">\(J\)</span> 사이 회색 blob = X + (한 loop) + (두 vertex 사슬) + (세 vertex 사슬) + ⋯] (분모: vacuum)</p>
+<div class="math block">
+<div>\[\phi_I(x)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}\left(a_{\vec p}e^{-ip\cdot x}+a^\dagger_{\vec p}e^{ip\cdot x}\right)=\phi_I^+(x)+\phi_I^-(x)\]</div>
+
+</div>
+<div class="math block">
+<div>\[\phi_I^+(x)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}a_{\vec p}e^{-ip\cdot x},\qquad
+\phi_I^-(x)=\int\frac{d^3p}{(2\pi)^3}\frac1{\sqrt{2E_{\vec p}}}a^\dagger_{\vec p}e^{ip\cdot x}\]</div>
+
+</div>
+<div class="math block">
+<div>\[\phi_I^+(x)|0\rangle=0,\qquad \langle0|\phi_I^-(x)=0\]</div>
+
+</div>
+<p><strong>Two-pt function</strong>: <span class="math inline">\(T\{\phi_I(x)\phi_I(y)\}\)</span>, <span class="math inline">\(x^0&gt;y^0\)</span>:
+<div class="math inline"><div>\[=\left(\phi_I^+(x)+\phi_I^-(x)\right)\left(\phi_I^+(y)+\phi_I^-(y)\right)
+=\phi_I^+(x)\phi_I^+(y)+\phi_I^+(x)\phi_I^-(y)+\phi_I^-(x)\phi_I^+(y)+\phi_I^-(x)\phi_I^-(y)\]</div>
+</div>
+<div class="math inline"><div>\[\langle0|T\{\phi_I(x)\phi_I(y)\}|0\rangle=\langle0|\phi_I^+(x)\phi_I^-(y)|0\rangle\]</div>
+</div>
+[moving <span class="math inline">\(a\)</span> to the right, and <span class="math inline">\(a^\dagger\)</span> to the left] = <strong>Normal ordering</strong>:
+<div class="math inline"><div>\[=\phi_I^+(x)\phi_I^+(y)+\phi_I^-(y)\phi_I^+(x)+\phi_I^-(x)\phi_I^+(y)+\phi_I^-(x)\phi_I^-(y)+[\phi_I^+(x),\phi_I^-(y)]\]</div>
+</div>
+<div class="math inline"><div>\[\langle0|T\{\phi_I(x)\phi_I(y)\}|0\rangle=\langle0|[\phi_I^+(x),\phi_I^-(y)]|0\rangle\theta(x^0-y^0)+\langle0|[\phi_I^+(y),\phi_I^-(x)]|0\rangle\theta(y^0-x^0)\]</div>
+</div>
+<div class="math inline"><div>\[=\int\frac{d^3p}{(2\pi)^3}\frac1{2E_{\vec p}}\left(e^{-ip\cdot(x-y)}\theta(x^0-y^0)+e^{ip\cdot(x-y)}\theta(y^0-x^0)\right)\qquad\leftarrow\textbf{H.W.}\]</div>
+</div>
+<div class="math inline"><div>\[=\boxed{\int\frac{d^4p}{(2\pi)^4}\frac{i\,[?]\,e^{-ip\cdot(x-y)}}{p^2-m^2+i\epsilon}}\ \ \text{Feynman propagator}=D_F(x-y)\qquad\leftarrow\textbf{H.W.}\]</div>
+</div>
+(필기에는 분자의 <span class="math inline">\(i\)</span>가 빠져 있음)</p>
+<p><strong>Contraction</strong>:
+<div class="math inline"><div>\[\overline{\phi_I(x)\phi_I(y)}=\begin{cases}[\phi_I^+(x),\phi_I^-(y)]&amp;x^0&gt;y^0\\ [\phi_I^+(y),\phi_I^-(x)]&amp;y^0&gt;x^0\end{cases}\]</div>
+</div>
+<div class="math inline"><div>\[T\{\phi_I(x)\phi_I(y)\}=\,:\!\phi_I(x)\phi_I(y)\!:\,+\overline{\phi_I(x)\phi_I(y)}\qquad\text{(notation)}\]</div>
+</div>
+<div class="math inline"><div>\[T\{\phi_I(x_1)\cdots\phi_I(x_n)\}=\,:\!\phi_I(x_1)\cdots\phi_I(x_n)+\text{all possible contractions}\!:\]</div>
+</div>
+<strong>Example</strong>: 4-point function, <span class="math inline">\(\phi_i\equiv\phi(x_i)\)</span>:
+<div class="math inline"><div>\[T\{\phi_1\phi_2\phi_3\phi_4\}=\,:\!\phi_1\phi_2\phi_3\phi_4+\text{all possible contractions}\!:\]</div>
+</div>
+<div class="math inline"><div>\[=\,:\!\phi_1\phi_2\phi_3\phi_4\!:+\,:\!\overline{\phi_1\phi_2}\phi_3\phi_4\!:+\,:\!\overline{\phi_1\phi_3}\phi_2\phi_4\!:+\,:\!\overline{\phi_1\phi_4}\phi_2\phi_3\!:+\text{(three more)}
++\overline{\phi_1\phi_2}\,\overline{\phi_3\phi_4}+\overline{\phi_1\phi_3}\,\overline{\phi_2\phi_4}+\overline{\phi_1\phi_4}\,\overline{\phi_2\phi_3}\]</div>
+</div>
+<div class="math inline"><div>\[\langle0|T\{\phi_1\phi_2\phi_3\phi_4\}|0\rangle=D_F(x_1-x_2)D_F(x_3-x_4)+D_F(x_1-x_3)D_F(x_2-x_4)+D_F(x_1-x_4)D_F(x_2-x_3)\]</div>
+</div>
+[그림: <span class="math inline">\(\langle0|\)</span> 과 <span class="math inline">\(|0\rangle\)</span> 사이, 네 점 <span class="math inline">\(x_1,x_2\)</span> (아래), <span class="math inline">\(x_3,x_4\)</span> (위)를 잇는 세 가지 짝짓기]</p>
+<div class="math block">
+<div>\[U(-\infty,\infty)\,[?]=S\text{-matrix}\]</div>
+
+</div>
